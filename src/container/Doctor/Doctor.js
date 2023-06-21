@@ -37,30 +37,22 @@ function Doctor(props) {
     let filterData = doctorData.filter((value) => value.id === parseInt(id));
 
     return (
-        <section id='doctor' className='doctor'>
-            <div className='container'>
-                {
-                    filterData.map((value) => {
-                        return (
-                            <div className="member d-flex align-items-start">
-                                <div className="pic"><img src={value.url} className="img-doctor" alt /></div>
-                                <div className="member-info">
-                                    <h4>{value.name}</h4>
-                                    <span>{value.besingations}</span>
-                                    <p>{value.description}</p>
-                                    <div className="social">
-                                        <a href><i className="ri-twitter-fill" /></a>
-                                        <a href><i className="ri-facebook-fill" /></a>
-                                        <a href><i className="ri-instagram-fill" /></a>
-                                        <a href><i className="ri-linkedin-box-fill" /></a>
-                                    </div>
-                                </div>
-                            </div>
-                        )
-                    })
-                }
+        <div className="col-lg-6">
+            <div className="member d-flex align-items-start">
+                <div className="pic"><img src={filterData[0].url} className="img-doctor" alt /></div>
+                <div className="member-info">
+                    <h4>{filterData[0].name}</h4>
+                    <span>{filterData[0].besingations}</span>
+                    <p>{filterData[0].description}</p>
+                    <div className="social">
+                        <a href><i className="ri-twitter-fill" /></a>
+                        <a href><i className="ri-facebook-fill" /></a>
+                        <a href><i className="ri-instagram-fill" /></a>
+                        <a href> <i className="ri-linkedin-box-fill" /> </a>
+                    </div>
+                </div>
             </div>
-        </section>
+        </div>
     );
 }
 
