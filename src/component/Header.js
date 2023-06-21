@@ -28,25 +28,24 @@ function Header(props) {
                     </div>
                     <nav id="navbar" className="navbar order-last order-lg-0">
                         <ul>
-                            <Link to="/" className="nav-link scrollto" >Home</Link>
-                            <Link to="/departments" className="nav-link scrollto">Departments</Link>
-                            <Link to="/doctors" className="nav-link scrollto">Doctors</Link>
-                            <Link to="/about" className="nav-link scrollto">About</Link>
-                            <Link to="/contact" className="nav-link scrollto">Contact</Link>
+                            <li><Link to="/" className="nav-link scrollto active" >Home</Link></li>
+                            <li><Link to="/departments" className="nav-link scrollto">Departments</Link></li>
+                            <li><Link to="/doctors" className="nav-link scrollto">Doctors</Link></li>
+                            <li><Link to="/about" className="nav-link scrollto">About</Link></li>
+                            <li><Link to="/contact" className="nav-link scrollto">Contact</Link></li>
                             <Outlet />
                         </ul>
                         <i className="bi bi-list mobile-nav-toggle" />
                     </nav>
-                    {/* <a href="./pages/appointment.html" className="appointment-btn scrollto"><span className="d-none d-md-inline">Make an</span>
-                        Appointment</a> */}
-                    <Link to="/appointment" className="nav-link scrollto">Appointment</Link>
+                    <a href="./pages/appointment.html" className="appointment-btn scrollto"><span className="d-none d-md-inline">Make an</span>
+                        Appointment</a>
+                    {/* <Link to="/appointment" className="nav-link scrollto">Appointment</Link> */}
                     <a href="#" className="appointment-btn scrollto">
                         <span className="d-none d-md-inline">Login/ Signup</span>
                     </a>
                 </div>
             </header>
         </div>
-
     );
 }
 
