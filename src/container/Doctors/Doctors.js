@@ -44,6 +44,8 @@ function Doctors(props) {
 
                     <Link to={'/doctor/1'}>doctor1</Link>
                     <Link to={'/doctor/2'}>doctor2</Link>
+                    <Link to={'/doctor/vistingdoctor'}>Visting Doctor</Link>
+                    <Link to={'*'}>Not Found</Link>
                 </div>
                 <div className="row">
                     {

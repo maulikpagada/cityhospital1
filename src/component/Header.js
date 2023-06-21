@@ -40,10 +40,12 @@ function Header(props) {
                     <a href="./pages/appointment.html" className="appointment-btn scrollto"><span className="d-none d-md-inline">Make an</span>
                         Appointment</a>
                     {/* <Link to="/appointment" className="nav-link scrollto">Appointment</Link> */}
+
                     <a href="#" className="appointment-btn scrollto">
-                        <span className="d-none d-md-inline">Login/ Signup</span>
+                        <span><Link to="/auth" className="d-none d-md-inline">Login/ Signup</Link></span>
+                        {/* <span className="d-none d-md-inline"></span> */}
                     </a>
-                </div>
+                </div>  
             </header>
         </div>
     );
