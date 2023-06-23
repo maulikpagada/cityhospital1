@@ -37,14 +37,13 @@ function Header(props) {
                         </ul>
                         <i className="bi bi-list mobile-nav-toggle" />
                     </nav>
-                    <a href="./pages/appointment.html" className="appointment-btn scrollto"><span className="d-none d-md-inline">Make an</span>
-                        Appointment</a>
-                    {/* <Link to="/appointment" className="nav-link scrollto">Appointment</Link> */}
+                    {/* <a href="./pages/appointment.html" className="appointment-btn scrollto"><span className="d-none d-md-inline">Make an</span>
+                        Appointment</a> */}
+                    <Link to="/appointment" className="appointment-btn scrollto">Make an Appointment</Link>
 
-                    <a href="#" className="appointment-btn scrollto">
-                        <span><Link to="/auth" className="d-none d-md-inline">Login/ Signup</Link></span>
-                        {/* <span className="d-none d-md-inline"></span> */}
-                    </a>
+                    <Link to="/auth" className='appointment-btn scrollto'>
+                        <span className='d-none d-md-inline'>Login/SignUp</span>
+                    </Link>
                 </div>  
             </header>
         </div>
