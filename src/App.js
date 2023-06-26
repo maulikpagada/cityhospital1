@@ -11,6 +11,7 @@ import Doctor from './container/Doctor/Doctor';
 import VistingDoctor from './container/Visting_Doctor/VistingDoctor';
 import NotFound from './container/NotFound/NotFound';
 import Auth from './container/Auth/Auth';
+import FromValidation from './container/Form_validation/FromValidation';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path='/doctor/vistingdoctor' element={<VistingDoctor />} />
         <Route path='*' element={<NotFound />}/>
         <Route path='/auth' element={<Auth />} />
+        <Route path='/formvalidation' element={<FromValidation />} />
 
         {/* <Route path='/doctor'>
           <Route path='/doctor/:id' element={<Doctor />} />

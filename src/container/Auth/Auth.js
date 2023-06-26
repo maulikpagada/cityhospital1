@@ -1,69 +1,107 @@
 import React, { useState } from 'react';
-import { Form, FormGroup, Container, Label, Input, Button } from 'reactstrap'
+import * as Yup from 'yup'
+import { useFormik } from 'formik';
 
 
 function Auth(props) {
 
-    const [authType, setAuthType] = useState('Login')
+    const [authtype, setauthtype] = useState('login');
+
+    let authSchema = Yup.object({
+        name: Yup.string().required('Please enter your name').matches(/^[A-Za-z ]*$/, 'Please enter only Char'),
+        email: Yup.string().email('Please enter valid email').required('Please enter your email'),
+        password: Yup.string().required('Please enter your password'),
+    });
+
+    const formik = useFormik({
+        validationSchema: authSchema,
+        initialValues: {
+            name: '',
+            email: '',
+            password: '',
+        },
+        onSubmit: values => {
+            console.log(values);
+        },
+    });
+
+    const { values, errors, touched, handleBlur, handleChange, handleSubmit } = formik;
+
 
     return (
-
         <section id="appointment" className="appointment">
             <div className="container">
                 <div className="section-title">
-
                     {
-                        authType === 'Login' ? <h2>Login</h2> :
-                            authType === 'SignUp' ? <h2>Sign Up</h2> : <h2>Reset Password</h2>
-
+                        authtype === 'login' ? <h2>Login</h2>
+                            : authtype === 'signup' ? <h2>Signup</h2> : <h2>Reset Password</h2>
                     }
-                    <p>Aenean enim orci, suscipit vitae sodales ac, semper in ex. Nunc aliquam eget nibh eu euismod. Donec dapibus
-                        blandit quam volutpat sollicitudin. Fusce tincidunt sit amet ex in volutpat. Donec lacinia finibus tortor.
-                        Curabitur luctus eleifend odio. Phasellus placerat mi et suscipit pulvinar.</p>
                 </div>
-                <div className="php-email-form">
-                    {
-                        authType === 'Login' || authType === 'forget' ? null :
-                            <div className="col-md-7 form-group mt-3 mt-md-0" style={{ margin: '0 auto' }}>
-                                <input type="text" className="form-control" name="name" id="name" placeholder="Your Name" data-rule="name" data-msg="Please enter a Your Name" />
-                                <div className="validate" />
-                            </div>
+                <form action method="post" role="form" className="php-email-form" onSubmit={handleSubmit}>
+                    <div className="row justify-content-center ">
+                        {
+                            authtype === 'login' || authtype === 'forget' ? null :
 
-                    }
-                    <div className="col-md-7 form-group mt-3 mt-md-0" style={{ margin: '0 auto' }}>
-                        <input type="email" className="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
-                        <div className="validate" />
+                                <div className="col-md-7 form-group">
+                                    <input type="text"
+                                        name="name"
+                                        className="form-control"
+                                        id="name"
+                                        value={values.name}
+                                        onBlur={handleBlur}
+                                        onChange={handleChange}
+                                        placeholder="Your Name"
+                                    />
+                                    <div className="validate" />
+                                    <span className='err'>{errors.name && touched.name ? errors.name : ''}</span>
+                                </div>
+                        }
+                        <div className="col-md-7 form-group mt-3 mt-md-0">
+                            <input type="email"
+                                className="form-control"
+                                name="email" id="email"
+                                value={values.email}
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                placeholder="Your Email"
+                            />
+                            <div className="validate" />
+                            <span className='err'>{errors.email && touched.email ? errors.email : ''}</span>
+                        </div>
+                        {
+                            authtype !== 'forget' ? <div className="col-md-7 form-group mt-3 mt-md-0">
+                                <input type="password"
+                                    className="form-control"
+                                    name="password"
+                                    id="password"
+                                    value={values.password}
+                                    onBlur={handleBlur}
+                                    onChange={handleChange}
+                                    placeholder="Your Password"
+                                />
+                                <div className="validate" />
+                                <span className='err'>{errors.password && touched.password ? errors.password : ''}</span>
+                            </div> : null
+                        }
+                        <div className="text-center m-2">
+                            {
+                                authtype === 'login' ? <a href='#' onClick={(() => setauthtype('forget'))}>Forgot password?</a>
+                                    : null
+                            }
+                        </div>
                     </div>
-
                     {
-                        authType !== 'forget' ?
-                            <div className="col-md-7 form-group mt-3 mt-md-0" style={{ margin: '0 auto' }}>
-                                <input type="password" className="form-control" name="phone" id="phone" placeholder="Password" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                                <div className="validate" />
-
-                            </div> :
-                            null
+                        authtype === 'login' ? <div className="text-center"><button type="submit">Login</button></div>
+                            : authtype === 'signup' ? <div className="text-center"><button type="submit">Signup</button></div>
+                                : <div className="text-center"><button type="submit">Send OTP</button></div>
                     }
-
-                    {
-                        authType === 'Login' ? <div className="text-center"><button type="submit">Login</button></div> :
-                            authType === 'SignUp' ? <div className="text-center"><button type="submit">Sign Up</button></div> :
-                                <div className="text-center"><button type="submit">submit</button></div>
-
-                    }
-
-                    {
-                        authType === 'Login' ?
-                            <>
-                                <span>Already have an Account<a href="#" onClick={() => setAuthType('SignUp')}>SignUp</a></span>
-                                <br />
-                                <a href="#" onClick={() => setAuthType('forget')}>forgot password?</a>
-                            </> :
-                            <span>Create a New Account?<a href="#" onClick={() => setAuthType('Login')}>Login</a></span>
-
-
-                    }
-                </div>
+                    <div className="text-center m-2">
+                        {
+                            authtype === 'login' ? <span>Don't have an account <a href='#' onClick={() => setauthtype('signup')}>Signup</a></span>
+                                : <span>Already have an account <a href='#' onClick={() => setauthtype('login')}>Login</a></span>
+                        }
+                    </div>
+                </form>
             </div>
         </section>
 
