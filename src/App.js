@@ -12,13 +12,14 @@ import VistingDoctor from './container/Visting_Doctor/VistingDoctor';
 import NotFound from './container/NotFound/NotFound';
 import Auth from './container/Auth/Auth';
 import FromValidation from './container/Form_validation/FromValidation';
+import Layout from './admin/component/Layout/Layout';
 
 function App() {
   return (
     <>
-      <Header />
-      <Routes>
-        <Route path='/' element={<Home />} />
+      {/* <Header /> */}
+      {/* <Routes> */}
+        {/* <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />} />
         <Route path='/appointment' element={<Appointment />} />
         <Route path='/contact' element={<Contact />} />
@@ -28,14 +29,17 @@ function App() {
         <Route path='/doctor/vistingdoctor' element={<VistingDoctor />} />
         <Route path='*' element={<NotFound />}/>
         <Route path='/auth' element={<Auth />} />
-        <Route path='/formvalidation' element={<FromValidation />} />
+        <Route path='/formvalidation' element={<FromValidation />} /> */}
 
         {/* <Route path='/doctor'>
           <Route path='/doctor/:id' element={<Doctor />} />
           <Route path='/doctor/vistingdoctor' element={<VistingDoctor />} />
         </Route> */}
-      </Routes>
-      <Footer />
+        <Layout>
+
+        </Layout>
+      {/* </Routes> */}
+      {/* <Footer /> */}
     </>
   );
 }

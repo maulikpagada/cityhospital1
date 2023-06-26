@@ -5,18 +5,18 @@ import * as yup from 'yup'
 function FromValidation(props) {
 
     let userSchema = yup.object().shape({
-        Fullname :yup.string()
+        Fullname: yup.string()
             .min(2)
             .max(40)
             .matches(/^[A-Za-z ]*$/, 'Please enter valid name')
-            .test("Fullname","Enter valid name", function(value){
+            .test("Fullname", "Enter valid name", function (value) {
                 let arr = value.split(" ");
 
                 if (arr.length > 3) {
                     return false
-                } else if (arr.length > 3){
-                return false
-            }else {
+                } else if (arr.length > 3) {
+                    return false
+                } else {
                     return true
                 }
             })

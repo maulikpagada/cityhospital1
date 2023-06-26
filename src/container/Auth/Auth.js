@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import * as Yup from 'yup'
+import * as yup from 'yup'
 import { useFormik } from 'formik';
 
 
@@ -7,12 +7,16 @@ function Auth(props) {
 
     const [authtype, setauthtype] = useState('login');
 
-    let authobj = {}; let authval = []
+    let authobj = {}; let authval = {}
 
     if (authtype === 'login') {
         authobj = {
-            email: Yup.string().email('Please enter valid email').required('Please enter your email'),
-            password: Yup.string().required('Please enter your password'),
+            email: yup.string().email('Please enter valid email').required('Please enter your email'),
+            password: yup.string().required("Please enter your password")
+            .matches(
+                /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
+                "Password must contain at least 8 characters, one uppercase, one number and one special case character"
+            ),
         }
 
         authval = {
@@ -21,9 +25,28 @@ function Auth(props) {
         }
     } else if (authtype === 'signup') {
         authobj = {
-            name: Yup.string().required('Please enter your name').matches(/^[A-Za-z ]*$/, 'Please enter only Char'),
-            email: Yup.string().email('Please enter valid email').required('Please enter your email'),
-            password: Yup.string().required('Please enter your password'),
+            name: yup.string()
+                .min(2)
+                .max(40)
+                .matches(/^[A-Za-z ]*$/, 'Please enter valid name')
+                .test("Fullname", "Enter valid name", function (value) {
+                    let arr = value.split(" ");
+
+                    if (arr.length > 3) {
+                        return false
+                    } else if (arr.length > 3) {
+                        return false
+                    } else {
+                        return true
+                    }
+                })
+                .required(),
+            email: yup.string().email('Please enter valid email').required('Please enter your email'),
+            password: yup.string().required("Please enter your password")
+            .matches(
+                /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
+                "Password must contain at least 8 characters, one uppercase, one number and one special case character"
+            ),
         }
         authval = {
             name: '',
@@ -32,18 +55,14 @@ function Auth(props) {
         }
     } else {
         authobj = {
-            email: Yup.string().email('Please enter valid email').required('Please enter your email'),
+            email: yup.string().email('Please enter valid email').required('Please enter your email'),
         }
         authval = {
             email: '',
         }
     }
 
-    let authSchema = Yup.object({
-        name: Yup.string().required('Please enter your name').matches(/^[A-Za-z ]*$/, 'Please enter only Char'),
-        email: Yup.string().email('Please enter valid email').required('Please enter your email'),
-        password: Yup.string().required('Please enter your password'),
-    });
+    let authSchema = yup.object(authobj);
 
     const formik = useFormik({
         initialValues: authval,
@@ -84,7 +103,7 @@ function Auth(props) {
                                         placeholder="Your Name"
                                     />
                                     <div className="validate" />
-                                    <span className='err'>{errors.name && touched.name ? errors.name : ''}</span>
+                                    <span className='error'>{errors.name && touched.name ? errors.name : ''}</span>
                                 </div>
                         }
                         <div className="col-md-7 form-group mt-3 mt-md-0">
@@ -97,7 +116,7 @@ function Auth(props) {
                                 placeholder="Your Email"
                             />
                             <div className="validate" />
-                            <span className='err'>{errors.email && touched.email ? errors.email : ''}</span>
+                            <span className='error'>{errors.email && touched.email ? errors.email : ''}</span>
                         </div>
                         {
                             authtype !== 'forget' ? <div className="col-md-7 form-group mt-3 mt-md-0">
@@ -111,7 +130,7 @@ function Auth(props) {
                                     placeholder="Your Password"
                                 />
                                 <div className="validate" />
-                                <span className='err'>{errors.password && touched.password ? errors.password : ''}</span>
+                                <span className='error'>{errors.password && touched.password ? errors.password : ''}</span>
                             </div> : null
                         }
                         <div className="text-center m-2">
