@@ -7,6 +7,38 @@ function Auth(props) {
 
     const [authtype, setauthtype] = useState('login');
 
+    let authobj = {}; let authval = []
+
+    if (authtype === 'login') {
+        authobj = {
+            email: Yup.string().email('Please enter valid email').required('Please enter your email'),
+            password: Yup.string().required('Please enter your password'),
+        }
+
+        authval = {
+            email: '',
+            password: '',
+        }
+    } else if (authtype === 'signup') {
+        authobj = {
+            name: Yup.string().required('Please enter your name').matches(/^[A-Za-z ]*$/, 'Please enter only Char'),
+            email: Yup.string().email('Please enter valid email').required('Please enter your email'),
+            password: Yup.string().required('Please enter your password'),
+        }
+        authval = {
+            name: '',
+            email: '',
+            password: '',
+        }
+    } else {
+        authobj = {
+            email: Yup.string().email('Please enter valid email').required('Please enter your email'),
+        }
+        authval = {
+            email: '',
+        }
+    }
+
     let authSchema = Yup.object({
         name: Yup.string().required('Please enter your name').matches(/^[A-Za-z ]*$/, 'Please enter only Char'),
         email: Yup.string().email('Please enter valid email').required('Please enter your email'),
@@ -14,13 +46,11 @@ function Auth(props) {
     });
 
     const formik = useFormik({
+        initialValues: authval,
         validationSchema: authSchema,
-        initialValues: {
-            name: '',
-            email: '',
-            password: '',
-        },
-        onSubmit: values => {
+        enableReinitialize: true,
+        onSubmit: (values, action) => {
+            action.resetForm()
             console.log(values);
         },
     });
@@ -43,7 +73,8 @@ function Auth(props) {
                             authtype === 'login' || authtype === 'forget' ? null :
 
                                 <div className="col-md-7 form-group">
-                                    <input type="text"
+                                    <input
+                                        type="text"
                                         name="name"
                                         className="form-control"
                                         id="name"
