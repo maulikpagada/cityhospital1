@@ -15,6 +15,7 @@ import FromValidation from './container/Form_validation/FromValidation';
 import Layout from './admin/component/Layout/Layout';
 import Doctor from './admin/container/Doctor/Doctor';
 import Product from './admin/container/Product/Product';
+import Medicine from './admin/container/Medicine/Medicine';
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
         <Routes>
           <Route path='/Doctor' element={<Doctor />} />
           <Route path='/Product' element={<Product />} />
+          <Route path='/Medicine' element={<Medicine />} />
         </Routes>
       </Layout>
     </>

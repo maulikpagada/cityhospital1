@@ -18,15 +18,17 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import MedicationIcon from '@mui/icons-material/Medication';
+import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 import { Link } from 'react-router-dom';
+import MedicationIcon from '@mui/icons-material/Medication';
 
 const drawerWidth = 240;
 
 const DoctorData = [
-  { labal: 'Doctor', to: '/Doctor', icon: <MedicationIcon /> },
+  { labal: 'Doctor', to: '/Doctor', icon: <LocalHospitalIcon /> },
   { labal: 'Product', to: '/Product', icon: <ProductionQuantityLimitsIcon /> },
+  { labal: 'Medicine', to: '/Medicine', icon: <MedicationIcon /> },
 ]
 
 const openedMixin = (theme) => ({
@@ -51,6 +53,7 @@ const closedMixin = (theme) => ({
 });
 
 const DrawerHeader = styled('div')(({ theme }) => ({
+  // color: 'red',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'flex-end',
@@ -94,7 +97,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-export default function Layout({children}) {
+
+export default function Layout({ children }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -107,16 +111,16 @@ export default function Layout({children}) {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', color: 'red' }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar position="fixed" open={open} sx={{backgroundColor: 'red', color: 'yellow',}} >
         <Toolbar>
           <IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
-            sx={{
+            sx={{ 
               marginRight: 5,
               ...(open && { display: 'none' }),
             }}
@@ -128,7 +132,8 @@ export default function Layout({children}) {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={open}>
+      <Drawer 
+        variant="permanent" open={open}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
@@ -137,8 +142,8 @@ export default function Layout({children}) {
         <Divider />
         <List>
           {DoctorData.map((t, i) => (
-            <ListItem 
-              key={i} 
+            <ListItem
+              key={i}
               disablePadding sx={{ display: 'block' }}
               to={t.to}
               component={Link}
