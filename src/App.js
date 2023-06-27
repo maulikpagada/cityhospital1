@@ -7,19 +7,21 @@ import Appointment from './container/Appointment/Appointment';
 import Contact from './container/Contact/Contact';
 import Departments from './container/Departments/Departments';
 import Doctors from './container/Doctors/Doctors';
-import Doctor from './container/Doctor/Doctor';
+// import Doctor from './container/Doctor/Doctor';
 import VistingDoctor from './container/Visting_Doctor/VistingDoctor';
 import NotFound from './container/NotFound/NotFound';
 import Auth from './container/Auth/Auth';
 import FromValidation from './container/Form_validation/FromValidation';
 import Layout from './admin/component/Layout/Layout';
+import Doctor from './admin/container/Doctor/Doctor';
+import Product from './admin/container/Product/Product';
 
 function App() {
   return (
     <>
-      {/* <Header /> */}
-      {/* <Routes> */}
-        {/* <Route path='/' element={<Home />} />
+      {/* <Header />
+      <Routes>
+        <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />} />
         <Route path='/appointment' element={<Appointment />} />
         <Route path='/contact' element={<Contact />} />
@@ -29,17 +31,21 @@ function App() {
         <Route path='/doctor/vistingdoctor' element={<VistingDoctor />} />
         <Route path='*' element={<NotFound />}/>
         <Route path='/auth' element={<Auth />} />
-        <Route path='/formvalidation' element={<FromValidation />} /> */}
+        <Route path='/formvalidation' element={<FromValidation />} />
 
-        {/* <Route path='/doctor'>
+        <Route path='/doctor'>
           <Route path='/doctor/:id' element={<Doctor />} />
           <Route path='/doctor/vistingdoctor' element={<VistingDoctor />} />
-        </Route> */}
-        <Layout>
+        </Route>
+      </Routes>
+      <Footer /> */}
 
-        </Layout>
-      {/* </Routes> */}
-      {/* <Footer /> */}
+      <Layout>
+        <Routes>
+          <Route path='/Doctor' element={<Doctor />} />
+          <Route path='/Product' element={<Product />} />
+        </Routes>
+      </Layout>
     </>
   );
 }

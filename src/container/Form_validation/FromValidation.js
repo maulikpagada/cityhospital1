@@ -28,12 +28,24 @@ function FromValidation(props) {
                 /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
                 "Password must contain at least 8 characters, one uppercase, one number and one special case character"
             ),
-        ConfPassword: yup.string().oneOf([yup.ref('Password'), null], 'Passwords must match'),
+        // ConfPassword: yup.string().oneOf([yup.ref('Password'), null], 'Passwords must match'),
+        ConfPassword: yup
+            .string()
+            .required("Please enter match Password")
+            .test("ConfPassword", "Please must be match", function(val){
+                if(this.parent.Password === val){
+                    return true;
+                } else {
+                    return false;
+                }
+            }),
         PhoneNumber: yup.number().required("please enter your number").test('PhoneNumber', 'Must be exactly 10 number.', (value) => { if (value) { return value.toString().length === 10 } }),
         Age: yup.number().required("Please enter your age").min(0, "You must be at least 0 years").max(150, "You must be at most 150 years"),
         Gender: yup.string().required(),
         Country: yup.string().required(),
-        Hobby: yup.array().min(2).of(yup.string().required()).required(),
+        Hobby: yup.array().min(2, "Please enter minimum 2 hobby select ").required().of(yup.string().required()).required(),
+        
+        // Hobby: yup.array().min(2).of(yup.string().required()).required(),
         Address: yup.string().required('Please enter your massage').test('Address', 'maxmium 5 word allowed.', function (val) {
             let arr = val.split(" ");
 
