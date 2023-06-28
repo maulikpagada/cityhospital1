@@ -50,7 +50,7 @@ function Product(props) {
     };
     return (
         <div>
-            <Button variant="outlined" onClick={handleClickOpen}>
+            <Button variant="outlined" onClick={handleClickOpen} sx={{left: '1200px'}}>
                 Add Product
             </Button>
             <Dialog open={open} onClose={handleClose}>

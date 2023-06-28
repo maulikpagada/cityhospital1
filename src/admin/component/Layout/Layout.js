@@ -22,14 +22,10 @@ import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 import { Link } from 'react-router-dom';
 import MedicationIcon from '@mui/icons-material/Medication';
+import BookOnlineIcon from '@mui/icons-material/BookOnline';
 
 const drawerWidth = 240;
 
-const DoctorData = [
-  { labal: 'Doctor', to: '/Doctor', icon: <LocalHospitalIcon /> },
-  { labal: 'Product', to: '/Product', icon: <ProductionQuantityLimitsIcon /> },
-  { labal: 'Medicine', to: '/Medicine', icon: <MedicationIcon /> },
-]
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -110,17 +106,25 @@ export default function Layout({ children }) {
     setOpen(false);
   };
 
+
+  const DoctorData = [
+    // { labal: 'Doctor', to: '/admin/Doctor', icon: <LocalHospitalIcon /> },
+    { labal: 'Product', to: '/admin/Product', icon: <ProductionQuantityLimitsIcon /> },
+    { labal: 'Medicine', to: '/admin/Medicine', icon: <MedicationIcon /> },
+    // { labal: 'Appointment', to: '/Appointment', icon: <BookOnlineIcon /> },
+  ]
+
   return (
     <Box sx={{ display: 'flex', color: 'red' }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open} sx={{backgroundColor: 'red', color: 'yellow',}} >
+      <AppBar position="fixed" open={open} sx={{ backgroundColor: 'red', color: 'yellow', }} >
         <Toolbar>
           <IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
-            sx={{ 
+            sx={{
               marginRight: 5,
               ...(open && { display: 'none' }),
             }}
@@ -132,7 +136,7 @@ export default function Layout({ children }) {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Drawer 
+      <Drawer
         variant="permanent" open={open}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
@@ -144,10 +148,10 @@ export default function Layout({ children }) {
           {DoctorData.map((t, i) => (
             <ListItem
               key={i}
-              disablePadding sx={{ display: 'block' }}
+              disablePadding 
+              sx={{ display: 'block' }}
               to={t.to}
               component={Link}
-              exact
             >
               <ListItemButton
                 sx={{
