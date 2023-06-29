@@ -14,9 +14,17 @@ function Medicine(props) {
 
     let userSchema = yup.object().shape({
         name: yup.string().matches(/^[A-Za-z ]*$/, 'Please enter valid name').max(10).required("Please enter Name"),
-        e_date: yup.string().required(),
+        e_date:yup.date().max(new Date(), "Enter Valid Date").required(),
         price: yup.number().required("please enter Price").positive().integer(),
-        Description:yup.string().required(),
+        Description: yup.string().required('Please enter your massage').test('Description', 'maxmium 5 word allowed.', function (val) {
+            let arr = val.split(" ");
+
+            if (arr.length > 10) {
+                return false
+            } else {
+                return true
+            }
+        }),
     })
 
     const formik = useFormik({
