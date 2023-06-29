@@ -1,4 +1,4 @@
-import React, {  useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -51,7 +51,9 @@ function Medicine(props) {
 
         if (localdata === null) {
             localStorage.setItem("medicine", JSON.stringify([newData]))
+            setProData([newData])
         } else {
+            setProData(localdata)
             localdata.push(newData)
             localStorage.setItem("medicine", JSON.stringify(localdata))
         }
@@ -88,8 +90,10 @@ function Medicine(props) {
         onSubmit: (values, action) => {
             action.resetForm()
             handleAdd(values)
-
+            ProData(values)
+            setOpen(false);
         },
+
     })
 
     const { handleChange, handleBlur, handleSubmit, values, errors, touched } = formik
