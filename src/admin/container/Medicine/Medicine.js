@@ -14,7 +14,7 @@ function Medicine(props) {
 
     let userSchema = yup.object().shape({
         name: yup.string().matches(/^[A-Za-z ]*$/, 'Please enter valid name').max(10).required("Please enter Name"),
-        e_date:yup.date().max(new Date(), "Enter Valid Date").required(),
+        e_date: yup.date().max(new Date(), "Enter Valid Date").required(),
         price: yup.number().required("please enter Price").positive().integer(),
         Description: yup.string().required('Please enter your massage').test('Description', 'maxmium 5 word allowed.', function (val) {
             let arr = val.split(" ");
@@ -62,75 +62,75 @@ function Medicine(props) {
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle> Add  Medicine</DialogTitle>
                 <DialogContent>
-                    <Formik values={formik}>
-                        <Form onSubmit={handleSubmit}>
-                            <TextField
-                                margin="dense"
-                                id="name"
-                                label="product Name"
-                                type="text"
-                                name='name'
-                                fullWidth
-                                variant="filled"
-                                value={values.name}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                            />
 
-                            <span className='error'>{errors.name && touched.name ? errors.name : ''}</span>
+                    <form onSubmit={handleSubmit}>
+                        <TextField
+                            margin="dense"
+                            id="name"
+                            label="product Name"
+                            type="text"
+                            name='name'
+                            fullWidth
+                            variant="filled"
+                            value={values.name}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                        />
 
-                            <TextField
-                                margin="dense"
-                                id="date"
-                                type="date"
-                                name='e_date'
-                                fullWidth
-                                variant="filled"
-                                value={values.e_date}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                            />
+                        <span className='error'>{errors.name && touched.name ? errors.name : ''}</span>
 
-                            <span className='error'>{errors.e_date && touched.e_date ? errors.e_date : ''}</span>
+                        <TextField
+                            margin="dense"
+                            id="date"
+                            type="date"
+                            name='e_date'
+                            fullWidth
+                            variant="filled"
+                            value={values.e_date}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                        />
 
-                            <TextField
-                                margin="dense"
-                                id="price"
-                                label="product price"
-                                type="text"
-                                name='price'
-                                fullWidth
-                                variant="filled"
-                                value={values.price}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                            />
+                        <span className='error'>{errors.e_date && touched.e_date ? errors.e_date : ''}</span>
 
-                            <span className='error'>{errors.price && touched.price ? errors.price : ''}</span>
+                        <TextField
+                            margin="dense"
+                            id="price"
+                            label="product price"
+                            type="text"
+                            name='price'
+                            fullWidth
+                            variant="filled"
+                            value={values.price}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                        />
 
-                          
-                            <TextField
-                                margin="dense"
-                                id="Description"
-                                label="product Description"
-                                type="text"
-                                name='Description'
-                                fullWidth
-                                variant="filled"
-                                value={values.Description}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                            />
-
-                            <span className='error'>{errors.Description && touched.Description ? errors.Description : ''}</span>
+                        <span className='error'>{errors.price && touched.price ? errors.price : ''}</span>
 
 
-                            <DialogActions>
-                                <Button onClick={handleClose}>Cancel</Button>
-                                <Button type="submit">Add</Button>
-                            </DialogActions>
-                        </Form>
-                    </Formik>
+                        <TextField
+                            margin="dense"
+                            id="Description"
+                            label="product Description"
+                            type="text"
+                            name='Description'
+                            fullWidth
+                            variant="filled"
+                            value={values.Description}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                        />
+
+                        <span className='error'>{errors.Description && touched.Description ? errors.Description : ''}</span>
+
+
+                        <DialogActions>
+                            <Button onClick={handleClose}>Cancel</Button>
+                            <Button type="submit">Add</Button>
+                        </DialogActions>
+                    </form>
+
                 </DialogContent>
 
             </Dialog>
