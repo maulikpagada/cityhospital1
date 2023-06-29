@@ -11,6 +11,33 @@ import { Form, Formik, useFormik } from 'formik';
 
 
 function Product(props) {
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+   
+    const handleAdd = (data) => {
+        let localdata = JSON.parse(localStorage.getItem("product"));
+
+        let rno = Math.floor(Math.random() * 100);
+        let newData = {id:rno, ...data};
+        
+        if (localdata === null) {
+            localStorage.setItem("product", JSON.stringify([newData]))
+        } else {
+            localdata.push(newData)
+            localStorage.setItem("product", JSON.stringify(localdata))
+        }
+        handleClose()
+    }
+
     let userSchema = yup.object().shape({
         name: yup.string().matches(/^[A-Za-z ]*$/, 'Please enter valid name').max(10).required("Please enter Name"),
         qua: yup.number().required("please enter Quantity").positive().integer(),
@@ -27,9 +54,9 @@ function Product(props) {
         },
 
         validationSchema: userSchema,
-        onSubmit: values => {
-            // alert(JSON.stringify(values, null, 2));
-
+        onSubmit: (values,action) => {
+            action.resetForm()
+            handleAdd(values)
         },
     })
 
@@ -37,17 +64,6 @@ function Product(props) {
     const { handleBlur, handleChange, handleSubmit, values, errors, touched } = formik
     console.log(errors);
 
-
-
-    const [open, setOpen] = React.useState(false);
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
     return (
         <div>
             <Button variant="outlined" onClick={handleClickOpen} sx={{left: '1200px'}}>
@@ -73,7 +89,6 @@ function Product(props) {
 
                             <span className='error'>{errors.name && touched.name ? errors.name : ''}</span>
 
-
                             <TextField
                                 margin="dense"
                                 id="qua"
@@ -89,7 +104,6 @@ function Product(props) {
                             />
                             <span className='error'>{errors.qua && touched.qua ? errors.qua : ''}</span>
 
-
                             <TextField
                                 margin="dense"
                                 id="price"
@@ -104,7 +118,6 @@ function Product(props) {
                                 onBlur={handleBlur}
                             />
                             <span className='error'>{errors.price && touched.price ? errors.price : ''}</span>
-
 
                             <TextField
                                 margin="dense"

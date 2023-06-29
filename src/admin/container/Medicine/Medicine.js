@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {  useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -8,18 +8,67 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import * as yup from 'yup'
 import { Form, Formik, useFormik } from 'formik';
+import { DataGrid } from '@mui/x-data-grid';
+
 
 
 function Medicine(props) {
+    const [open, setOpen] = React.useState(false);
+    const [ProData, setProData] = useState([]);
 
-    let userSchema = yup.object().shape({
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    useEffect(() => {
+        let localData = JSON.parse(localStorage.getItem("medicine"));
+
+        if (localData !== null) {
+            setProData(localData)
+        }
+    }, [])
+
+
+    const columns = [
+        { field: 'id', headerName: 'ID', width: 70 },
+        { field: 'name', headerName: 'Name', width: 130 },
+        { field: 'e_date', headerName: 'e_date', width: 130 },
+        { field: 'price', headerName: 'price', width: 130 },
+        { field: 'Description', headerName: 'Description', width: 130 },
+    ];
+
+    const handleAdd = (data) => {
+
+        let localdata = JSON.parse(localStorage.getItem("medicine"));
+
+        let rno = Math.floor(Math.random() * 100);
+        let newData = { id: rno, ...data };
+
+        if (localdata === null) {
+            localStorage.setItem("medicine", JSON.stringify([newData]))
+        } else {
+            localdata.push(newData)
+            localStorage.setItem("medicine", JSON.stringify(localdata))
+        }
+        handleClose()
+    }
+
+    let d = new Date()
+    let nd = new Date(d.setDate(d.getDate() - 1))
+
+    let medicineSchema = yup.object().shape({
         name: yup.string().matches(/^[A-Za-z ]*$/, 'Please enter valid name').max(10).required("Please enter Name"),
-        e_date: yup.date().max(new Date(), "Enter Valid Date").required(),
+        e_date: yup.date().min(nd, "Enter Valid Date").required(),
         price: yup.number().required("please enter Price").positive().integer(),
-        Description: yup.string().required('Please enter your massage').test('Description', 'maxmium 5 word allowed.', function (val) {
+        Description: yup.string().required('Please enter your Description').test('Description', 'maxmium 5 word allowed.', function (val) {
             let arr = val.split(" ");
 
-            if (arr.length > 10) {
+            if (arr.length > 3) {
                 return false
             } else {
                 return true
@@ -35,9 +84,10 @@ function Medicine(props) {
             Description: '',
         },
 
-        validationSchema: userSchema,
-        onSubmit: values => {
-            // alert(JSON.stringify(values, null, 2));
+        validationSchema: medicineSchema,
+        onSubmit: (values, action) => {
+            action.resetForm()
+            handleAdd(values)
 
         },
     })
@@ -45,15 +95,7 @@ function Medicine(props) {
     const { handleChange, handleBlur, handleSubmit, values, errors, touched } = formik
 
 
-    const [open, setOpen] = React.useState(false);
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
     return (
         <div>
             <Button variant="outlined" onClick={handleClickOpen}>
@@ -114,6 +156,8 @@ function Medicine(props) {
                             id="Description"
                             label="product Description"
                             type="text"
+                            multiline
+                            rows={4}
                             name='Description'
                             fullWidth
                             variant="filled"
@@ -130,10 +174,18 @@ function Medicine(props) {
                             <Button type="submit">Add</Button>
                         </DialogActions>
                     </form>
-
                 </DialogContent>
-
             </Dialog>
+
+            <div style={{ height: 400, width: '80%', margin: '0px auto 0px auto' }}>
+                <DataGrid
+                    rows={ProData}
+                    columns={columns}
+                    pageSize={5}
+                    rowsPerPageOptions={[5]}
+                    checkboxSelection
+                />
+            </div>
         </div>
     );
 }
