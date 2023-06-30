@@ -9,8 +9,9 @@ import DialogTitle from '@mui/material/DialogTitle';
 import * as yup from 'yup'
 import { Form, Formik, useFormik } from 'formik';
 import { DataGrid } from '@mui/x-data-grid';
-
-
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
 
 function Medicine(props) {
     const [open, setOpen] = React.useState(false);
@@ -33,13 +34,38 @@ function Medicine(props) {
         }
     }, [])
 
+    const handledelete = (id) => {
+        let localData = JSON.parse(localStorage.getItem("medicine"));
+
+        let dData = localData.filter((a, i) => a.id !== id)
+
+        localStorage.setItem("medicine", JSON.stringify(dData));
+
+        setProData(dData)
+    }
+
 
     const columns = [
-        { field: 'id', headerName: 'ID', width: 70 },
         { field: 'name', headerName: 'Name', width: 130 },
-        { field: 'e_date', headerName: 'e_date', width: 130 },
+        { field: 'e_date', headerName: 'Expiry_date', width: 130 },
         { field: 'price', headerName: 'price', width: 130 },
         { field: 'Description', headerName: 'Description', width: 130 },
+        {
+            field: 'Action',
+            headerName: 'Action',
+            width: 130,
+            renderCell: (params) => (
+                <>
+                    <IconButton aria-label="delete" onClick={() => handledelete(params.row.id)}>
+                        <DeleteIcon />
+                    </IconButton>
+
+                    <IconButton aria-label="delete">
+                            <ModeEditIcon />
+                        </IconButton>
+                </>
+            )
+        }
     ];
 
     const handleAdd = (data) => {
@@ -53,8 +79,8 @@ function Medicine(props) {
             localStorage.setItem("medicine", JSON.stringify([newData]))
             setProData([newData])
         } else {
-            setProData(localdata)
             localdata.push(newData)
+            setProData(localdata)
             localStorage.setItem("medicine", JSON.stringify(localdata))
         }
         handleClose()
@@ -185,8 +211,7 @@ function Medicine(props) {
                 <DataGrid
                     rows={ProData}
                     columns={columns}
-                    pageSize={5}
-                    rowsPerPageOptions={[5]}
+                    pageSizeOptions={[5, 10]}
                     checkboxSelection
                 />
             </div>

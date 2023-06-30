@@ -8,11 +8,15 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import * as yup from 'yup'
 import { Form, Formik, useFormik } from 'formik';
+import { DataGrid } from '@mui/x-data-grid';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 function Product(props) {
 
     const [open, setOpen] = React.useState(false);
+    const [data, setdata] = React.useState([]);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -22,18 +26,28 @@ function Product(props) {
         setOpen(false);
     };
 
-   
+    React.useEffect(() => {
+        let localdata = JSON.parse(localStorage.getItem("product"));
+
+        if (localdata !== null) {
+            setdata(localdata)
+        }
+    }, [])
+
+
     const handleAdd = (data) => {
         let localdata = JSON.parse(localStorage.getItem("product"));
 
         let rno = Math.floor(Math.random() * 100);
-        let newData = {id:rno, ...data};
-        
+        let newData = { id: rno, ...data };
+
         if (localdata === null) {
             localStorage.setItem("product", JSON.stringify([newData]))
+            setdata([newData])
         } else {
-            localdata.push(newData)
             localStorage.setItem("product", JSON.stringify(localdata))
+            localdata.push(newData)
+            setdata(localdata)
         }
         handleClose()
     }
@@ -54,11 +68,38 @@ function Product(props) {
         },
 
         validationSchema: userSchema,
-        onSubmit: (values,action) => {
+        onSubmit: (values, action) => {
             action.resetForm()
             handleAdd(values)
         },
     })
+
+    const handledelete = (id) => {
+        let localData = JSON.parse(localStorage.getItem("medicine"));
+
+        let dData = localData.filter((a, i) => a.id !== id)
+
+        localStorage.setItem("medicine", JSON.stringify(dData));
+
+        setdata(dData)
+    }
+
+    const columns = [
+        { field: 'name', headerName: 'First name', width: 130 },
+        { field: 'qua', headerName: 'Quantity', width: 130 },
+        { field: 'price', headerName: 'Price', width: 130 },
+        { field: 'year', headerName: 'Year', width: 130 },
+        {
+            field: 'Action',
+            headerName: 'Action',
+            width: 130,
+            renderCell: (params) => (
+                <IconButton aria-label="delete" onClick={() => handledelete(params.row.id)}>
+                    <DeleteIcon />
+                </IconButton>
+            )
+        }
+    ];
 
 
     const { handleBlur, handleChange, handleSubmit, values, errors, touched } = formik
@@ -66,7 +107,7 @@ function Product(props) {
 
     return (
         <div>
-            <Button variant="outlined" onClick={handleClickOpen} sx={{left: '1200px'}}>
+            <Button variant="outlined" onClick={handleClickOpen}>
                 Add Product
             </Button>
             <Dialog open={open} onClose={handleClose}>
@@ -142,6 +183,15 @@ function Product(props) {
                     </Formik>
                 </DialogContent>
             </Dialog>
+
+            <div style={{ height: 400, width: '100%' }}>
+                <DataGrid
+                    rows={data}
+                    columns={columns}
+                    pageSizeOptions={[5, 10]}
+                    checkboxSelection
+                />
+            </div>
         </div>
     );
 }
