@@ -12,7 +12,7 @@ import VistingDoctor from '../user/container/Visting_Doctor/VistingDoctor';
 import NotFound from '../user/container/NotFound/NotFound';
 import Auth from '../user/container/Auth/Auth';
 import FromValidation from '../user/container/Form_validation/FromValidation';
-
+import Medicine from '../user/container/Medicine/Medicine';
 function Userroutes(props) {
     return (
         <>
@@ -34,6 +34,7 @@ function Userroutes(props) {
                     <Route path='/doctor/:id' element={<Doctor />} />
                     <Route path='/doctor/vistingdoctor' element={<VistingDoctor />} />
                 </Route>
+                <Route path='/medicine' element={<Medicine/>} />
             </Routes>
             <Footer />
         </>

@@ -1,22 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import * as React from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import * as yup from 'yup'
-import { Form, Formik, useFormik } from 'formik';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 import { DataGrid } from '@mui/x-data-grid';
+import { useEffect } from 'react';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
-import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import EditIcon from '@mui/icons-material/Edit';
+
 
 function Medicine(props) {
     const [open, setOpen] = React.useState(false);
-    const [ProData, setProData] = useState([]);
-
+    const [items, setItems] = React.useState([]);
+    const [update, setupdate] = React.useState(null);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -26,196 +27,223 @@ function Medicine(props) {
         setOpen(false);
     };
 
+
+
     useEffect(() => {
-        let localData = JSON.parse(localStorage.getItem("medicine"));
+        let localData = JSON.parse(localStorage.getItem("medicines"));
 
         if (localData !== null) {
-            setProData(localData)
+            setItems(localData)
         }
-    }, [])
 
-    const handledelete = (id) => {
-        let localData = JSON.parse(localStorage.getItem("medicine"));
+    }, []);
 
-        let dData = localData.filter((a, i) => a.id !== id)
+    let d = new Date();
+    let nd = new Date(d.setDate(d.getDate() - 1))
 
-        localStorage.setItem("medicine", JSON.stringify(dData));
+    let medicineschema = yup.object({
+        name: yup.string().required(),
+        date: yup.date().min(nd, "please entre a valid date").required(),
+        price: yup.number().required(),
+        desc: yup.string().required()
+            .test('desc', 'maxmium 3 word allowed.',
+                function (val) {
+                    let arr = val.split(" ")
 
-        setProData(dData)
+                    if (arr.length > 3) {
+                        return false
+                    } else {
+                        return true
+                    }
+                })
+    });
+
+    const formik = useFormik({
+        validationSchema: medicineschema,
+
+        initialValues: {
+            name: '',
+            date: '',
+            price: '',
+            desc: ''
+        },
+        onSubmit: (values, action) => {
+            handlesubmitdata(values)
+            action.resetForm()
+        },
+
+    });
+
+    const { values, errors, touched, handleBlur, handleChange, handleSubmit } = formik;
+
+    const handlesubmitdata = (data) => {
+        console.log(data);
+
+        let rno = Math.floor(Math.random() * 1000);
+
+        let newData = { id: rno, ...data };
+
+        let localdata = JSON.parse(localStorage.getItem("medicines"));
+
+        console.log(localdata);
+
+        if (localdata === null) {
+            localStorage.setItem("medicines", JSON.stringify([newData]))
+            setItems([newData])
+        } else {
+            if (update) {
+                let udata = localdata.map((v, i) => {
+                    if (v.id === data.id) {
+                        return data;
+                    } else {
+                        return v;
+                    }
+                })
+                localStorage.setItem("medicines", JSON.stringify(udata))
+                setItems(udata)
+            } else {
+                localdata.push(newData)
+                localStorage.setItem("medicines", JSON.stringify(localdata))
+                setItems(localdata)
+            }
+
+        }
+
+        handleClose();
+    };
+
+    const handleDelete = (id) => {
+        let localData = JSON.parse(localStorage.getItem("medicines"));
+
+        let fdata = localData.filter((v, i) => v.id !== id)
+
+        localStorage.setItem("medicines", JSON.stringify(fdata))
+
+        setItems(fdata)
     }
 
+    const handleupdate = (values) => {
+        console.log(values);
+        formik.setValues(values)
+        handleClickOpen()
+        setupdate(values) 
+    }
 
     const columns = [
+
+        // { field: 'id', headerName: 'ID', width: 130 },
         { field: 'name', headerName: 'Name', width: 130 },
-        { field: 'e_date', headerName: 'Expiry_date', width: 130 },
-        { field: 'price', headerName: 'price', width: 130 },
-        { field: 'Description', headerName: 'Description', width: 130 },
+        { field: 'date', headerName: 'ExpiryDate', width: 130 },
+        { field: 'price', headerName: 'Price', width: 130 },
+        { field: 'desc', headerName: 'Description', width: 130 },
         {
-            field: 'Action',
+            field: 'action',
             headerName: 'Action',
             width: 130,
             renderCell: (params) => (
                 <>
-                    <IconButton aria-label="delete" onClick={() => handledelete(params.row.id)}>
+                    <IconButton aria-label="delete" onClick={() => handleDelete(params.row.id)}>
                         <DeleteIcon />
                     </IconButton>
 
-                    <IconButton aria-label="delete">
-                            <ModeEditIcon />
-                        </IconButton>
+                    <IconButton aria-label="edit" onClick={() => handleupdate(params.row)}>
+                        <EditIcon />
+                    </IconButton>
                 </>
-            )
+            ),
+
         }
+
     ];
-
-    const handleAdd = (data) => {
-
-        let localdata = JSON.parse(localStorage.getItem("medicine"));
-
-        let rno = Math.floor(Math.random() * 100);
-        let newData = { id: rno, ...data };
-
-        if (localdata === null) {
-            localStorage.setItem("medicine", JSON.stringify([newData]))
-            setProData([newData])
-        } else {
-            localdata.push(newData)
-            setProData(localdata)
-            localStorage.setItem("medicine", JSON.stringify(localdata))
-        }
-        handleClose()
-    }
-
-    let d = new Date()
-    let nd = new Date(d.setDate(d.getDate() - 1))
-
-    let medicineSchema = yup.object().shape({
-        name: yup.string().matches(/^[A-Za-z ]*$/, 'Please enter valid name').max(10).required("Please enter Name"),
-        e_date: yup.date().min(nd, "Enter Valid Date").required(),
-        price: yup.number().required("please enter Price").positive().integer(),
-        Description: yup.string().required('Please enter your Description').test('Description', 'maxmium 5 word allowed.', function (val) {
-            let arr = val.split(" ");
-
-            if (arr.length > 3) {
-                return false
-            } else {
-                return true
-            }
-        }),
-    })
-
-    const formik = useFormik({
-        initialValues: {
-            name: '',
-            e_date: '',
-            price: '',
-            Description: '',
-        },
-
-        validationSchema: medicineSchema,
-        onSubmit: (values, action) => {
-            action.resetForm()
-            handleAdd(values)
-            ProData(values)
-            setOpen(false);
-        },
-
-    })
-
-    const { handleChange, handleBlur, handleSubmit, values, errors, touched } = formik
-
 
 
     return (
-        <div>
+
+        <>
+            <h1>Medicine</h1>
             <Button variant="outlined" onClick={handleClickOpen}>
-                Add  Medicine
+                Open form Medicine
             </Button>
             <Dialog open={open} onClose={handleClose}>
-                <DialogTitle> Add  Medicine</DialogTitle>
+                <DialogTitle>Medicine</DialogTitle>
                 <DialogContent>
-
                     <form onSubmit={handleSubmit}>
                         <TextField
+
                             margin="dense"
                             id="name"
-                            label="product Name"
-                            type="text"
+                            label="Medicine name"
                             name='name'
+                            type="text"
                             fullWidth
-                            variant="filled"
+                            variant="standard"
                             value={values.name}
                             onChange={handleChange}
                             onBlur={handleBlur}
                         />
-
-                        <span className='error'>{errors.name && touched.name ? errors.name : ''}</span>
-
+                        <span style={{ color: 'red' }}>{errors.name && touched.name ? errors.name : null}  </span>
                         <TextField
+
                             margin="dense"
-                            id="date"
+                            id="name"
+                            label=""
+                            name='date'
                             type="date"
-                            name='e_date'
                             fullWidth
-                            variant="filled"
-                            value={values.e_date}
+                            variant="standard"
+                            value={values.date}
                             onChange={handleChange}
                             onBlur={handleBlur}
                         />
-
-                        <span className='error'>{errors.e_date && touched.e_date ? errors.e_date : ''}</span>
-
+                        <span style={{ color: 'red' }}>{errors.date && touched.date ? errors.date : null} </span>
                         <TextField
+
                             margin="dense"
-                            id="price"
-                            label="product price"
-                            type="text"
+                            id="name"
+                            label="Medicine Price"
                             name='price'
+                            type="text"
                             fullWidth
-                            variant="filled"
+                            variant="standard"
                             value={values.price}
                             onChange={handleChange}
                             onBlur={handleBlur}
                         />
-
-                        <span className='error'>{errors.price && touched.price ? errors.price : ''}</span>
-
-
+                        <span style={{ color: 'red' }}>{errors.price && touched.price ? errors.price : null} </span>
                         <TextField
+
                             margin="dense"
-                            id="Description"
-                            label="product Description"
-                            type="text"
+                            id="name"
+                            label="Medicine Description"
+                            name='desc'
                             multiline
                             rows={4}
-                            name='Description'
+                            type="address"
                             fullWidth
-                            variant="filled"
-                            value={values.Description}
+                            variant="standard"
+                            value={values.desc}
                             onChange={handleChange}
                             onBlur={handleBlur}
                         />
-
-                        <span className='error'>{errors.Description && touched.Description ? errors.Description : ''}</span>
-
+                        <span style={{ color: 'red' }}>{errors.desc && touched.desc ? errors.desc : null} </span>
 
                         <DialogActions>
                             <Button onClick={handleClose}>Cancel</Button>
-                            <Button type="submit">Add</Button>
+                            <Button type='submit' >submit</Button>
                         </DialogActions>
                     </form>
                 </DialogContent>
             </Dialog>
 
-            <div style={{ height: 400, width: '80%', margin: '0px auto 0px auto' }}>
+            <div style={{ height: 400, width: '100%' }}>
                 <DataGrid
-                    rows={ProData}
+                    rows={items}
                     columns={columns}
                     pageSizeOptions={[5, 10]}
                     checkboxSelection
                 />
             </div>
-        </div>
+        </>
     );
 }
 
