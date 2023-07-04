@@ -12,22 +12,12 @@ import { useEffect } from 'react';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import MedicineForm from './MedicineForm';
 
 
 function Medicine(props) {
-    const [open, setOpen] = React.useState(false);
     const [items, setItems] = React.useState([]);
     const [update, setupdate] = React.useState(null);
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
-
-
 
     useEffect(() => {
         let localData = JSON.parse(localStorage.getItem("medicines"));
@@ -37,44 +27,6 @@ function Medicine(props) {
         }
 
     }, []);
-
-    let d = new Date();
-    let nd = new Date(d.setDate(d.getDate() - 1))
-
-    let medicineschema = yup.object({
-        name: yup.string().required(),
-        date: yup.date().min(nd, "please entre a valid date").required(),
-        price: yup.number().required(),
-        desc: yup.string().required()
-            .test('desc', 'maxmium 3 word allowed.',
-                function (val) {
-                    let arr = val.split(" ")
-
-                    if (arr.length > 3) {
-                        return false
-                    } else {
-                        return true
-                    }
-                })
-    });
-
-    const formik = useFormik({
-        validationSchema: medicineschema,
-
-        initialValues: {
-            name: '',
-            date: '',
-            price: '',
-            desc: ''
-        },
-        onSubmit: (values, action) => {
-            handlesubmitdata(values)
-            action.resetForm()
-        },
-
-    });
-
-    const { values, errors, touched, handleBlur, handleChange, handleSubmit } = formik;
 
     const handlesubmitdata = (data) => {
         console.log(data);
@@ -109,7 +61,7 @@ function Medicine(props) {
 
         }
 
-        handleClose();
+
     };
 
     const handleDelete = (id) => {
@@ -122,12 +74,12 @@ function Medicine(props) {
         setItems(fdata)
     }
 
-    const handleupdate = (values) => {
-        console.log(values);
-        formik.setValues(values)
-        handleClickOpen()
-        setupdate(values) 
-    }
+    // const handleupdate = (values) => {
+    //     console.log(values);
+    //     formik.setValues(values)
+    //     handleClickOpen()
+    //     setupdate(values) 
+    // }
 
     const columns = [
 
@@ -146,9 +98,9 @@ function Medicine(props) {
                         <DeleteIcon />
                     </IconButton>
 
-                    <IconButton aria-label="edit" onClick={() => handleupdate(params.row)}>
+                    {/* <IconButton aria-label="edit" onClick={() => handleupdate(params.row)}>
                         <EditIcon />
-                    </IconButton>
+                    </IconButton> */}
                 </>
             ),
 
@@ -160,80 +112,8 @@ function Medicine(props) {
     return (
 
         <>
-            <h1>Medicine</h1>
-            <Button variant="outlined" onClick={handleClickOpen}>
-                Open form Medicine
-            </Button>
-            <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Medicine</DialogTitle>
-                <DialogContent>
-                    <form onSubmit={handleSubmit}>
-                        <TextField
 
-                            margin="dense"
-                            id="name"
-                            label="Medicine name"
-                            name='name'
-                            type="text"
-                            fullWidth
-                            variant="standard"
-                            value={values.name}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                        />
-                        <span style={{ color: 'red' }}>{errors.name && touched.name ? errors.name : null}  </span>
-                        <TextField
-
-                            margin="dense"
-                            id="name"
-                            label=""
-                            name='date'
-                            type="date"
-                            fullWidth
-                            variant="standard"
-                            value={values.date}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                        />
-                        <span style={{ color: 'red' }}>{errors.date && touched.date ? errors.date : null} </span>
-                        <TextField
-
-                            margin="dense"
-                            id="name"
-                            label="Medicine Price"
-                            name='price'
-                            type="text"
-                            fullWidth
-                            variant="standard"
-                            value={values.price}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                        />
-                        <span style={{ color: 'red' }}>{errors.price && touched.price ? errors.price : null} </span>
-                        <TextField
-
-                            margin="dense"
-                            id="name"
-                            label="Medicine Description"
-                            name='desc'
-                            multiline
-                            rows={4}
-                            type="address"
-                            fullWidth
-                            variant="standard"
-                            value={values.desc}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                        />
-                        <span style={{ color: 'red' }}>{errors.desc && touched.desc ? errors.desc : null} </span>
-
-                        <DialogActions>
-                            <Button onClick={handleClose}>Cancel</Button>
-                            <Button type='submit' >submit</Button>
-                        </DialogActions>
-                    </form>
-                </DialogContent>
-            </Dialog>
+            <MedicineForm />
 
             <div style={{ height: 400, width: '100%' }}>
                 <DataGrid
