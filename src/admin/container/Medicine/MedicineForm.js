@@ -1,5 +1,5 @@
 import { useFormik } from 'formik';
-import React from 'react';
+import React, { useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -9,9 +9,16 @@ import * as yup from 'yup'
 import Button from '@mui/material/Button';
 
 
-function MedicineForm(props) {
+function MedicineForm({ onhandlesubmit, onupdate }) {
 
     const [open, setOpen] = React.useState(false);
+
+    useEffect(() => {
+        if (onupdate) {
+            formik.setValues(onupdate)
+            handleClickOpen()
+        }
+    }, [onupdate])
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -21,7 +28,6 @@ function MedicineForm(props) {
         setOpen(false);
     };
 
-   
 
     let d = new Date();
     let nd = new Date(d.setDate(d.getDate() - 1))
@@ -56,13 +62,14 @@ function MedicineForm(props) {
             // handlesubmitdata(values)
             action.resetForm()
             handleClose()
+            onhandlesubmit(values)
         },
 
     });
 
     const { values, errors, touched, handleBlur, handleChange, handleSubmit } = formik;
 
-  
+
 
     return (
         <>

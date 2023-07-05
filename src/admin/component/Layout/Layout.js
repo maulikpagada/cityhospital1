@@ -117,7 +117,7 @@ export default function Layout({ children }) {
   return (
     <Box sx={{ display: 'flex', color: 'red' }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open} sx={{ backgroundColor: 'red', color: 'yellow', }} >
+      <AppBar position="fixed" open={open} sx={{ backgroundColor: 'red', }} >
         <Toolbar>
           <IconButton
             color="inherit"
