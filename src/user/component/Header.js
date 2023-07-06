@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import Custombutton from '../container/Ul/Custombutton';
 
 function Header(props) {
 
@@ -8,6 +9,7 @@ function Header(props) {
     const handleremove = () => {
         localStorage.removeItem('loginstatus')
     }
+
 
     return (
         <div className="main-header">
@@ -42,23 +44,23 @@ function Header(props) {
                             <li><Link to="/about" className="nav-link scrollto">About</Link></li>
                             <li><Link to="/contact" className="nav-link scrollto">Contact</Link></li>
                             <li><Link to="/formvalidation" className="nav-link scrollto">FormValidation</Link></li>
-
                             <Outlet />
                         </ul>
                         <i className="bi bi-list mobile-nav-toggle" />
                     </nav>
                     {/* <a href="./pages/appointment.html" className="appointment-btn scrollto"><span className="d-none d-md-inline">Make an</span>
                         Appointment</a> */}
-                    <Link to="/appointment" className="appointment-btn scrollto">Make an Appointment</Link>
+                    <Link to="/appointment"><Custombutton val={'Make an Appointment'} /></Link>
 
                     {
                         loginstatus ?
-                            <Link to="/auth" className='appointment-btn scrollto' onClick={handleremove}>
-                                <span className='d-none d-md-inline'>Logout</span>
+                            <Link to="/auth" onClick={handleremove}>
+                                <Custombutton val={'Logout'} />
+
                             </Link> :
 
-                            <Link to="/auth" className='appointment-btn scrollto'>
-                                <span className='d-none d-md-inline'>Login/SignUp</span>
+                            <Link to="/auth">
+                                <Custombutton val={'Login/Signup'} />
                             </Link>
                     }
 
