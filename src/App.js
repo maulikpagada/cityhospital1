@@ -1,15 +1,17 @@
 import { Route, Routes } from 'react-router-dom';
-import Layout from './admin/component/Layout/Layout';
 import Userroutes from './routes/Userroutes';
 import Adminroutes from './routes/Adminroutes';
+import PrivateRoute from './routes/PrivateRoute';
 
 
 function App() {
   return (
-      <Routes>
-        <Route path='/*' element={<Userroutes />} />
+    <Routes>
+      <Route path='/*' element={<Userroutes />} />
+      <Route element={<PrivateRoute />}>
         <Route path='/admin/*' element={<Adminroutes />} />
-      </Routes>
+      </Route>
+    </Routes>
   );
 }
 

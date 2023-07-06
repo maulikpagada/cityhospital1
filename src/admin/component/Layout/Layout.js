@@ -23,6 +23,7 @@ import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantity
 import { Link } from 'react-router-dom';
 import MedicationIcon from '@mui/icons-material/Medication';
 import BookOnlineIcon from '@mui/icons-material/BookOnline';
+import { Dashboard } from '@mui/icons-material';
 
 const drawerWidth = 240;
 
@@ -108,6 +109,7 @@ export default function Layout({ children }) {
 
 
   const DoctorData = [
+    // { labal: 'Dashbord', to: '/admin/Dashbord', icon: <Dashboard /> },
     // { labal: 'Doctor', to: '/admin/Doctor', icon: <LocalHospitalIcon /> },
     { labal: 'Product', to: '/admin/Product', icon: <ProductionQuantityLimitsIcon /> },
     { labal: 'Medicine', to: '/admin/Medicine', icon: <MedicationIcon /> },

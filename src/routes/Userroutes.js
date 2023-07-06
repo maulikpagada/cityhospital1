@@ -13,6 +13,8 @@ import NotFound from '../user/container/NotFound/NotFound';
 import Auth from '../user/container/Auth/Auth';
 import FromValidation from '../user/container/Form_validation/FromValidation';
 import Medicine from '../user/container/Medicine/Medicine';
+import PrivateRoute from './PrivateRoute';
+// import PrivateRoute from '../utils/PrivateRoute';
 
 function Userroutes(props) {
     return (
@@ -28,14 +30,18 @@ function Userroutes(props) {
                 <Route path='/doctor/:id' element={<Doctor />} />
                 <Route path='/doctor/vistingdoctor' element={<VistingDoctor />} />
                 <Route path='*' element={<NotFound />} />
-                <Route path='/auth' element={<Auth />} />
+
                 <Route path='/formvalidation' element={<FromValidation />} />
 
                 <Route path='/doctor'>
                     <Route path='/doctor/:id' element={<Doctor />} />
                     <Route path='/doctor/vistingdoctor' element={<VistingDoctor />} />
                 </Route>
-                <Route path='/medicine' element={<Medicine/>} />
+
+                <Route element={<PrivateRoute />}>
+                    <Route path='/medicine' element={<Medicine />} />
+                </Route>
+                <Route path='/auth' element={<Auth />} />
             </Routes>
             <Footer />
         </>

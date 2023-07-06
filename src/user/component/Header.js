@@ -2,6 +2,13 @@ import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 
 function Header(props) {
+
+    let loginstatus = localStorage.getItem('loginstatus')
+
+    const handleremove = () => {
+        localStorage.removeItem('loginstatus')
+    }
+
     return (
         <div className="main-header">
             <div id="topbar" className="d-flex align-items-center fixed-top">
@@ -35,7 +42,7 @@ function Header(props) {
                             <li><Link to="/about" className="nav-link scrollto">About</Link></li>
                             <li><Link to="/contact" className="nav-link scrollto">Contact</Link></li>
                             <li><Link to="/formvalidation" className="nav-link scrollto">FormValidation</Link></li>
-                         
+
                             <Outlet />
                         </ul>
                         <i className="bi bi-list mobile-nav-toggle" />
@@ -44,10 +51,18 @@ function Header(props) {
                         Appointment</a> */}
                     <Link to="/appointment" className="appointment-btn scrollto">Make an Appointment</Link>
 
-                    <Link to="/auth" className='appointment-btn scrollto'>
-                        <span className='d-none d-md-inline'>Login/SignUp</span>
-                    </Link>
-                </div>  
+                    {
+                        loginstatus ?
+                            <Link to="/auth" className='appointment-btn scrollto' onClick={handleremove}>
+                                <span className='d-none d-md-inline'>Logout</span>
+                            </Link> :
+
+                            <Link to="/auth" className='appointment-btn scrollto'>
+                                <span className='d-none d-md-inline'>Login/SignUp</span>
+                            </Link>
+                    }
+
+                </div>
             </header>
         </div>
     );

@@ -33,10 +33,12 @@ function Medicine(props) {
         }
     }
     return (
-        <div className='row'>
-            <input type="text" placeholder='Search Medicine' onChange={(e) => handlesearch(e.target.value)} />
+        <div className='container'>
+            <div className='row'>
+                <input type="text" placeholder='Search Medicine' onChange={(e) => handlesearch(e.target.value)} />
 
-            <ListingMed mdata={fdata ? fdata : data} />
+                <ListingMed mdata={fdata ? fdata : data} />
+            </div>
         </div>
     );
 }

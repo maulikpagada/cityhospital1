@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import * as yup from 'yup'
 import { useFormik } from 'formik';
+import { useNavigate } from 'react-router-dom';
 
 
 function Auth(props) {
 
     const [authtype, setauthtype] = useState('login');
+
+    let naigate = useNavigate()
 
     let authobj = {}; let authval = {}
 
@@ -13,10 +16,10 @@ function Auth(props) {
         authobj = {
             email: yup.string().email('Please enter valid email').required('Please enter your email'),
             password: yup.string().required("Please enter your password")
-            .matches(
-                /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
-                "Password must contain at least 8 characters, one uppercase, one number and one special case character"
-            ),
+                .matches(
+                    /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
+                    "Password must contain at least 8 characters, one uppercase, one number and one special case character"
+                ),
         }
 
         authval = {
@@ -43,10 +46,10 @@ function Auth(props) {
                 .required(),
             email: yup.string().email('Please enter valid email').required('Please enter your email'),
             password: yup.string().required("Please enter your password")
-            .matches(
-                /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
-                "Password must contain at least 8 characters, one uppercase, one number and one special case character"
-            ),
+                .matches(
+                    /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
+                    "Password must contain at least 8 characters, one uppercase, one number and one special case character"
+                ),
         }
         authval = {
             name: '',
@@ -62,6 +65,20 @@ function Auth(props) {
         }
     }
 
+    const handlelogin = () => {
+        localStorage.setItem("loginstatus", "true");
+        naigate('/')
+    };
+
+    const handlerigister = () => {
+
+    }
+
+    const handleforget = () => {
+
+    }
+
+
     let authSchema = yup.object(authobj);
 
     const formik = useFormik({
@@ -71,6 +88,14 @@ function Auth(props) {
         onSubmit: (values, action) => {
             action.resetForm()
             console.log(values);
+            if (authtype === 'login') {
+                handlelogin()
+            } else if (authtype === 'signup') {
+                handlerigister()
+            } else if (authtype === 'forget') {
+                handleforget()
+            }
+            
         },
     });
 
