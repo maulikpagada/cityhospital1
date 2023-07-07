@@ -16,7 +16,7 @@ function Custombutton({ val }) {
     }
     `
     return (
-        <Btn>
+        <Btn>   
             {val}
         </Btn>
     );

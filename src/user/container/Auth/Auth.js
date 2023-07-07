@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import * as yup from 'yup'
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
+import Button from '../Ul/Button/Button';
 
 
 function Auth(props) {
@@ -95,7 +96,7 @@ function Auth(props) {
             } else if (authtype === 'forget') {
                 handleforget()
             }
-            
+
         },
     });
 
@@ -166,9 +167,9 @@ function Auth(props) {
                         </div>
                     </div>
                     {
-                        authtype === 'login' ? <div className="text-center"><button type="submit">Login</button></div>
-                            : authtype === 'signup' ? <div className="text-center"><button type="submit">Signup</button></div>
-                                : <div className="text-center"><button type="submit">Send OTP</button></div>
+                        authtype === 'login' ? <div className="text-center"><Button type="primary" ondisabled={true}>Login</Button></div>
+                            : authtype === 'signup' ? <div className="text-center"><Button type="secondary">Signup</Button></div>
+                                : <div className="text-center"><Button type="outlined">Submit</Button></div>
                     }
                     <div className="text-center m-2">
                         {
