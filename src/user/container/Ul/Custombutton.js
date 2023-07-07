@@ -9,6 +9,7 @@ function Custombutton({ val }) {
     transition: 0.4s;
     border-radius: 50px;
     margin: 10px;
+    padding: 10px 35px;
 
     &:hover {
         background: #1c84e3;
