@@ -1,11 +1,12 @@
 import React from 'react';
+import Heading from '../Ul/Heading/Heading';
 
 function Home(props) {
     return (
         <div>
             <section id="hero" className="d-flex align-items-center">
                 <div className="container">
-                    <h1>Welcome to City <br />Multispeciality Hospital</h1>
+                    <Heading type='h1'>Welcome to City <br />Multispeciality Hospital</Heading>
                     <h2>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</h2>
                 </div>
             </section>
@@ -49,7 +50,7 @@ function Home(props) {
                 <section id="services" className="services">
                     <div className="container">
                         <div className="section-title">
-                            <h2>Our Facilities</h2>
+                            <Heading type='h2'>Our Facilities</Heading>
                             <p>Nunc aliquam eget nibh eu euismod. Donec dapibus blandit quam volutpat sollicitudin. Fusce tincidunt sit
                                 amet ex in volutpat. Donec lacinia finibus tortor. Curabitur luctus eleifend odio. Phasellus placerat mi et
                                 suscipit pulvinar. Donec quis tristique lectus.</p>
@@ -102,7 +103,7 @@ function Home(props) {
                 </section>
                 <section id="testimonials" className="testimonials">
                     <div className="container">
-                        <div className="section-title"><h2>Reviews</h2></div>
+                        <div className="section-title"><Heading type='h2'>Reviews</Heading></div>
                         <div className="testimonials-slider swiper-container" data-aos="fade-up" data-aos-delay={100}>
                             <div className="swiper-wrapper">
                                 <div className="swiper-slide">
@@ -194,7 +195,7 @@ function Home(props) {
                 <section id="gallery" className="gallery">
                     <div className="container">
                         <div className="section-title">
-                            <h2>Gallery</h2>
+                            <Heading type='h2'>Gallery</Heading>
                             <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint
                                 consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit
                                 in iste officiis commodi quidem hic quas.</p>

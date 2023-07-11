@@ -1,6 +1,7 @@
 import { useFormik } from 'formik';
 import React from 'react';
 import * as yup from 'yup'
+import Heading from '../Ul/Heading/Heading';
 
 function Contact(props) {
 
@@ -40,7 +41,7 @@ function Contact(props) {
         <section id="contact" className="contact">
             <div className="container">
                 <div className="section-title">
-                    <h2>Contact</h2>
+                <Heading type='h2'>Contact</Heading>
                     <p>Aenean enim orci, suscipit vitae sodales ac, semper in ex. Nunc aliquam eget nibh eu euismod. Donec dapibus
                         blandit quam volutpat sollicitudin. Aenean ac turpis ante. Mauris velit sapien, aliquet aliquet rhoncus quis,
                         luctus at neque. Mauris sit amet massa sed orci vehicula facilisis.</p>
@@ -52,17 +53,17 @@ function Contact(props) {
                         <div className="info">
                             <div className="address">
                                 <i className="bi bi-geo-alt" />
-                                <h4>Location:</h4>
+                                <Heading>Location:</Heading>
                                 <p> F-505, Inovative Plazza New Delhi, India</p>
                             </div>
                             <div className="email">
                                 <i className="bi bi-envelope" />
-                                <h4>Email:</h4>
+                                <Heading>Email:</Heading>
                                 <p>cityhospital@example.com</p>
                             </div>
                             <div className="phone">
                                 <i className="bi bi-phone" />
-                                <h4>Call:</h4>
+                                <Heading>Call:</Heading>
                                 <p>+91 9988776655</p>
                             </div>
                         </div>

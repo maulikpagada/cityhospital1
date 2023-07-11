@@ -1,13 +1,14 @@
 import React from 'react';
+import Heading from '../Ul/Heading/Heading';
 
 function Departments(props) {
     return (
         <section id="departments" className="departments">
             <div className="container">
                 <div className="section-title">
-                    <h2>Departments</h2>
+                <Heading type='h2'>Departments</Heading>
                 </div>
-                <div className="row">
+                <div className="row">   
                     <div className="col-lg-3">
                         <ul className="nav nav-tabs flex-column">
                             <li className="nav-item">

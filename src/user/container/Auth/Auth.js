@@ -3,12 +3,14 @@ import * as yup from 'yup'
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import Button from '../Ul/Button/Button';
+import Input from '../Ul/Input/Input';
+import Heading from '../Ul/Heading/Heading';
 
 
 function Auth(props) {
 
     const [authtype, setauthtype] = useState('login');
-
+    
     let naigate = useNavigate()
 
     let authobj = {}; let authval = {}
@@ -96,7 +98,6 @@ function Auth(props) {
             } else if (authtype === 'forget') {
                 handleforget()
             }
-
         },
     });
 
@@ -108,8 +109,8 @@ function Auth(props) {
             <div className="container">
                 <div className="section-title">
                     {
-                        authtype === 'login' ? <h2>Login</h2>
-                            : authtype === 'signup' ? <h2>Signup</h2> : <h2>Reset Password</h2>
+                        authtype === 'login' ? <Heading>Login</Heading>
+                            : authtype === 'signup' ? <Heading>Signup</Heading> : <Heading>Reset Password</Heading>
                     }
                 </div>
                 <form action method="post" role="form" className="php-email-form" onSubmit={handleSubmit}>
@@ -118,45 +119,47 @@ function Auth(props) {
                             authtype === 'login' || authtype === 'forget' ? null :
 
                                 <div className="col-md-7 form-group">
-                                    <input
+                                    <Input
                                         type="text"
                                         name="name"
-                                        className="form-control"
                                         id="name"
                                         value={values.name}
                                         onBlur={handleBlur}
                                         onChange={handleChange}
                                         placeholder="Your Name"
+                                        errorText={errors.name && touched.name ? errors.name : ''}
                                     />
                                     <div className="validate" />
-                                    <span className='error'>{errors.name && touched.name ? errors.name : ''}</span>
+                                    {/* <span className='error'>{errors.name && touched.name ? errors.name : ''}</span> */}
                                 </div>
                         }
                         <div className="col-md-7 form-group mt-3 mt-md-0">
-                            <input type="email"
-                                className="form-control"
+                            <Input
+                                type="email"
                                 name="email" id="email"
                                 value={values.email}
                                 onBlur={handleBlur}
                                 onChange={handleChange}
                                 placeholder="Your Email"
+                                errorText={errors.email && touched.email ? errors.email : ''}
                             />
                             <div className="validate" />
-                            <span className='error'>{errors.email && touched.email ? errors.email : ''}</span>
+                            {/* <span className='error'>{errors.email && touched.email ? errors.email : ''}</span> */}
                         </div>
                         {
                             authtype !== 'forget' ? <div className="col-md-7 form-group mt-3 mt-md-0">
-                                <input type="password"
-                                    className="form-control"
+                                <Input
+                                    type="password"
                                     name="password"
                                     id="password"
                                     value={values.password}
                                     onBlur={handleBlur}
                                     onChange={handleChange}
                                     placeholder="Your Password"
+                                    errorText={errors.password && touched.password ? errors.password : ''}
                                 />
                                 <div className="validate" />
-                                <span className='error'>{errors.password && touched.password ? errors.password : ''}</span>
+                                {/* <span className='error'>{errors.password && touched.password ? errors.password : ''}</span> */}
                             </div> : null
                         }
                         <div className="text-center m-2">
@@ -167,8 +170,8 @@ function Auth(props) {
                         </div>
                     </div>
                     {
-                        authtype === 'login' ? <div className="text-center"><Button type="primary" ondisabled={true}>Login</Button></div>
-                            : authtype === 'signup' ? <div className="text-center"><Button type="secondary">Signup</Button></div>
+                        authtype === 'login' ? <div className="text-center"><Button type="primary">Login</Button></div>
+                            : authtype === 'signup' ? <div className="text-center"><Button type="secondary"  ondisabled={true}>Signup</Button></div>
                                 : <div className="text-center"><Button type="outlined">Submit</Button></div>
                     }
                     <div className="text-center m-2">
