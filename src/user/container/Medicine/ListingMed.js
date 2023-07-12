@@ -1,7 +1,5 @@
 import React from 'react';
-// import CustomCard from '../Ul/CustomCard';
-// import Custombutton from '../Ul/Card/Custombutton';
-import CustomCard from '../Ul/Card/CustomCard'
+import CustomCard from '../Ul/CustomCard'
 
 function ListingMed({mdata}) {
     return (

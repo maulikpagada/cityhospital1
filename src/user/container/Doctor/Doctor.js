@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import Card from '../Ul/Card/Card';
 
 const doctorData = [
     {
@@ -38,7 +39,7 @@ function Doctor(props) {
 
     return (
         <div className="col-lg-6">
-            <div className="member d-flex align-items-start">
+            <Card className="member d-flex align-items-start">
                 <div className="pic"><img src={filterData[0].url} className="img-doctor" alt /></div>
                 <div className="member-info">
                     <h4>{filterData[0].name}</h4>
@@ -51,7 +52,7 @@ function Doctor(props) {
                         <a href> <i className="ri-linkedin-box-fill" /> </a>
                     </div>
                 </div>
-            </div>
+            </Card>
         </div>
     );
 }
