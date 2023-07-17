@@ -19,28 +19,28 @@ function Home(props) {
                         <div className="row">
                             <div className="col-lg-3 col-md-6">
                                 <div className="count-box">
-                                <Icon className="fas fa-user-md" />
+                                    <Icon className="fas fa-user-md" />
                                     <span>23</span>
                                     <p>Doctors</p>
                                 </div>
                             </div>
                             <div className="col-lg-3 col-md-6 mt-5 mt-md-0">
                                 <div className="count-box">
-                                <Icon className="far fa-hospital" />
+                                    <Icon className="far fa-hospital" />
                                     <span>18</span>
                                     <p>Departments</p>
                                 </div>
                             </div>
                             <div className="col-lg-3 col-md-6 mt-5 mt-lg-0">
                                 <div className="count-box">
-                                <Icon className="fas fa-heartbeat" />
+                                    <Icon className="fas fa-heartbeat" />
                                     <span>980</span>
                                     <p>Patients</p>
                                 </div>
                             </div>
                             <div className="col-lg-3 col-md-6 mt-5 mt-lg-0">
                                 <div className="count-box">
-                                <Icon className="fas fa-award" />
+                                    <Icon className="fas fa-award" />
                                     <span>12</span>
                                     <p>Awards</p>
                                 </div>
