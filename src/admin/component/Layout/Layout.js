@@ -110,7 +110,7 @@ export default function Layout({ children }) {
 
   const DoctorData = [
     // { labal: 'Dashbord', to: '/admin/Dashbord', icon: <Dashboard /> },
-    // { labal: 'Doctor', to: '/admin/Doctor', icon: <LocalHospitalIcon /> },
+    { labal: 'Doctors', to: '/admin/Doctors', icon: <LocalHospitalIcon /> },
     { labal: 'Product', to: '/admin/Product', icon: <ProductionQuantityLimitsIcon /> },
     { labal: 'Medicine', to: '/admin/Medicine', icon: <MedicationIcon /> },
     // { labal: 'Appointment', to: '/Appointment', icon: <BookOnlineIcon /> },
