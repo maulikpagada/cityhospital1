@@ -1,19 +1,23 @@
 {
-    "posts": [
+    "Doctor": [
         {
             "id": 11,
-            "title": "json-server",
-            "author": "typicode"
+            "name": "ABC",
+            "price": "100"
         },
         {
             "id": 12,
-            "title": "json-server",
-            "author": "typicode"
+            "name": "HEET",
+            "price": "200"
+        },{
+            "id": 13,
+            "name": "KETAN",
+            "price": "300"
         },
         {
-            "id": 13,
-            "title": "json-server",
-            "author": "typicode"
+            "id": 14,
+            "name": "MAULIK",
+            "price": "400"
         }
     ],
     "comments": [
