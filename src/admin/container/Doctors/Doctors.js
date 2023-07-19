@@ -1,8 +1,9 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getDoctorData } from '../../../redux/action/doctors.action'
+import { addDoctorData, getDoctorData } from '../../../redux/action/doctors.action'
 import { DataGrid } from '@mui/x-data-grid';
+import DoctorForm from './DoctorForm';
 
 function Doctors(props) {
 
@@ -19,9 +20,14 @@ function Doctors(props) {
         { field: 'price', headerName: 'Price', width: 130 },
     ]
 
+    const handlesubmit = (data) => {
+        dispatch(addDoctorData(data))
+    }
+
     return (
         <div>
-            <h1>Hello Doctors Page</h1>
+
+            <DoctorForm onhandlesubmit={handlesubmit} />
 
             <div style={{ height: 400, width: '100%' }}>
                 <DataGrid

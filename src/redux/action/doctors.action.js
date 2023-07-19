@@ -11,3 +11,20 @@ export const getDoctorData = () => (dispatch) => {
         console.log(error);
     }
 }
+
+export const addDoctorData = (data) => (dispatch) => {
+    try {
+        fetch("http://localhost:3004/Doctor", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+
+            },
+            body: JSON.stringify(data),
+        })
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+    } catch (error) {
+        console.log(error);
+    }
+}

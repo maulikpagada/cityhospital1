@@ -6,7 +6,6 @@ const initialState = {
     error: null 
 }
 
-
 export const doctorReducer = (state = initialState, action) => {
     console.log(action.payload);
     switch (action.type) {
@@ -14,6 +13,12 @@ export const doctorReducer = (state = initialState, action) => {
             return {
                 ...state,
                 doctors: action.payload
+            }
+
+        case ActionTypes.POST_DOCTORS:
+            return{
+                ...state,
+                doctors: state.doctors.concat(action.payload)
             }
 
         default:
