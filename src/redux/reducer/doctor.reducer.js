@@ -3,11 +3,11 @@ import * as ActionTypes from "../ActionTypes"
 const initialState = {
     doctors: [],
     isloading: false,
-    error: null 
+    error: null
 }
 
 export const doctorReducer = (state = initialState, action) => {
-    console.log(action.payload);
+    console.log(action);
     switch (action.type) {
         case ActionTypes.GET_DOCTORS:
             return {
@@ -15,8 +15,8 @@ export const doctorReducer = (state = initialState, action) => {
                 doctors: action.payload
             }
 
-        case ActionTypes.POST_DOCTORS:
-            return{
+        case ActionTypes.ADD_DOCTORS:
+            return {
                 ...state,
                 doctors: state.doctors.concat(action.payload)
             }

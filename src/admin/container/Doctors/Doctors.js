@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addDoctorData, getDoctorData } from '../../../redux/action/doctors.action'
+import { addDoctorData, deleteDoctorData, getDoctorData } from '../../../redux/action/doctors.action'
 import { DataGrid } from '@mui/x-data-grid';
 import DoctorForm from './DoctorForm';
 
@@ -9,12 +9,12 @@ function Doctors(props) {
 
     const dispatch = useDispatch()
     const doctorData = useSelector(state => state.doctors)
-    console.log(doctorData)
+    // console.log(doctorData)
 
     useEffect(() => {
         dispatch(getDoctorData())
     }, [])
-
+ 
     const columns = [
         { field: 'name', headerName: 'Name', width: 130 },
         { field: 'price', headerName: 'Price', width: 130 },

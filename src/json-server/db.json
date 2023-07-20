@@ -1,44 +1,24 @@
 {
   "Doctor": [
     {
-      "id": 11,
-      "name": "ABC",
-      "price": "100"
+      "name": "aaaa",
+      "price": "123456",
+      "id": 24
     },
     {
-      "id": 12,
-      "name": "HEET",
-      "price": "200"
+      "name": "uii",
+      "price": "7878",
+      "id": 25
     },
     {
-      "id": 13,
-      "name": "KETAN",
-      "price": "300"
-    },
-    {
-      "id": 14,
-      "name": "MAULIK",
-      "price": "400"
+      "name": "eeee",
+      "price": "1111",
+      "id": 26
     },
     {
       "name": "maulikmaulik",
-      "price": "10101010",
-      "id": 15
-    },
-    {
-      "name": "maulik",
       "price": "20001000",
-      "id": 16
-    },
-    {
-      "name": "met",
-      "price": "88888",
-      "id": 17
-    },
-    {
-      "name": "aaaaaa",
-      "price": "888888888988",
-      "id": 18
+      "id": 27
     }
   ],
   "comments": [
