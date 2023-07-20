@@ -21,6 +21,12 @@ export const doctorReducer = (state = initialState, action) => {
                 doctors: state.doctors.concat(action.payload)
             }
 
+        case ActionTypes.DELETE_DOCTORS:
+            return {
+                ...state,
+                doctors: state.doctors.filter((v) => v.id != action.payload)
+            }
+
         default:
             return state
     }

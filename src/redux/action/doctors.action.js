@@ -26,3 +26,15 @@ export const addDoctorData = (data) => (dispatch) => {
         console.log(error);
     }
 }
+
+export const deleteDoctorData = (id) => (dispatch) => {
+    try {
+        fetch("http://localhost:3004/Doctor/" + id, {
+            method: "DELETE"
+        })
+        .then((response) => response.json())
+        .then(dispatch({ type: ActionTypes.DELETE_DOCTORS, payload: id}))
+    } catch (error) {
+        console.log(error);
+    }
+}

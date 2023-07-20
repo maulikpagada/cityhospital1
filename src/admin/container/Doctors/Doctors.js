@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addDoctorData, deleteDoctorData, getDoctorData } from '../../../redux/action/doctors.action'
 import { DataGrid } from '@mui/x-data-grid';
 import DoctorForm from './DoctorForm';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 function Doctors(props) {
 
@@ -14,10 +17,36 @@ function Doctors(props) {
     useEffect(() => {
         dispatch(getDoctorData())
     }, [])
- 
+
+    const handleDelete = (id) => {
+        console.log(id);
+        dispatch(deleteDoctorData(id))
+    }   
+
+    const handleupdate = () => {
+
+    }
+
     const columns = [
         { field: 'name', headerName: 'Name', width: 130 },
         { field: 'price', headerName: 'Price', width: 130 },
+        {
+            field: 'action',
+            headerName: 'Action',
+            width: 130,
+            renderCell: (params) => (
+                <>
+                    <IconButton aria-label="delete" onClick={() => handleDelete(params.row.id)}>
+                        <DeleteIcon />
+                    </IconButton>
+
+                    <IconButton aria-label="edit" onClick={() => handleupdate(params.row)}>
+                        <EditIcon />
+                    </IconButton>
+                </>
+            ),
+
+        }
     ]
 
     const handlesubmit = (data) => {
