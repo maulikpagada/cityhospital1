@@ -7,13 +7,14 @@ import DoctorForm from './DoctorForm';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function Doctors(props) {
     const [update, setupdate] = React.useState(null);
 
     const dispatch = useDispatch()
     const doctorData = useSelector(state => state.doctors)
-    // console.log(doctorData)
+    console.log(doctorData)
 
     useEffect(() => {
         dispatch(getDoctorData())
@@ -62,16 +63,24 @@ function Doctors(props) {
     return (
         <div>
 
-            <DoctorForm onhandlesubmit={handlesubmit} onupdate={update} />
+            {
+                doctorData.isloading ? <CircularProgress color="secondary" /> :
+                
+                    <>
+                        <DoctorForm onhandlesubmit={handlesubmit} onupdate={update} />
 
-            <div style={{ height: 400, width: '100%' }}>
-                <DataGrid
-                    rows={doctorData.doctors}
-                    columns={columns}
-                    pageSizeOptions={[5, 10]}
-                    checkboxSelection
-                />
-            </div>
+                        <div style={{ height: 400, width: '100%' }}>
+                            <DataGrid
+                                rows={doctorData.doctors}
+                                columns={columns}
+                                pageSizeOptions={[5, 10]}
+                                checkboxSelection
+                            />
+                        </div>
+                    </>
+            }
+
+
         </div>
     );
 }
