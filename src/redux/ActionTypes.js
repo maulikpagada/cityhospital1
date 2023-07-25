@@ -7,3 +7,14 @@ export const GET_DOCTORS = "GET_DOCTORS";
 export const ADD_DOCTORS = "ADD_DOCTORS";
 export const UPDATE_DOCTORS = "UPDATE_DOCTORS";
 export const DELETE_DOCTORS = "DELETE_DOCTORS";
+
+
+export const GET_MEDICINE = "GET_MEDICINE";
+export const ADD_MEDICINE = "ADD_MEDICINE";
+export const UPDATE_MEDICINE = "UPDATE_MEDICINE";
+export const DELETE_MEDICINE = "DELETE_MEDICINE";
+
+export const ADD_TO_CART = "ADD_TO_CART";
+export const INC_CART = "INC_CART";
+export const DEC_CART = "DEC_CART";
+export const REMOVE_CART = "REMOVE_CART";

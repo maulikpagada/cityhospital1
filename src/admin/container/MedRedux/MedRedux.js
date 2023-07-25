@@ -1,28 +1,28 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addDoctorData, deleteDoctorData, getDoctorData, updateDoctorData } from '../../../redux/action/doctors.action'
 import { DataGrid } from '@mui/x-data-grid';
-import DoctorForm from './DoctorForm';
-import IconButton from '@mui/material/IconButton';
+import { addMedicineData, deleteMedicineData, getMedicineData, updateMedicineData } from '../../../redux/action/medicine.action';
+import MedReduxForm from './MedReduxForm';
+import { IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import CircularProgress from '@mui/material/CircularProgress';
 
-function Doctors(props) {
+function MedRedux(props) {
+
     const [update, setupdate] = React.useState(null);
 
     const dispatch = useDispatch()
-    const doctorData = useSelector(state => state.doctors)
-    console.log(doctorData)
+    const medicineData = useSelector(state => state.medicine)
+    console.log(medicineData)
 
     useEffect(() => {
-        dispatch(getDoctorData())
+        dispatch(getMedicineData())
     }, [])
 
     const handleDelete = (id) => {
         console.log(id);
-        dispatch(deleteDoctorData(id))
+        dispatch(deleteMedicineData(id))
     }
 
     const handleupdate = (data) => {
@@ -32,6 +32,8 @@ function Doctors(props) {
     const columns = [
         { field: 'name', headerName: 'Name', width: 130 },
         { field: 'price', headerName: 'Price', width: 130 },
+        { field: 'expiry', headerName: 'expiry', width: 130 },
+        { field: 'desc', headerName: 'desc', width: 230 },
         {
             field: 'action',
             headerName: 'Action',
@@ -51,38 +53,32 @@ function Doctors(props) {
         }
     ]
 
+
     const handlesubmit = (data) => {
         if (update) {
-            dispatch(updateDoctorData(data))
+            dispatch(updateMedicineData(data))
         } else {
-            dispatch(addDoctorData(data))
+            dispatch(addMedicineData(data))
         }
         setupdate(null)
     }
-
     return (
         <div>
+            <h1>Hello medicine Page</h1>
 
-            {
-                doctorData.isloading ? <CircularProgress color="secondary" /> :
+            <MedReduxForm onhandlesubmit={handlesubmit} onupdate={update} />
 
-                    <>
-                        <DoctorForm onhandlesubmit={handlesubmit} onupdate={update} />
+            <div style={{ height: 400, width: '100%' }}>
+                <DataGrid
+                    rows={medicineData.medicine}
+                    columns={columns}
+                    pageSizeOptions={[5, 10]}
+                    checkboxSelection
+                />
 
-                        <div style={{ height: 400, width: '100%' }}>
-                            <DataGrid
-                                rows={doctorData.doctors}
-                                columns={columns}
-                                pageSizeOptions={[5, 10]}
-                                checkboxSelection
-                            />
-                        </div>
-                    </>
-            }
-
-
+            </div>
         </div>
     );
 }
 
-export default Doctors;
+export default MedRedux;

@@ -1,11 +1,14 @@
 import React from 'react';
 import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle } from 'reactstrap';
 
-function CustomCard({ value }) {
+function CustomCard({ value, btnval, onclick1 }) {
+    console.log(value);
     return (
         <Card
             style={{
-                width: '18rem'
+                width: '18rem',
+                height: '30rem',
+
             }}
         >
             {
@@ -30,13 +33,14 @@ function CustomCard({ value }) {
                     {value.price}
                 </CardText>
                 <CardText>
-                    {value.desc}
+                    {value.desc.substring(0,100)}
+                    {value.desc.length > 50 ? '...' : ''}
                 </CardText>
+
                 {
-                    value.valbtn ?
-                        <Button>
-                            Button
-                        </Button> : null
+                    btnval ? <Button onClick={() => onclick1(value.id)}>
+                        {btnval}
+                    </Button> : null
                 }
 
             </CardBody>

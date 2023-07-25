@@ -43,8 +43,8 @@ function Header(props) {
                             <li><Link to="/doctors" className="nav-link scrollto">Doctors</Link></li>
                             <li><Link to="/about" className="nav-link scrollto">About</Link></li>
                             <li><Link to="/contact" className="nav-link scrollto">Contact</Link></li>
-                            {/* <li><Link to="/formvalidation" className="nav-link scrollto">FormValidation</Link></li> */}
-                            <li><Link to="/counter" className="nav-link scrollto">Counter</Link></li>
+                            <li><Link to="/formvalidation" className="nav-link scrollto">FormValidation</Link></li>
+                            {/* <li><Link to="/counter" className="nav-link scrollto">Counter</Link></li> */}
                             <Outlet />
                         </ul>
                         <i className="bi bi-list mobile-nav-toggle" />
