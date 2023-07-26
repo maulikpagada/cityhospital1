@@ -67,29 +67,39 @@ function Cart(props) {
                                                     <IconButton aria-label="delete" onClick={() => handleremove(c.id)}>
                                                         <DeleteIcon />
                                                     </IconButton>
-                                                    {/* <a href="#!" style={{ color: '#cecece' }}><i className="fas fa-trash-alt" /></a> */}
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    {/* <div className='order-total-amount'>
-                                        <div className='order-total-subdata'>
-                                            <div>
-                                                <p>subtotal:-</p>
-                                                <p>
-                                                    <FormatPrice />
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div> */}
                                 </>
                             )
                         })
                     }
+                    <div>
+                        <hr className="my-4" />
+                        <div className="d-flex justify-content-between">
+                            <p className="mb-2">Subtotal</p>
+                            <p className="mb-2">$4798.00</p>
+                        </div>
+                        <div className="d-flex justify-content-between">
+                            <p className="mb-2">Shipping</p>
+                            <p className="mb-2">$20.00</p>
+                        </div>
+                        <div className="d-flex justify-content-between mb-4">
+                            <p className="mb-2">Total(Incl. taxes)</p>
+                            <p className="mb-2">$4818.00</p>
+                        </div>
+                        <button type="button" className="btn btn-info btn-block btn-lg">
+                            <div className="d-flex justify-content-between">
+                                <span>$4818.00</span>
+                                <span>Checkout <i className="fas fa-long-arrow-alt-right ms-2" /></span>
+                            </div>
+                        </button>
+                    </div>
 
                 </div>
             </div>
-        </section>
+        </section >
     );
 }
 

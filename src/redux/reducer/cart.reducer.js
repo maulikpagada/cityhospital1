@@ -44,7 +44,7 @@ export const cartreducer = (state = initState, action) => {
         case Actiontypes.DEC_CART:
             let index1 = state.item.findIndex((v) => v.pid === action.payload)
 
-            if (index1 <= 1) {
+            if (state.item[index1].qty > 1) {
                 state.item[index1].qty--;
             }
 
