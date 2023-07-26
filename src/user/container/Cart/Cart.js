@@ -1,10 +1,6 @@
 import React from 'react';
-import Heading from '../Ul/Heading/Heading';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button } from 'reactstrap';
 import { decCartQty, deleteToCart, incCartQty } from '../../../redux/action/cart.action';
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
 
 function Cart(props) {
 
@@ -22,6 +18,8 @@ function Cart(props) {
     })
 
 
+    let totalPrice = cartitems.reduce((acc, value) => acc + value.price * value.qty, 0);
+
     const handleInc = (id) => {
         dispatch(incCartQty(id))
     }
@@ -36,70 +34,56 @@ function Cart(props) {
     }
 
     return (
-        <section id="appointment" className="appointment">
+
+        <section id="medicines" className="medicines">
             <div className="container">
                 <div className="section-title">
-                    <Heading type='h2'>cart</Heading>
-                </div>
-                <div className='container'>
-                    {
-                        cartitems.map((c, i) => {
-                            return (
-                                <>
-                                    <div className="card mb-3">
-                                        <div className="card-body">
-                                            <div className="d-flex justify-content-between">
-                                                <div className="d-flex flex-row align-items-center">
-                                                    <div className="ms-3">
-                                                        <h5>{c.name}</h5>
-                                                        <p className="small mb-0">{c.desc.substring(0, 50)}</p>
-                                                    </div>
-                                                </div>
-                                                <div className="d-flex flex-row align-items-center">
-                                                    <div style={{ width: 50 }}>
-                                                        <Button onClick={() => handleDec(c.id)}>-</Button>
-                                                        <h5 className="fw-normal mb-0">{c.qty}</h5>
-                                                        <Button onClick={() => handleInc(c.id)}>+</Button>
-                                                    </div>
-                                                    <div style={{ width: 80 }}>
-                                                        <h5 className="mb-0">{c.price}</h5>
-                                                    </div>
-                                                    <IconButton aria-label="delete" onClick={() => handleremove(c.id)}>
-                                                        <DeleteIcon />
-                                                    </IconButton>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </>
-                            )
-                        })
-                    }
-                    <div>
-                        <hr className="my-4" />
-                        <div className="d-flex justify-content-between">
-                            <p className="mb-2">Subtotal</p>
-                            <p className="mb-2">$4798.00</p>
-                        </div>
-                        <div className="d-flex justify-content-between">
-                            <p className="mb-2">Shipping</p>
-                            <p className="mb-2">$20.00</p>
-                        </div>
-                        <div className="d-flex justify-content-between mb-4">
-                            <p className="mb-2">Total(Incl. taxes)</p>
-                            <p className="mb-2">$4818.00</p>
-                        </div>
-                        <button type="button" className="btn btn-info btn-block btn-lg">
-                            <div className="d-flex justify-content-between">
-                                <span>$4818.00</span>
-                                <span>Checkout <i className="fas fa-long-arrow-alt-right ms-2" /></span>
-                            </div>
-                        </button>
-                    </div>
+                    <h2>cart</h2>
 
                 </div>
             </div>
-        </section >
+            <div className="container">
+                <div className="card mb-3">
+                    {
+                        cartitems.map((v) => {
+                            return (
+
+                                <div className="card-body">
+                                    <div className="d-flex justify-content-between">
+                                        <div className="d-flex flex-row align-items-center">
+
+                                            <div className="ms-3">
+                                                <h5>{v.name}</h5>
+                                                <p className="small mb-0">{v.desc.substring(0, 20)}</p>
+                                            </div>
+                                        </div>
+                                        <div className="d-flex flex-row align-items-center">
+                                            <div style={{ width: 50 }}>
+                                                <button onClick={() => handleDec(v.pid)}>-</button>
+                                                <h5 className="fw-normal mb-0">{v.qty}</h5>
+                                                <button onClick={() => handleInc(v.pid)}>+</button>
+                                            </div>
+                                            <div style={{ width: 80 }}>
+                                                <h5 className="mb-0">{v.qty * v.price}</h5>
+                                            </div>
+                                            <a href="#!" style={{ color: '#cecece' }} onClick={() => handleremove(v.pid)}><i className="fas fa-trash-alt" /></a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
+                    <div className=" card-body card mb-3 ms-3 d-flex justify-content-between d-flex flex-row align-items-center">
+                        Total
+                        <div style={{ width: 80 }}>
+                            <h5 className="mb-0">{totalPrice}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
     );
 }
 
