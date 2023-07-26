@@ -17,6 +17,7 @@ import PrivateRoute from './PrivateRoute';
 import Counter from '../user/container/Counter/Counter';
 import { configureStore } from '../redux/store';
 import { Provider } from 'react-redux';
+import Cart from '../user/container/Cart/Cart';
 // import PrivateRoute from '../utils/PrivateRoute';
 
 function Userroutes(props) {
@@ -49,6 +50,7 @@ function Userroutes(props) {
                     </Route>
                     <Route path='/auth' element={<Auth />} />
                     <Route path='/counter' element={<Counter />} />
+                    <Route path='/cart' element={<Cart />} />
                 </Routes>
                 <Footer />
             </Provider>

@@ -24,11 +24,42 @@ export const cartreducer = (state = initState, action) => {
 
             console.log(state);
             console.log(item);
-            
+
             return {
                 item: state.item,
                 isloading: false,
                 error: null
+            }
+
+        case Actiontypes.INC_CART:
+            let index = state.item.findIndex((v) => v.pid === action.payload)
+            state.item[index].qty++
+
+            return {
+                item: state.item,
+                isloading: false,
+                error: null
+            }
+
+        case Actiontypes.DEC_CART:
+            let index1 = state.item.findIndex((v) => v.pid === action.payload)
+
+            if (index1 <= 1) {
+                state.item[index1].qty--;
+            }
+
+
+            return {
+                item: state.item,
+                isloading: false,
+                error: null
+            }
+
+        case Actiontypes.REMOVE_CART:
+            console.log(action.payload);
+            return {
+                ...state,
+                item: state.item.filter((v) => v.pid != action.payload)
             }
 
         default:

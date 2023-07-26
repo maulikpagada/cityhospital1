@@ -2,12 +2,11 @@ import React from 'react';
 import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle } from 'reactstrap';
 
 function CustomCard({ value, btnval, onclick1 }) {
-    console.log(value);
     return (
         <Card
             style={{
                 width: '18rem',
-                height: '30rem',
+                height: '15rem',
 
             }}
         >
