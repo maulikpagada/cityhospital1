@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle } from 'reactstrap';
 
-function CustomCard({ value, btnval, onclick1 }) {
+function CustomCard({ value, btnval, onclick1   }) {
     return (
         <Card
             style={{
