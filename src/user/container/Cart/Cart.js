@@ -45,7 +45,7 @@ function Cart(props) {
             <div className="container">
                 <div className="card mb-3">
                     {
-                        cartitems.map((v) => {
+                        cartitems.map((a,i) => {
                             return (
 
                                 <div className="card-body">
@@ -53,20 +53,20 @@ function Cart(props) {
                                         <div className="d-flex flex-row align-items-center">
 
                                             <div className="ms-3">
-                                                <h5>{v.name}</h5>
-                                                <p className="small mb-0">{v.desc.substring(0, 20)}</p>
+                                                <h5>{a.name}</h5>
+                                                <p className="small mb-0">{a.desc.substring(0, 20)}</p>
                                             </div>
                                         </div>
                                         <div className="d-flex flex-row align-items-center">
                                             <div style={{ width: 50 }}>
-                                                <button onClick={() => handleDec(v.pid)}>-</button>
-                                                <h5 className="fw-normal mb-0">{v.qty}</h5>
-                                                <button onClick={() => handleInc(v.pid)}>+</button>
+                                                <button onClick={() => handleDec(a.pid)}>-</button>
+                                                <h5 className="fw-normal mb-0">{a.qty}</h5>
+                                                <button onClick={() => handleInc(a.pid)}>+</button>
                                             </div>
                                             <div style={{ width: 80 }}>
-                                                <h5 className="mb-0">{v.qty * v.price}</h5>
+                                                <h5 className="mb-0">{a.qty * a.price}</h5>
                                             </div>
-                                            <a href="#!" style={{ color: '#cecece' }} onClick={() => handleremove(v.pid)}><i className="fas fa-trash-alt" /></a>
+                                            <a href="#!" style={{ color: '#cecece' }} onClick={() => handleremove(a.pid)}><i className="fas fa-trash-alt" /></a>
                                         </div>
 
                                     </div>
