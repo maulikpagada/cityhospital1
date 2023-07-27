@@ -8,6 +8,7 @@ function Cart(props) {
     let medData = useSelector(state => state.medicine);
     let cartData = useSelector(state => state.cart);
 
+    console.log(medData, cartData);
 
     let cartitems = cartData.item.map((v) => {
         let medicinceData = medData.medicine.find((m) => m.id === v.pid);

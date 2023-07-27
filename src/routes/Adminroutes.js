@@ -10,9 +10,7 @@ import { Provider } from 'react-redux';
 import MedRedux from '../admin/container/MedRedux/MedRedux';
 
 function Adminroutes(props) {
-    let store = configureStore()
     return (
-        <Provider store={store}>
         <Layout>
             <Routes>
 
@@ -24,7 +22,6 @@ function Adminroutes(props) {
                 {/* <Route path='/Appointment' element={<Appointment />} /> */}
             </Routes>
         </Layout>
-        </Provider>
     );
 }
 

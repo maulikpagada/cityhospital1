@@ -43,12 +43,20 @@ function Header(props) {
                     </div>
 
                     <div>
-                        <Link to='/cart'>
-                        <IconButton aria-label="cart">
-                            <StyledBadge badgeContent={countercart} color="secondary">
-                                <ShoppingCartIcon />
-                            </StyledBadge>
-                        </IconButton>
+                        {/* <Link to='/cart'>
+                            <IconButton aria-label="cart">
+                                <StyledBadge badgeContent={countercart} color="secondary">
+                                    <ShoppingCartIcon />
+                                </StyledBadge>
+                            </IconButton>
+                        </Link> */}
+
+                        <Link to='/cart1'>
+                            <IconButton aria-label="cart1">
+                                <StyledBadge badgeContent={countercart} color="secondary">
+                                    <ShoppingCartIcon />
+                                </StyledBadge>
+                            </IconButton>
                         </Link>
                     </div>
 
