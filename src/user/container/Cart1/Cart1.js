@@ -1,6 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { json } from 'react-router-dom';
 
 function Cart1(props) {
+    const [medicineData, setmedicineData] = useState([]);
+    const [localdata, setlocaldata] = useState([]);
+
+    useEffect(() => {
+        let localdata = JSON.parse(localStorage.getItem("cart"))
+        setlocaldata(localdata)
+        try {
+            fetch("http://localhost:3004/medicines")
+                .then((response) => response.json())
+                .then((data) => setmedicineData(data))
+                .catch((error) => console.log(error))
+        } catch (error) {
+            console.log(error);
+        }
+    }, [])
+
     let cartdata = localdata.map((v) => {
         let medata = medicineData.find((m) => m.id === v.pid)
 
@@ -9,6 +26,39 @@ function Cart1(props) {
         return Fdata
 
     })
+
+    let totalPrice = cartdata.reduce((acc, value) => acc + value.price * value.qty, 0);
+
+    const handleInc = (id) => {
+        let inccartdata = localdata.map((v, i) => {
+            if (v.pid === id) {
+                return { ...v, qty: v.qty + 1 }
+            } else {
+                return v;
+            }
+        })
+        setlocaldata(inccartdata)
+        localStorage.setItem("cart", JSON.stringify(inccartdata))
+    }
+
+    const handleDec = (id) => {
+        let deccartdata = localdata.map((v, i) => {
+            if (v.pid === id && v.qty > 1) {
+                return { ...v, qty: v.qty - 1 }
+            } else {
+                return v;
+            }
+        })
+        setlocaldata(deccartdata)
+        localStorage.setItem("cart", JSON.stringify(deccartdata))
+    }
+
+
+    const handleRemove = (id) => {
+        let fdata = cartdata.filter((v) => v.pid != id)
+        setlocaldata(fdata)
+        localStorage.setItem("cart", JSON.stringify(fdata))
+    }
 
     return (
         <section id="medicines" className="medicines">

@@ -32,6 +32,13 @@ function Header(props) {
         localStorage.removeItem('loginstatus')
     }
 
+    const data = JSON.parse(localStorage.getItem('cart'))
+    let cartcount = 0;
+
+    if (data) {
+        cartcount = data.reduce((acc, v, i) =>  acc + v.qty, 0)
+    }
+
 
     return (
         <div className="main-header">
@@ -43,17 +50,17 @@ function Header(props) {
                     </div>
 
                     <div>
-                        {/* <Link to='/cart'>
+                        <Link to='/cart'>
                             <IconButton aria-label="cart">
                                 <StyledBadge badgeContent={countercart} color="secondary">
                                     <ShoppingCartIcon />
                                 </StyledBadge>
                             </IconButton>
-                        </Link> */}
+                        </Link>
 
                         <Link to='/cart1'>
-                            <IconButton aria-label="cart1">
-                                <StyledBadge badgeContent={countercart} color="secondary">
+                            <IconButton aria-label="cart">
+                                <StyledBadge badgeContent={cartcount} color="secondary">
                                     <ShoppingCartIcon />
                                 </StyledBadge>
                             </IconButton>

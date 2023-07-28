@@ -3,9 +3,12 @@ import CustomCard from '../Ul/CustomCard';
 
 function Medicine1(props) {
     const [getdata, setgetdata] = useState([])
-    const [cart, setcardata] = useState([])
-    
-    console.log(cart);
+    // const [cart, setcartdata] = useState([])
+
+
+    let localdata = JSON.parse(localStorage.getItem('cart'))
+
+    // console.log(cart);
 
     useEffect(() => {
         try {
@@ -18,10 +21,30 @@ function Medicine1(props) {
         }
     }, [])
 
+    const cartarr = [];
 
     const handleCart1 = (id) => {
-        console.log(id);
-        setcardata(id)
+
+        let localdata = JSON.parse(localStorage.getItem('cart'))
+
+        if (localdata === null) {
+            localStorage.setItem('cart', JSON.stringify([{
+                pid: id,
+                qty: 1
+            }]))
+        } else {
+            let mdata = localdata.find((m) => m.pid == id)
+            if(mdata){
+                mdata.qty++;
+                localStorage.setItem('cart', JSON.stringify(localdata))
+            } else {
+                localdata.push({
+                    pid:id,
+                    qty:1
+                })
+                localStorage.setItem('cart', JSON.stringify(localdata))
+            }
+        }
     }
 
 
