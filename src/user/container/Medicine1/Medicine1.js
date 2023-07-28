@@ -19,9 +19,9 @@ function Medicine1(props) {
     }, [])
 
 
-    const handleCart1 = (data) => {
-        console.log(data);
-        setcardata({...cart, data})
+    const handleCart1 = (id) => {
+        console.log(id);
+        setcardata(id)
     }
 
 
