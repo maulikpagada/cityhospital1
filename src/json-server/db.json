@@ -1,24 +1,14 @@
 {
-  "Doctor": [
+  "Doctors": [
     {
-      "name": "aaalllpp",
-      "price": "123456",
-      "id": 24
-    },
-    {
-      "name": "uiiiiiiiii",
-      "price": "7878",
+      "name": "uiiiiiiiiieeeeeeee",
+      "price": "787844444444",
       "id": 25
     },
     {
       "name": "eeee",
       "price": "111155",
       "id": 26
-    },
-    {
-      "name": "maulikmaulik",
-      "price": "999000",
-      "id": 27
     }
   ],
   "comments": [

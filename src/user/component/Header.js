@@ -18,7 +18,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
     },
 }));
 
-function Header({cartcount1}) {
+function Header({ cartcount1 }) {
 
     let loginstatus = localStorage.getItem('loginstatus')
 
@@ -33,14 +33,7 @@ function Header({cartcount1}) {
         localStorage.removeItem('loginstatus')
     }
 
-    const data = JSON.parse(localStorage.getItem('cart'))
-    let cartcount = 0;
 
-    if (data) {
-        cartcount = data.reduce((acc, v, i) => acc + v.qty, 0)
-    }
-
-   
 
 
     return (
@@ -70,7 +63,7 @@ function Header({cartcount1}) {
                         </Link>
 
                         <Link to='/myfav'>
-                            <Badge  color="primary">
+                            <Badge color="primary">
                                 <MailIcon color="action" />
                             </Badge>
                         </Link>

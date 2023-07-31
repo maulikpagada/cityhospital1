@@ -26,10 +26,10 @@ import { useState } from 'react';
 
 function Userroutes(props) {
     const [cartcount, setcartcount] = useState(0);
- 
+
     return (
         <>
-            <Header cartcount1={cartcount}/>
+            <Header cartcount1={cartcount} />
             <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/about' element={<About />} />
@@ -49,8 +49,8 @@ function Userroutes(props) {
                 </Route>
 
                 <Route element={<PrivateRoute />}>
-                    <Route path='/medicine' element={<Medicine />} setcartcount={setcartcount}/>
-                    <Route path='/medicine1' element={<Medicine1 />} />
+                    <Route path='/medicine' element={<Medicine />} />
+                    <Route path='/medicine1' element={<Medicine1 setcartcount={setcartcount} />} />
                 </Route>
                 <Route path='/auth' element={<Auth />} />
                 <Route path='/counter' element={<Counter />} />
