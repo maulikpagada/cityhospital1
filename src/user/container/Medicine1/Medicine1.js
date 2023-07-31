@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import CustomCard from '../Ul/CustomCard';
+import { useDispatch, useSelector } from 'react-redux';
+import { addfav } from '../../../redux/action/myfav.action';
 
-function Medicine1(props) {
+function Medicine1({ setcartcount }) {
+
+    const dispatch = useDispatch();
     const [getdata, setgetdata] = useState([])
-    // const [cart, setcartdata] = useState([])
 
 
     let localdata = JSON.parse(localStorage.getItem('cart'))
-
-    // console.log(cart);
 
     useEffect(() => {
         try {
@@ -34,17 +35,26 @@ function Medicine1(props) {
             }]))
         } else {
             let mdata = localdata.find((m) => m.pid == id)
-            if(mdata){
+            if (mdata) {
                 mdata.qty++;
                 localStorage.setItem('cart', JSON.stringify(localdata))
             } else {
                 localdata.push({
-                    pid:id,
-                    qty:1
+                    pid: id,
+                    qty: 1
                 })
                 localStorage.setItem('cart', JSON.stringify(localdata))
             }
         }
+
+        setcartcount((prev) => prev + 1)
+        console.log(setcartcount);
+    }
+
+
+    const handlecart2 = (id) => {
+        console.log(id);
+        dispatch(addfav(id))
     }
 
 
@@ -66,6 +76,8 @@ function Medicine1(props) {
                                         value={a}
                                         onclick1={handleCart1}
                                         btnval={'Add to Cart'}
+                                        favItem={handlecart2}
+                                    // onclick2={handlecart2}
                                     />
                                 </div>
                             )

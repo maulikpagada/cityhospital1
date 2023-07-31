@@ -1,7 +1,8 @@
 import React from 'react';
 import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle } from 'reactstrap';
+import FavoriteBorderIcon from '@mui/icons-material/Favorite';
 
-function CustomCard({ value, btnval, onclick1   }) {
+function CustomCard({ value, btnval, onclick1, favItem }) {
     return (
         <Card
             style={{
@@ -21,6 +22,8 @@ function CustomCard({ value, btnval, onclick1   }) {
             <CardBody>
                 <CardTitle tag="h5">
                     {value.name}
+                    <FavoriteBorderIcon onClick={() => favItem(value.id)} sx={{ color: "red", position: 'absolute', right: '30px' }} />
+
                 </CardTitle>
                 <CardSubtitle
                     className="mb-2 text-muted"
@@ -32,7 +35,7 @@ function CustomCard({ value, btnval, onclick1   }) {
                     {value.price}
                 </CardText>
                 <CardText>
-                    {value.desc.substring(0,100)}
+                    {value.desc.substring(0, 100)}
                     {value.desc.length > 50 ? '...' : ''}
                 </CardText>
 

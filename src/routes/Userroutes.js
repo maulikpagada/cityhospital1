@@ -20,13 +20,16 @@ import { Provider } from 'react-redux';
 import Cart from '../user/container/Cart/Cart';
 import Cart1 from '../user/container/Cart1/Cart1';
 import Medicine1 from '../user/container/Medicine1/Medicine1';
+import Myfav from '../user/container/myFav/Myfav';
+import { useState } from 'react';
 // import PrivateRoute from '../utils/PrivateRoute';
 
 function Userroutes(props) {
-
+    const [cartcount, setcartcount] = useState(0);
+ 
     return (
         <>
-            <Header />
+            <Header cartcount1={cartcount}/>
             <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/about' element={<About />} />
@@ -46,13 +49,14 @@ function Userroutes(props) {
                 </Route>
 
                 <Route element={<PrivateRoute />}>
-                    <Route path='/medicine' element={<Medicine />} />
+                    <Route path='/medicine' element={<Medicine />} setcartcount={setcartcount}/>
                     <Route path='/medicine1' element={<Medicine1 />} />
                 </Route>
                 <Route path='/auth' element={<Auth />} />
                 <Route path='/counter' element={<Counter />} />
                 <Route path='/cart' element={<Cart />} />
                 <Route path='/cart1' element={<Cart1 />} />
+                <Route path='/myfav' element={<Myfav />} />
             </Routes>
             <Footer />
         </>

@@ -6,6 +6,7 @@ import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useSelector } from 'react-redux';
+import MailIcon from '@mui/icons-material/Mail';
 
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -17,7 +18,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
     },
 }));
 
-function Header(props) {
+function Header({cartcount1}) {
 
     let loginstatus = localStorage.getItem('loginstatus')
 
@@ -36,8 +37,10 @@ function Header(props) {
     let cartcount = 0;
 
     if (data) {
-        cartcount = data.reduce((acc, v, i) =>  acc + v.qty, 0)
+        cartcount = data.reduce((acc, v, i) => acc + v.qty, 0)
     }
+
+   
 
 
     return (
@@ -60,10 +63,16 @@ function Header(props) {
 
                         <Link to='/cart1'>
                             <IconButton aria-label="cart">
-                                <StyledBadge badgeContent={cartcount} color="secondary">
+                                <StyledBadge badgeContent={cartcount1} color="secondary">
                                     <ShoppingCartIcon />
                                 </StyledBadge>
                             </IconButton>
+                        </Link>
+
+                        <Link to='/myfav'>
+                            <Badge  color="primary">
+                                <MailIcon color="action" />
+                            </Badge>
                         </Link>
                     </div>
 
