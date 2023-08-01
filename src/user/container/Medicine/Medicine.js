@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import ListingMed from './ListingMed';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMedicineData } from '../../../redux/action/medicine.action';
-import { addToCart } from '../../../redux/action/cart.action';
+import { addtocart } from '../../../redux/slice/cartSlice';
+// import { addToCart } from '../../../redux/action/cart.action';
 
 function Medicine(props) {
 
@@ -43,8 +44,9 @@ function Medicine(props) {
     }
 
     const handleCart = (id) => {
-        dispatch(addToCart(id))
-        console.log("handleCart", id);
+        console.log(id);
+        dispatch(addtocart({pid: id, qty: 1}))
+        // console.log("handleCart", id);
     }
 
     return (

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { decCartQty, deleteToCart, incCartQty } from '../../../redux/action/cart.action';
+import { decCartQty, deleteToCart, incCartQty } from '../../../redux/slice/cartSlice';
+// import { decCartQty, deleteToCart, incCartQty } from '../../../redux/action/cart.action';
 
 function Cart(props) {
 
@@ -22,15 +23,17 @@ function Cart(props) {
     let totalPrice = cartitems.reduce((acc, value) => acc + value.price * value.qty, 0);
 
     const handleInc = (id) => {
+        console.log(id);
         dispatch(incCartQty(id))
     }
 
     const handleDec = (id) => {
+        console.log(id);
         dispatch(decCartQty(id))
     }
 
     const handleremove = (id) => {
-        console.log("remove", id);
+        console.log(id);
         dispatch(deleteToCart(id))
     }
 
@@ -50,7 +53,7 @@ function Cart(props) {
                                         <div className="d-flex flex-row align-items-center">
                                             <div className="ms-3">
                                                 <h5>I{c.name}</h5>
-                                                <p className="small mb-0">{c.desc.substring(0, 50)}...</p>
+                                                <p className="small mb-0">{c.desc}...</p>
                                             </div>
                                         </div>
                                         <div className="d-flex flex-row align-items-center">
