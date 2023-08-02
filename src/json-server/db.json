@@ -81,11 +81,6 @@
   ],
   "department": [
     {
-      "id": 1,
-      "name": "E.N.T",
-      "desc": "Vestibulum volutpat luctus quam sed finibus. Sed luctus odio eget ex posuere hendrerit. Donec iaculis nisi ut purus dapibus Vivamus nisi mauris, blandit quis sem sit amet, posuere blandit diam. Cras quis quam suscipit, tincidunt neque non, ullamcorper erat. Quisque sapien ipsum, efficitur ac dui et, fringilla viverra tellus. Proin urna augue, posuere ut pellentesque quis, cursus ac neque."
-    },
-    {
       "id": 2,
       "name": "Cancer",
       "desc": "Quisque sapien ipsum, efficitur ac dui et, fringilla viverra tellus. Proin urna augue, posuere ut pellentesque quis, cursus ac neque. Vivamus nisi mauris, blandit quis sem sit amet, posuere blandit diam. Cras quis quam suscipit, tincidunt neque non, ullamcorper erat. Quisque sapien ipsum, efficitur ac dui et, fringilla viverra tellus. Proin urna augue, posuere ut pellentesque quis, cursus ac neque."
@@ -94,16 +89,6 @@
       "id": 3,
       "name": "Physiotherapy",
       "desc": "Fusce placerat ornare enim sed varius. Mauris tortor diam, molestie eget vulputate a, facilisis quis nibh. Donec blandit efficitur nulla Vivamus nisi mauris, blandit quis sem sit amet, posuere blandit diam. Cras quis quam suscipit, tincidunt neque non, ullamcorper erat. Quisque sapien ipsum, efficitur ac dui et, fringilla viverra tellus. Proin urna augue, posuere ut pellentesque quis, cursus ac neque."
-    },
-    {
-      "id": 4,
-      "name": "Dental",
-      "desc": "sollicitudin sed est. Vestibulum volutpat luctus quam sed finibus. Sed luctus odio eget ex posuere hendrerit. Donec iaculis nisi ut purus. Vivamus nisi mauris, blandit quis sem sit amet, posuere blandit diam. Cras quis quam suscipit, tincidunt neque non, ullamcorper erat. Quisque sapien ipsum, efficitur ac dui et, fringilla viverra tellus. Proin urna augue, posuere ut pellentesque quis, cursus ac neque."
-    },
-    {
-      "id": 5,
-      "name": "Neurosurgery",
-      "desc": "Aliquam sed convallis libero. Proin in mi tempor, convallis lectus sed, convallis mauris. Quisque ac nulla et lorem ultricies vulputate. Vivamus nisi mauris, blandit quis sem sit amet, posuere blandit diam. Cras quis quam suscipit, tincidunt neque non, ullamcorper erat. Quisque sapien ipsum, efficitur ac dui et, fringilla viverra tellus. Proin urna augue, posuere ut pellentesque quis, cursus ac neque."
     }
   ]
 }

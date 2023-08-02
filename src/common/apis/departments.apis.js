@@ -10,7 +10,6 @@ export const fetchadddepartmentData = (data) => {
 
 
 export const fetchdeletedepartmentData = (id) => {
-    console.log("22222222222", id);
     return deleterequest('department/' , id)
 }
 

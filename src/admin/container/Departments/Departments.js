@@ -7,7 +7,7 @@ import DepartmentsForm from './DepartmentsForm';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { fetchdepartments } from '../../../redux/slice/departmentSlice';
+import { adddepartmentsData, deletedepartmentsData, fetchdepartments, updatedepartmentsData } from '../../../redux/slice/departmentSlice';
 
 function Departments(props) {
 
@@ -22,8 +22,8 @@ function Departments(props) {
     }, [])
 
     const handleDelete = (id) => {
-        console.log("555555555",id);
-        // dispatch(deletedepartmentsData(id))
+        console.log("111111111", id);
+        dispatch(deletedepartmentsData(id))
     }
 
     const handleupdate = (data) => {
@@ -31,7 +31,7 @@ function Departments(props) {
     }
     const columns = [
         { field: 'name', headerName: 'Name', width: 130 },
-        { field: 'desc', headerName: 'desc', width: 130 },
+        { field: 'desc', headerName: 'desc', width: 450 },
         {
             field: 'action',
             headerName: 'Action',
@@ -52,9 +52,9 @@ function Departments(props) {
     ]
     const handlesubmit = (data) => {
         if (update) {
-            // dispatch(updatedepartmentsData(data))
+            dispatch(updatedepartmentsData(data))
         } else {
-            // dispatch(adddepartmentsData(data))
+            dispatch(adddepartmentsData(data))
         }
         setupdate(null)
     }

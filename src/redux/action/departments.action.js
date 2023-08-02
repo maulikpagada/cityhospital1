@@ -14,7 +14,6 @@ export const adddepartmentsData = (data) => (dispatch) => {
 }
 
 export const deletedepartmentsData = (id) => (dispatch) => {
-    console.log("33333333333", id);
     fetchdeletedepartmentData(id)
         .then(dispatch({ type: ActionTypes.DELETE_DEPARTMENTS, payload: id }))
         .catch((error) => console.log(error))
