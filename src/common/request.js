@@ -14,7 +14,6 @@ export const getRequest = (path) => {
     return sendRequest({
         method: 'GET',
         url: path
-
     })
 }
 
@@ -30,6 +29,7 @@ export const addrequest = (path, data) => {
 }
 
 export const deleterequest = (path, id) => {
+    console.log("11111111111111", path , id);
     return sendRequest({
         method: 'DELETE',
         url: path + id

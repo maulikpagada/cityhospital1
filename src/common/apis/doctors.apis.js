@@ -9,7 +9,7 @@ export const fetchaddDoctorData = (data) => {
 }
 
 export const fetchdeleteDoctorData = (id) => {
-    return deleterequest('Doctors/' + id)
+    return deleterequest('Doctors/' , id)
 }
 
 export const fetcheditDoctorData = (data) => {

@@ -95,7 +95,7 @@ function Header({ cartcount1 }) {
                             <li><Link to="/doctors" className="nav-link scrollto">Doctors</Link></li>
                             <li><Link to="/about" className="nav-link scrollto">About</Link></li>
                             <li><Link to="/contact" className="nav-link scrollto">Contact</Link></li>
-                            <li><Link to="/formvalidation" className="nav-link scrollto">FormValidation</Link></li>
+                            {/* <li><Link to="/formvalidation" className="nav-link scrollto">FormValidation</Link></li> */}
                             <li><Link to="/counter" className="nav-link scrollto">Counter</Link></li>
                             <Outlet />
                         </ul>
@@ -105,7 +105,7 @@ function Header({ cartcount1 }) {
                         Appointment</a> */}
                     <Link to="/appointment"><Custombutton val={'Make an Appointment'} /></Link>
 
-                    {
+                    {   
                         loginstatus ?
                             <Link to="/auth" onClick={handleremove}>
                                 <Custombutton val={'Logout'} />

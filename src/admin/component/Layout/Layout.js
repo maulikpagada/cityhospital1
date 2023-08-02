@@ -25,6 +25,7 @@ import MedicationIcon from '@mui/icons-material/Medication';
 import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
 import BookOnlineIcon from '@mui/icons-material/BookOnline';
 import { Dashboard } from '@mui/icons-material';
+import DepartureBoardIcon from '@mui/icons-material/DepartureBoard';
 
 const drawerWidth = 240;
 
@@ -114,8 +115,9 @@ export default function Layout({ children }) {
     { labal: 'Doctors', to: '/admin/Doctors', icon: <LocalHospitalIcon /> },
     { labal: 'Product', to: '/admin/Product', icon: <ProductionQuantityLimitsIcon /> },
     { labal: 'Medicine', to: '/admin/Medicine', icon: <MedicationIcon /> },
-    { labal: 'MedRedux', to: '/admin/MedRedux', icon: <MedicalServicesIcon />}
-    // { labal: 'Appointment', to: '/Appointment', icon: <BookOnlineIcon /> },
+    { labal: 'MedRedux', to: '/admin/MedRedux', icon: <MedicalServicesIcon />},
+    { labal: 'Departments', to: '/admin/Departments', icon: <MedicalServicesIcon />}
+    // { labal: 'Appointment', to: '/Appointment', icon: <DepartureBoardIcon /> },
   ]
 
   return (

@@ -8,6 +8,7 @@ import Doctors from '../admin/container/Doctors/Doctors';
 import { configureStore } from '../redux/store';
 import { Provider } from 'react-redux';
 import MedRedux from '../admin/container/MedRedux/MedRedux';
+import Departments from '../admin/container/Departments/Departments';
 
 function Adminroutes(props) {
     return (
@@ -18,7 +19,8 @@ function Adminroutes(props) {
                 <Route path='/Doctors' element={<Doctors />} />
                 <Route path='/Product' element={<Product />} />
                 <Route path='/Medicine' element={<Medicine />} />
-                <Route path='MedRedux' element={<MedRedux />} />
+                <Route path='/MedRedux' element={<MedRedux />} />
+                <Route path='/Departments' element={<Departments />} />
                 {/* <Route path='/Appointment' element={<Appointment />} /> */}
             </Routes>
         </Layout>
