@@ -16,6 +16,7 @@ function Counter(props) {
     }
 
     return (
+
         <>
             <section id="Counter" className="Counter">
                 <div className="container">
@@ -30,8 +31,6 @@ function Counter(props) {
 
                 </div>
             </section>
-
-
         </>
     );
 }

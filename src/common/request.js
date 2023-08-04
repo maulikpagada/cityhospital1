@@ -15,7 +15,7 @@ export const getRequest = (path) => {
         method: 'GET',
         url: path
     })
-}
+}   
 
 export const addrequest = (path, data) => {
     return sendRequest({

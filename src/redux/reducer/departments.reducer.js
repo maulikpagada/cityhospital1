@@ -2,7 +2,7 @@ import * as ActionTypes from "../ActionTypes"
 
 const initState = {
     departments: [],
-    isloading: false,
+    isLoading: false,
     error: null
 }
 

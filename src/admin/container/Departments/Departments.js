@@ -1,12 +1,14 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 // import { adddepartmentsData, deletedepartmentsData, getdepartmentsData, updatedepartmentsData } from '../../../redux/action/departments.action';
 import DepartmentsForm from './DepartmentsForm';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import CircularProgress from '@mui/material/CircularProgress';
 import { adddepartmentsData, deletedepartmentsData, fetchdepartments, updatedepartmentsData } from '../../../redux/slice/departmentSlice';
 
 function Departments(props) {
@@ -20,6 +22,16 @@ function Departments(props) {
     useEffect(() => {
         dispatch(fetchdepartments())
     }, [])
+
+
+    const handlesubmit = (data) => {
+        if (update) {
+            dispatch(updatedepartmentsData(data))
+        } else {
+            dispatch(adddepartmentsData(data))
+        }
+        setupdate(null)
+    }
 
     const handleDelete = (id) => {
         console.log("111111111", id);
@@ -50,31 +62,29 @@ function Departments(props) {
 
         }
     ]
-    const handlesubmit = (data) => {
-        if (update) {
-            dispatch(updatedepartmentsData(data))
-        } else {
-            dispatch(adddepartmentsData(data))
-        }
-        setupdate(null)
-    }
-
 
     return (
-        <div>
-            <h1>Hello departments Page</h1>
+        <>
+            <div>
+                <h1>Hello departments Page</h1>
+                {
+                    departmentsrData.isLoading ? <CircularProgress /> :
+                        departmentsrData.error ? <p>{departmentsrData.error}</p> :
+                            <>
+                                <DepartmentsForm onhandlesubmit={handlesubmit} onupdate={update} />
 
-            <DepartmentsForm onhandlesubmit={handlesubmit} onupdate={update} />
-
-            <div style={{ height: 400, width: '100%' }}>
-                <DataGrid
-                    rows={departmentsrData.departments}
-                    columns={columns}
-                    pageSizeOptions={[5, 10]}
-                    checkboxSelection
-                />
+                                <div style={{ height: 400, width: '100%' }}>
+                                    <DataGrid
+                                        rows={departmentsrData.departments}
+                                        columns={columns}
+                                        pageSizeOptions={[5, 10]}
+                                        checkboxSelection
+                                    />
+                                </div>
+                            </>
+                }
             </div>
-        </div>
+        </>
     );
 }
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import Custombutton from '../container/Ul/Custombutton';
 import Badge from '@mui/material/Badge';
@@ -7,6 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useSelector } from 'react-redux';
 import MailIcon from '@mui/icons-material/Mail';
+import { ThemeContext } from '../../context/ThemeContext';
 
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -19,6 +20,9 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 }));
 
 function Header({ cartcount1 }) {
+
+    const theme = useContext(ThemeContext)
+    console.log(theme);
 
     let loginstatus = localStorage.getItem('loginstatus')
 
@@ -34,11 +38,9 @@ function Header({ cartcount1 }) {
     }
 
 
-
-
     return (
-        <div className="main-header">
-            <div id="topbar" className="d-flex align-items-center fixed-top">
+        <div className={`main-header ${theme.theme}`}>
+            <div id="topbar" className={`d-flex align-items-center fixed-top  ${theme.theme}`}>
                 <div className="container d-flex justify-content-between">
                     <div className="contact-info d-flex align-items-center">
                         <i className="bi bi-envelope" /> <a href="mailto:contact@example.com">cityhospital@example.com</a>
@@ -67,6 +69,8 @@ function Header({ cartcount1 }) {
                                 <MailIcon color="action" />
                             </Badge>
                         </Link>
+
+                       
                     </div>
 
                     <div className="d-none d-lg-flex social-links align-items-center">
@@ -74,7 +78,7 @@ function Header({ cartcount1 }) {
                         <a href="#" className="facebook"><i className="bi bi-facebook" /></a>
                         <a href="#" className="instagram"><i className="bi bi-instagram" /></a>
                         <a href="#" className="linkedin"><i className="bi bi-linkedin" /></a>
-
+                        <button onClick={() => theme.toogletheme(theme.theme)}>TT</button>
                     </div>
                 </div>
             </div>
@@ -105,7 +109,7 @@ function Header({ cartcount1 }) {
                         Appointment</a> */}
                     <Link to="/appointment"><Custombutton val={'Make an Appointment'} /></Link>
 
-                    {   
+                    {
                         loginstatus ?
                             <Link to="/auth" onClick={handleremove}>
                                 <Custombutton val={'Logout'} />

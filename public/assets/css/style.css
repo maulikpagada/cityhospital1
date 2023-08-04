@@ -1757,3 +1757,13 @@ section {
 .error{
   color: red;
 }
+
+.dark{
+  color: white !important;
+  background-color: black !important;
+}
+
+.light{
+  color: black !important;
+  background-color: white !important;
+}
