@@ -7,9 +7,12 @@ import Input from '../Ul/Input/Input';
 import Heading from '../Ul/Heading/Heading';
 import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../../firebase';
+import { useDispatch } from 'react-redux';
+import { signupRequest } from '../../../redux/action/auth.action';
 
 
 function Auth(props) {
+    const dispatch = useDispatch()
 
     const [authtype, setauthtype] = useState('login');
 
@@ -96,22 +99,9 @@ function Auth(props) {
 
     const handlerigister = (values) => {
         console.log(values);
-        createUserWithEmailAndPassword(auth, values.email, values.password)
-            .then((userCredential) => {
-                // Signed in 
-                const user = userCredential.user;
-                onAuthStateChanged(auth, (user) => {
-                    sendEmailVerification(auth.currentUser)
-                        .then(() => {
-                            console.log("aaaaaaaaaaaaaaaaaaaaa");
-                        });
-                })
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorCode, errorMessage);
-            });
+
+        dispatch(signupRequest(values));
+       
     }
 
     const handleforget = (values) => {
