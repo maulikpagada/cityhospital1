@@ -5,12 +5,14 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../Ul/Button/Button';
 import Input from '../Ul/Input/Input';
 import Heading from '../Ul/Heading/Heading';
+import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../../firebase';
 
 
 function Auth(props) {
 
     const [authtype, setauthtype] = useState('login');
-    
+
     let naigate = useNavigate()
 
     let authobj = {}; let authval = {}
@@ -68,17 +70,66 @@ function Auth(props) {
         }
     }
 
-    const handlelogin = () => {
+    const handlelogin = (values) => {
+
+        console.log(values);
+
+        signInWithEmailAndPassword(auth, values.email, values.password)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                if (user.emailVerified) {
+                    console.log("sendEmailVerification ");
+                } else {
+                    console.log("not sendEmailVerification");
+                }
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode, errorMessage);
+            });
+
         localStorage.setItem("loginstatus", "true");
         naigate('/')
+
     };
 
-    const handlerigister = () => {
-
+    const handlerigister = (values) => {
+        console.log(values);
+        createUserWithEmailAndPassword(auth, values.email, values.password)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                onAuthStateChanged(auth, (user) => {
+                    sendEmailVerification(auth.currentUser)
+                        .then(() => {
+                            console.log("aaaaaaaaaaaaaaaaaaaaa");
+                        });
+                })
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode, errorMessage);
+                // ..
+            });
     }
 
-    const handleforget = () => {
+    const handleforget = (values) => {
+        console.log(values);
 
+        sendPasswordResetEmail(auth, values.email)
+            .then(() => {
+                console.log("Password reset link sent to your email id.");
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode, errorMessage);
+            });
     }
 
 
@@ -89,15 +140,14 @@ function Auth(props) {
         validationSchema: authSchema,
         enableReinitialize: true,
         onSubmit: (values, action) => {
-            action.resetForm()
-            console.log(values);
             if (authtype === 'login') {
-                handlelogin()
+                handlelogin(values)
             } else if (authtype === 'signup') {
-                handlerigister()
+                handlerigister(values)
             } else if (authtype === 'forget') {
-                handleforget()
+                handleforget(values)
             }
+            action.resetForm()
         },
     });
 
@@ -170,8 +220,8 @@ function Auth(props) {
                         </div>
                     </div>
                     {
-                        authtype === 'login' ? <div className="text-center"><Button type="primary">Login</Button></div>
-                            : authtype === 'signup' ? <div className="text-center"><Button type="secondary"  ondisabled={true}>Signup</Button></div>
+                        authtype === 'login' ? <div className="text-center"><Button type="primary" >Login</Button></div>
+                            : authtype === 'signup' ? <div className="text-center"><Button type="secondary" >Signup</Button></div>
                                 : <div className="text-center"><Button type="outlined">Submit</Button></div>
                     }
                     <div className="text-center m-2">
