@@ -80,19 +80,17 @@ function Auth(props) {
                 const user = userCredential.user;
                 if (user.emailVerified) {
                     console.log("sendEmailVerification ");
+                    localStorage.setItem("loginstatus", "true");
+                    naigate('/')
                 } else {
                     console.log("not sendEmailVerification");
                 }
-                // ...
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 console.log(errorCode, errorMessage);
             });
-
-        localStorage.setItem("loginstatus", "true");
-        naigate('/')
 
     };
 
@@ -108,13 +106,11 @@ function Auth(props) {
                             console.log("aaaaaaaaaaaaaaaaaaaaa");
                         });
                 })
-                // ...
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 console.log(errorCode, errorMessage);
-                // ..
             });
     }
 
