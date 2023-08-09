@@ -8,7 +8,7 @@ import Heading from '../Ul/Heading/Heading';
 import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../../firebase';
 import { useDispatch } from 'react-redux';
-import { signupRequest } from '../../../redux/action/auth.action';
+import { forgetRequest, loginRequest, signupRequest } from '../../../redux/action/auth.action';
 
 
 function Auth(props) {
@@ -77,24 +77,7 @@ function Auth(props) {
 
         console.log(values);
 
-        signInWithEmailAndPassword(auth, values.email, values.password)
-            .then((userCredential) => {
-                // Signed in 
-                const user = userCredential.user;
-                if (user.emailVerified) {
-                    console.log("sendEmailVerification ");
-                    localStorage.setItem("loginstatus", "true");
-                    naigate('/')
-                } else {
-                    console.log("not sendEmailVerification");
-                }
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorCode, errorMessage);
-            });
-
+        dispatch(loginRequest(values))
     };
 
     const handlerigister = (values) => {
@@ -106,16 +89,8 @@ function Auth(props) {
 
     const handleforget = (values) => {
         console.log(values);
-
-        sendPasswordResetEmail(auth, values.email)
-            .then(() => {
-                console.log("Password reset link sent to your email id.");
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorCode, errorMessage);
-            });
+        dispatch(forgetRequest(values))
+       
     }
 
 

@@ -95,7 +95,7 @@ function Header({ cartcount1 }) {
                             <li><Link to="/" className="nav-link scrollto active" >Home</Link></li>
                             <li><Link to="/departments" className="nav-link scrollto">Departments</Link></li>
                             <li><Link to="/medicine" className="nav-link scrollto">Medicine</Link></li>
-                            <li><Link to="/medicine1" className="nav-link scrollto">Medicine1</Link></li>
+                            {/* <li><Link to="/medicine1" className="nav-link scrollto">Medicine1</Link></li> */}
                             <li><Link to="/doctors" className="nav-link scrollto">Doctors</Link></li>
                             <li><Link to="/about" className="nav-link scrollto">About</Link></li>
                             <li><Link to="/contact" className="nav-link scrollto">Contact</Link></li>
