@@ -16,17 +16,16 @@ export const signupAPI = (values) => {
                             })
                             .catch((error) => {
                                 const errorCode = error.code;
-                                const errorMessage = error.message;
-                                reject(errorCode, errorMessage)
+                                reject({ message: errorCode })
                             })
                     })
                 })
                 .catch((error) => {
                     const errorCode = error.code;
                     if (errorCode.localeCompare('auth/email-already-in-use') === 0) {
-                        reject('Already user registered.')
+                        reject({ message: 'Already user registered.' })
                     } else if (errorCode.localeCompare('auth/network-request-failed') === 0) {
-                        reject('please check your internet connection.')
+                        reject({ message: 'please check your internet connection.' })
                     }
                 });
         })
@@ -49,16 +48,15 @@ export const loginAPI = (values) => {
                     // localStorage.setItem("loginstatus", "true");
                     // naigate('/')
                 } else {
-                    reject("Your Email is not Verified...");
+                    reject({ message: "Your Email is not Verified..." });
                 }
             })
             .catch((error) => {
                 const errorCode = error.code;
-                console.log(errorCode);
                 if (errorCode.localeCompare('auth/wrong-password') === 0) {
-                    reject('password is wrong.')
+                    reject({ message: "password is wrong." })
                 } else if (errorCode.localeCompare('auth/user-not-found') === 0) {
-                    reject('Email is not registred')
+                    reject({ message: "Email is not registred" })
                 }
             });
     })
@@ -74,8 +72,7 @@ export const forgetAPI = (values) => {
                 })
                 .catch((error) => {
                     const errorCode = error.code;
-                    const errorMessage = error.message;
-                    console.log(errorCode, errorMessage);
+                    reject({ message: errorCode })
                 });
         })
     } catch (error) {
