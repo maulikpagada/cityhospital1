@@ -10,12 +10,12 @@ export const alertSlice = createSlice({
     initialState,
     reducers: {
         setAlert: (state, action) => {
-            state.text = action.payload.text,
+            state.text = action.payload.text;
             state.color = action.payload.color
         },
 
         resetAlert: (state, action) => {
-            state.text = '',
+            state.text = '';
             state.color = ''
         }
     }
