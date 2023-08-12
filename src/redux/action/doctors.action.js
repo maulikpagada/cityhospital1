@@ -1,5 +1,6 @@
 import { fetchaddDoctorData, fetchdeleteDoctorData, fetcheditDoctorData, fetchgetDoctorData } from '../../common/apis/doctors.apis'
 import * as ActionTypes from '../ActionTypes'
+import { setAlert } from '../slice/alertSlice'
 
 export const getDoctorData = () => (dispatch) => {
     try {
@@ -28,7 +29,10 @@ export const getDoctorData = () => (dispatch) => {
 export const addDoctorData = (data) => (dispatch) => {
     try {
         fetchaddDoctorData(data)
-            .then((response) => dispatch({ type: ActionTypes.ADD_DOCTORS, payload: response.data }))
+            .then((response) => {
+                dispatch(setAlert({ text: 'ADD DATA', color: 'success' }))
+                dispatch({ type: ActionTypes.ADD_DOCTORS, payload: response.data })
+            })
             .catch((error) => console.log(error))
 
         // fetch("http://localhost:3004/Doctor", {
@@ -49,7 +53,10 @@ export const addDoctorData = (data) => (dispatch) => {
 export const deleteDoctorData = (id) => (dispatch) => {
     try {
         fetchdeleteDoctorData(id)
-            .then(dispatch({ type: ActionTypes.DELETE_DOCTORS, payload: id }))
+            .then(
+                dispatch(setAlert({ text: "Delete Data", color: 'error' })),
+                dispatch({ type: ActionTypes.DELETE_DOCTORS, payload: id })
+            )
             .catch((error) => console.log(error))
 
         // fetch("http://localhost:3004/Doctor/" + id, {
@@ -65,9 +72,12 @@ export const deleteDoctorData = (id) => (dispatch) => {
 export const updateDoctorData = (data) => (dispatch) => {
     try {
         fetcheditDoctorData(data)
-            .then(dispatch({ type: ActionTypes.UPDATE_DOCTORS, payload: data }))
+            .then(
+                dispatch(setAlert({ text: "Updete Data", color: 'success' })),
+                dispatch({ type: ActionTypes.UPDATE_DOCTORS, payload: data })
+            )
             .catch((error) => console.log(error))
-            
+
         // fetch("http://localhost:3004/Doctor/" + data.id, {
         //     method: "PUT",
         //     headers: {

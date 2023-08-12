@@ -5,9 +5,10 @@ import Badge from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import MailIcon from '@mui/icons-material/Mail';
 import { ThemeContext } from '../../context/ThemeContext';
+import { logoutRequest } from '../../redux/action/auth.action';
 
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -24,6 +25,11 @@ function Header({ cartcount1 }) {
     const theme = useContext(ThemeContext)
     console.log(theme);
 
+    const auth = useSelector(state => state.auth)
+    console.log(auth);
+
+    const dispatch = useDispatch()
+
     let loginstatus = localStorage.getItem('loginstatus')
 
     const cartData = useSelector(state => state.cart)
@@ -34,7 +40,8 @@ function Header({ cartcount1 }) {
     }
 
     const handleremove = () => {
-        localStorage.removeItem('loginstatus')
+        dispatch(logoutRequest())
+        // localStorage.removeItem('loginstatus')
     }
 
 
@@ -70,7 +77,7 @@ function Header({ cartcount1 }) {
                             </Badge>
                         </Link>
 
-                       
+
                     </div>
 
                     <div className="d-none d-lg-flex social-links align-items-center">
@@ -95,7 +102,7 @@ function Header({ cartcount1 }) {
                             <li><Link to="/" className="nav-link scrollto active" >Home</Link></li>
                             <li><Link to="/departments" className="nav-link scrollto">Departments</Link></li>
                             <li><Link to="/medicine" className="nav-link scrollto">Medicine</Link></li>
-                            {/* <li><Link to="/medicine1" className="nav-link scrollto">Medicine1</Link></li> */}
+                            <li><Link to="/medicine1" className="nav-link scrollto">Medicine1</Link></li>
                             <li><Link to="/doctors" className="nav-link scrollto">Doctors</Link></li>
                             <li><Link to="/about" className="nav-link scrollto">About</Link></li>
                             <li><Link to="/contact" className="nav-link scrollto">Contact</Link></li>
@@ -110,7 +117,7 @@ function Header({ cartcount1 }) {
                     <Link to="/appointment"><Custombutton val={'Make an Appointment'} /></Link>
 
                     {
-                        loginstatus ?
+                        auth.user ?
                             <Link to="/auth" onClick={handleremove}>
                                 <Custombutton val={'Logout'} />
 
@@ -124,6 +131,7 @@ function Header({ cartcount1 }) {
                 </div>
             </header>
         </div>
+        
     );
 }
 

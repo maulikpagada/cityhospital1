@@ -7,14 +7,18 @@ import Input from '../Ul/Input/Input';
 import Heading from '../Ul/Heading/Heading';
 import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../../firebase';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { forgetRequest, loginRequest, signupRequest } from '../../../redux/action/auth.action';
+import { CircularProgress } from '@mui/material';
 
 
 function Auth(props) {
     const dispatch = useDispatch()
 
     const [authtype, setauthtype] = useState('login');
+
+    const authData = useSelector(state => state.auth);
+    console.log(authData);
 
     let naigate = useNavigate()
 
@@ -75,22 +79,30 @@ function Auth(props) {
 
     const handlelogin = (values) => {
 
+
         console.log(values);
 
-        dispatch(loginRequest(values))
+        // localStorage.setItem("loginstatus", "true");
+        // naigate('/')
+        dispatch(loginRequest({
+            data:values,
+            callback: (route) => {
+                naigate(route)
+            }
+        }))
     };
 
     const handlerigister = (values) => {
         console.log(values);
 
         dispatch(signupRequest(values));
-       
+
     }
 
     const handleforget = (values) => {
         console.log(values);
         dispatch(forgetRequest(values))
-       
+
     }
 
 
@@ -124,74 +136,87 @@ function Auth(props) {
                             : authtype === 'signup' ? <Heading>Signup</Heading> : <Heading>Reset Password</Heading>
                     }
                 </div>
-                <form action method="post" role="form" className="php-email-form" onSubmit={handleSubmit}>
-                    <div className="row justify-content-center ">
-                        {
-                            authtype === 'login' || authtype === 'forget' ? null :
 
-                                <div className="col-md-7 form-group">
-                                    <Input
-                                        type="text"
-                                        name="name"
-                                        id="name"
-                                        value={values.name}
-                                        onBlur={handleBlur}
-                                        onChange={handleChange}
-                                        placeholder="Your Name"
-                                        errorText={errors.name && touched.name ? errors.name : ''}
-                                    />
-                                    <div className="validate" />
-                                    {/* <span className='error'>{errors.name && touched.name ? errors.name : ''}</span> */}
+                {/* {
+                    authData.error ? <p className='error'>{authData.error}</p> : null
+                } */}
+
+                {
+                    authData.isloading ? <CircularProgress color="secondary" /> :
+                        <>
+                            <form action method="post" role="form" className="php-email-form" onSubmit={handleSubmit}>
+                                <div className="row justify-content-center ">
+                                    {
+                                        authtype === 'login' || authtype === 'forget' ? null :
+
+                                            <div className="col-md-7 form-group">
+                                                <Input
+                                                    type="text"
+                                                    name="name"
+                                                    id="name"
+                                                    value={values.name}
+                                                    onBlur={handleBlur}
+                                                    onChange={handleChange}
+                                                    placeholder="Your Name"
+                                                    errorText={errors.name && touched.name ? errors.name : ''}
+                                                />
+                                                <div className="validate" />
+                                                {/* <span className='error'>{errors.name && touched.name ? errors.name : ''}</span> */}
+                                            </div>
+                                    }
+                                    <div className="col-md-7 form-group mt-3 mt-md-0">
+                                        <Input
+                                            type="email"
+                                            name="email" id="email"
+                                            value={values.email}
+                                            onBlur={handleBlur}
+                                            onChange={handleChange}
+                                            placeholder="Your Email"
+                                            errorText={errors.email && touched.email ? errors.email : ''}
+                                        />
+                                        <div className="validate" />
+                                        {/* <span className='error'>{errors.email && touched.email ? errors.email : ''}</span> */}
+                                    </div>
+                                    {
+                                        authtype !== 'forget' ? <div className="col-md-7 form-group mt-3 mt-md-0">
+                                            <Input
+                                                type="password"
+                                                name="password"
+                                                id="password"
+                                                value={values.password}
+                                                onBlur={handleBlur}
+                                                onChange={handleChange}
+                                                placeholder="Your Password"
+                                                errorText={errors.password && touched.password ? errors.password : ''}
+                                            />
+                                            <div className="validate" />
+                                            {/* <span className='error'>{errors.password && touched.password ? errors.password : ''}</span> */}
+                                        </div> : null
+                                    }
+                                    <div className="text-center m-2">
+                                        {
+                                            authtype === 'login' ? <a href='#' onClick={(() => setauthtype('forget'))}>Forgot password?</a>
+                                                : null
+                                        }
+                                    </div>
                                 </div>
-                        }
-                        <div className="col-md-7 form-group mt-3 mt-md-0">
-                            <Input
-                                type="email"
-                                name="email" id="email"
-                                value={values.email}
-                                onBlur={handleBlur}
-                                onChange={handleChange}
-                                placeholder="Your Email"
-                                errorText={errors.email && touched.email ? errors.email : ''}
-                            />
-                            <div className="validate" />
-                            {/* <span className='error'>{errors.email && touched.email ? errors.email : ''}</span> */}
-                        </div>
-                        {
-                            authtype !== 'forget' ? <div className="col-md-7 form-group mt-3 mt-md-0">
-                                <Input
-                                    type="password"
-                                    name="password"
-                                    id="password"
-                                    value={values.password}
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}
-                                    placeholder="Your Password"
-                                    errorText={errors.password && touched.password ? errors.password : ''}
-                                />
-                                <div className="validate" />
-                                {/* <span className='error'>{errors.password && touched.password ? errors.password : ''}</span> */}
-                            </div> : null
-                        }
-                        <div className="text-center m-2">
-                            {
-                                authtype === 'login' ? <a href='#' onClick={(() => setauthtype('forget'))}>Forgot password?</a>
-                                    : null
-                            }
-                        </div>
-                    </div>
-                    {
-                        authtype === 'login' ? <div className="text-center"><Button type="primary" >Login</Button></div>
-                            : authtype === 'signup' ? <div className="text-center"><Button type="secondary" >Signup</Button></div>
-                                : <div className="text-center"><Button type="outlined">Submit</Button></div>
-                    }
-                    <div className="text-center m-2">
-                        {
-                            authtype === 'login' ? <span>Don't have an account <a href='#' onClick={() => setauthtype('signup')}>Signup</a></span>
-                                : <span>Already have an account <a href='#' onClick={() => setauthtype('login')}>Login</a></span>
-                        }
-                    </div>
-                </form>
+                                {
+                                    authtype === 'login' ? <div className="text-center"><Button type="primary" >Login</Button></div>
+                                        : authtype === 'signup' ? <div className="text-center"><Button type="secondary" >Signup</Button></div>
+                                            : <div className="text-center"><Button type="outlined">Send OTP</Button></div>
+                                }
+
+                                <div className="text-center m-2">
+                                    {
+                                        authtype === 'login' ? <span>Don't have an account <a href='#' onClick={() => setauthtype('signup')}>Signup</a></span>
+                                            : <span>Already have an account <a href='#' onClick={() => setauthtype('login')}>Login</a></span>
+                                    }
+                                </div>
+
+                            </form>
+
+                        </>
+                }
             </div>
         </section>
 

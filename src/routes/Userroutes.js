@@ -16,7 +16,7 @@ import Medicine from '../user/container/Medicine/Medicine';
 import PrivateRoute from './PrivateRoute';
 import Counter from '../user/container/Counter/Counter';
 import { configureStore } from '../redux/store';
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import Cart from '../user/container/Cart/Cart';
 import Cart1 from '../user/container/Cart1/Cart1';
 import Medicine1 from '../user/container/Medicine1/Medicine1';
@@ -27,38 +27,42 @@ import { useState } from 'react';
 function Userroutes(props) {
     const [cartcount, setcartcount] = useState(0);
 
+    const theme = useSelector(state => state.theme)
+
     return (
         <>
-            <Header cartcount1={cartcount} />
-            <Routes>
-                <Route path='/' element={<Home />} />
-                <Route path='/about' element={<About />} />
-                <Route path='/appointment' element={<Appointment />} />
-                <Route path='/contact' element={<Contact />} />
-                <Route path='/departments' element={<Departments />} />
-                <Route path='/doctors' element={<Doctors />} />
-                <Route path='/doctor/:id' element={<Doctor />} />
-                <Route path='/doctor/vistingdoctor' element={<VistingDoctor />} />
-                <Route path='*' element={<NotFound />} />
-
-                <Route path='/formvalidation' element={<FromValidation />} />
-
-                <Route path='/doctor'>
+            <div className={`${theme.theme}`}>
+                <Header cartcount1={cartcount} />
+                <Routes>
+                    <Route path='/' element={<Home />} />
+                    <Route path='/about' element={<About />} />
+                    <Route path='/appointment' element={<Appointment />} />
+                    <Route path='/contact' element={<Contact />} />
+                    <Route path='/departments' element={<Departments />} />
+                    <Route path='/doctors' element={<Doctors />} />
                     <Route path='/doctor/:id' element={<Doctor />} />
                     <Route path='/doctor/vistingdoctor' element={<VistingDoctor />} />
-                </Route>
+                    <Route path='*' element={<NotFound />} />
 
-                <Route element={<PrivateRoute />}>
-                    <Route path='/medicine' element={<Medicine />} />
-                    <Route path='/medicine1' element={<Medicine1 setcartcount={setcartcount} />} />
-                </Route>
-                <Route path='/auth' element={<Auth />} />
-                <Route path='/counter' element={<Counter />} />
-                <Route path='/cart' element={<Cart />} />
-                <Route path='/cart1' element={<Cart1 />} />
-                <Route path='/myfav' element={<Myfav />} />
-            </Routes>
-            <Footer />
+                    <Route path='/formvalidation' element={<FromValidation />} />
+
+                    <Route path='/doctor'>
+                        <Route path='/doctor/:id' element={<Doctor />} />
+                        <Route path='/doctor/vistingdoctor' element={<VistingDoctor />} />
+                    </Route>
+
+                    <Route element={<PrivateRoute />}>
+                        <Route path='/medicine' element={<Medicine />} />
+                        <Route path='/medicine1' element={<Medicine1 setcartcount={setcartcount} />} />
+                    </Route>
+                    <Route path='/auth' element={<Auth />} />
+                    <Route path='/counter' element={<Counter />} />
+                    <Route path='/cart' element={<Cart />} />
+                    <Route path='/cart1' element={<Cart1 />} />
+                    <Route path='/myfav' element={<Myfav />} />
+                </Routes>
+                <Footer />
+            </div>
         </>
     );
 }
