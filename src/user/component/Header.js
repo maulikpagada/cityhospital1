@@ -104,7 +104,7 @@ function Header({ cartcount1 }) {
                             <li><Link to="/" className={`nav-link scrollto ${theme.theme}`} >Home</Link></li>
                             <li><Link to="/departments" className={`nav-link scrollto ${theme.theme}`} >Departments</Link></li>
                             <li><Link to="/medicine" className={`nav-link scrollto ${theme.theme}`} >Medicine</Link></li>
-                            {/* <li><Link to="/medicine1" className={`nav-link scrollto ${theme.theme}`} >Medicine1</Link></li> */}
+                            <li><Link to="/medicine1" className={`nav-link scrollto ${theme.theme}`} >Medicine1</Link></li>
                             <li><Link to="/doctors" className={`nav-link scrollto ${theme.theme}`} >Doctors</Link></li>
                             <li><Link to="/about" className={`nav-link scrollto ${theme.theme}`} >About</Link></li>
                             <li><Link to="/contact" className={`nav-link scrollto ${theme.theme}`} >Contact</Link></li>

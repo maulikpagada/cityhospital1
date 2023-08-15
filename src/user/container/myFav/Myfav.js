@@ -104,10 +104,6 @@ function Myfav(props) {
                                             </div>
 
                                             <FavoriteIcon style={{ color: '#FF6337' }} onClick={() => handleDelete(c.id)} />
-
-                                            <CustomCard
-                                                value={c}
-                                            />
                                         </div>
                                     </div>
                                 </div>
