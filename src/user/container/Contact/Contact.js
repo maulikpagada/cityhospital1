@@ -1,22 +1,25 @@
 import { useFormik } from 'formik';
-import React from 'react';
+import React, { useContext } from 'react';
 import * as yup from 'yup'
 import Heading from '../Ul/Heading/Heading';
+import { ThemeContext } from '../../../context/ThemeContext';
 
 function Contact(props) {
+    const theme = useContext(ThemeContext)
+
 
     let userSchema = yup.object().shape({
         name: yup.string().required('Please enter your name'),
         email: yup.string().required('Please enter your email').email('Please enter valid email'),
         subject: yup.string().required('Please enter your subject'),
-        message: yup.string().required('Please enter your massage').test('message', 'maxmium 5 word allowed.', function(val){
+        message: yup.string().required('Please enter your massage').test('message', 'maxmium 5 word allowed.', function (val) {
             let arr = val.split(" ");
 
-                if (arr.length > 5) {
-                    return false
-                } else {
-                    return true
-                }
+            if (arr.length > 5) {
+                return false
+            } else {
+                return true
+            }
         })
     });
 
@@ -38,10 +41,10 @@ function Contact(props) {
     console.log(errors);
 
     return (
-        <section id="contact" className="contact">
+        <section id="contact" className={`contact ${theme.theme}`}>
             <div className="container">
                 <div className="section-title">
-                <Heading type='h2'>Contact</Heading>
+                    <h2 className={`contact ${theme.theme}`}>Contact</h2>
                     <p>Aenean enim orci, suscipit vitae sodales ac, semper in ex. Nunc aliquam eget nibh eu euismod. Donec dapibus
                         blandit quam volutpat sollicitudin. Aenean ac turpis ante. Mauris velit sapien, aliquet aliquet rhoncus quis,
                         luctus at neque. Mauris sit amet massa sed orci vehicula facilisis.</p>
@@ -50,28 +53,28 @@ function Contact(props) {
             <div className="container">
                 <div className="row mt-5">
                     <div className="col-lg-4">
-                        <div className="info">
+                        <div className={`info ${theme.theme}`}>
                             <div className="address">
                                 <i className="bi bi-geo-alt" />
-                                <Heading>Location:</Heading>
-                                <p> F-505, Inovative Plazza New Delhi, India</p>
+                                <h4 className={`${theme.theme}`}>Location:</h4>
+                                <p className={`${theme.theme}`}> F-505, Inovative Plazza New Delhi, India</p>
                             </div>
                             <div className="email">
                                 <i className="bi bi-envelope" />
-                                <Heading>Email:</Heading>
-                                <p>cityhospital@example.com</p>
+                                <h4 className={`${theme.theme}`}>Email:</h4>
+                                <p className={`${theme.theme}`}>cityhospital@example.com</p>
                             </div>
                             <div className="phone">
                                 <i className="bi bi-phone" />
-                                <Heading>Call:</Heading>
-                                <p>+91 9988776655</p>
+                                <h4 className={`${theme.theme}`}>Call:</h4>
+                                <p className={`${theme.theme}`}>+91 9988776655</p>
                             </div>
                         </div>
                     </div>
                     <div className="col-lg-8 mt-5 mt-lg-0">
-                        <form onSubmit={handleSubmit} className="php-email-form">
-                            <div className="row">
-                                <div className="col-md-6 form-group">
+                        <form onSubmit={handleSubmit} className={`php-email-form ${theme.theme}`}>
+                            <div className={`row ${theme.theme}`}>
+                                <div className={`col-md-6 form-group ${theme.theme}`}>
                                     <input
                                         type="text"
                                         name="name"

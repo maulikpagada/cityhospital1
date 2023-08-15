@@ -5,14 +5,14 @@ import { TOOGLE_THEME } from "./ActionTypes";
 export const ThemeContext = createContext();
 
 const initState = {
-    theme: 'light'
+    theme: 'dark'
 }
 
 export const ThemeProvider = ({ children }) => {
     const [state, dispatch] = useReducer(ThemeReducer, initState)
 
     const toogletheme = (theme) => {
-        const newtheme = theme === 'light' ? 'dark' : 'light';
+        const newtheme = theme === 'dark' ? 'light' : 'dark';
 
         dispatch({ type:TOOGLE_THEME , payload: newtheme })
     }

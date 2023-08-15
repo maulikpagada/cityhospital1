@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Heading from '../Ul/Heading/Heading';
+import { ThemeContext } from '../../../context/ThemeContext';
 
 const doctorData = [
     {
@@ -34,11 +35,13 @@ const doctorData = [
 ]
 
 function Doctors(props) {
+    const theme =useContext(ThemeContext) 
+
     return (
-        <section id="doctors" className="doctors">
+        <section id="doctors" className={`doctors ${theme.theme}`}>
             <div className="container">
                 <div className="section-title">
-                <Heading type='h2'>Doctors</Heading>
+                <h2 className={`${theme.theme}`}>Doctors</h2>
                     <p>Duis sagittis rutrum neque, quis tincidunt arcu pretium ac. Suspendisse sem risus, molestie vitae arcu et,
                         tincidunt viverra erat. Quisque in lectus id nulla viverra sodales in a risus. Aliquam ut sem ex. Duis viverra
                         ipsum lacus, ut pharetra arcu sagittis nec. Phasellus a eleifend elit.</p>

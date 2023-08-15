@@ -1,47 +1,50 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Heading from '../Ul/Heading/Heading';
 import Icon from '../Ul/Icon/Icon';
+import { ThemeContext } from '../../../context/ThemeContext';
 
 function Home(props) {
+    const theme = useContext(ThemeContext)
+
     return (
         <div>
-            <section id="hero" className="d-flex align-items-center">
+            <section id="hero" className={`d-flex align-items-center ${theme.theme}`}>
                 <div className="container">
                     <Heading type='h1'>Welcome to City <br />Multispeciality Hospital</Heading>
                     <h2>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</h2>
                 </div>
             </section>
-            <main id="main">
+            <main id="main" className={`${theme.theme}`}>
                 <section id="why-us" className="why-us">
                 </section>
-                <section id="counts" className="counts">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-lg-3 col-md-6">
-                                <div className="count-box">
+                <section id="counts" className={`counts ${theme.theme}`}>
+                    <div className={`container ${theme.theme}`}>
+                        <div className={`row ${theme.theme}`}>
+                            <div className={`col-lg-3 col-md-6  ${theme.theme}`}>
+                                <div className={`count-box ${theme.theme}`}>
                                     <Icon className="fas fa-user-md" />
-                                    <span>23</span>
+                                    <span className={`${theme.theme}`}>23</span>
                                     <p>Doctors</p>
                                 </div>
                             </div>
                             <div className="col-lg-3 col-md-6 mt-5 mt-md-0">
-                                <div className="count-box">
+                                <div className={`count-box ${theme.theme}`}>
                                     <Icon className="far fa-hospital" />
-                                    <span>18</span>
+                                    <span className={`${theme.theme}`}>18</span>
                                     <p>Departments</p>
                                 </div>
                             </div>
                             <div className="col-lg-3 col-md-6 mt-5 mt-lg-0">
-                                <div className="count-box">
+                                <div className={`count-box ${theme.theme}`}>
                                     <Icon className="fas fa-heartbeat" />
-                                    <span>980</span>
+                                    <span className={`${theme.theme}`}>980</span>
                                     <p>Patients</p>
                                 </div>
                             </div>
                             <div className="col-lg-3 col-md-6 mt-5 mt-lg-0">
-                                <div className="count-box">
+                                <div className={`count-box ${theme.theme}`}>
                                     <Icon className="fas fa-award" />
-                                    <span>12</span>
+                                    <span className={`${theme.theme}`}>12</span>
                                     <p>Awards</p>
                                 </div>
                             </div>
@@ -51,7 +54,7 @@ function Home(props) {
                 <section id="services" className="services">
                     <div className="container">
                         <div className="section-title">
-                            <Heading type='h2'>Our Facilities</Heading>
+                            <Heading type='h2' className={`${theme.theme}`}>Our Facilities</Heading>
                             <p>Nunc aliquam eget nibh eu euismod. Donec dapibus blandit quam volutpat sollicitudin. Fusce tincidunt sit
                                 amet ex in volutpat. Donec lacinia finibus tortor. Curabitur luctus eleifend odio. Phasellus placerat mi et
                                 suscipit pulvinar. Donec quis tristique lectus.</p>
@@ -102,18 +105,18 @@ function Home(props) {
                         </div>
                     </div>
                 </section>
-                <section id="testimonials" className="testimonials">
+                <section id="testimonials" className={`testimonials ${theme.theme}`}>
                     <div className="container">
-                        <div className="section-title"><Heading type='h2'>Reviews</Heading></div>
+                        <div className="section-title"><Heading type='h2' className={`${theme.theme}`}>Reviews</Heading></div>
                         <div className="testimonials-slider swiper-container" data-aos="fade-up" data-aos-delay={100}>
                             <div className="swiper-wrapper">
                                 <div className="swiper-slide">
                                     <div className="testimonial-wrap">
-                                        <div className="testimonial-item">
+                                        <div className={`testimonial-item ${theme.theme}`}>
                                             <img src="assets/img/testimonials/testimonials-1.jpg" className="testimonial-img" alt />
-                                            <h3>Jacob Wilsson</h3>
+                                            <h3 className={`${theme.theme}`}>Jacob Wilsson</h3>
                                             <h4>Writer</h4>
-                                            <p>
+                                            <p className={`${theme.theme}`}>
                                                 <i className="bx bxs-quote-alt-left quote-icon-left" />
                                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere, lacus ac tincidunt tempor,
                                                 sapien justo ultrices ante, vel pharetra turpis ex ac nisi. Aliquam tempor egestas turpis, nec
@@ -196,7 +199,7 @@ function Home(props) {
                 <section id="gallery" className="gallery">
                     <div className="container">
                         <div className="section-title">
-                            <Heading type='h2'>Gallery</Heading>
+                            <Heading type='h2' className={`${theme.theme}`}>Gallery</Heading>
                             <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint
                                 consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit
                                 in iste officiis commodi quidem hic quas.</p>

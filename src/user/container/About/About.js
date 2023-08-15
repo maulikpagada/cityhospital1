@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Heading from '../Ul/Heading/Heading';
+import { ThemeContext } from '../../../context/ThemeContext';
 
 function About(props) {
+    const theme = useContext(ThemeContext)
     return (
-        <section id="about" class="about">
+        <section id="about" classname="about" className={`${theme.theme}`}>
             <div class="container">
                 <div class="row">
                     <div

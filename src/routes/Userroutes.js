@@ -27,42 +27,39 @@ import { useState } from 'react';
 function Userroutes(props) {
     const [cartcount, setcartcount] = useState(0);
 
-    const theme = useSelector(state => state.theme)
 
     return (
         <>
-            <div className={`${theme.theme}`}>
-                <Header cartcount1={cartcount} />
-                <Routes>
-                    <Route path='/' element={<Home />} />
-                    <Route path='/about' element={<About />} />
-                    <Route path='/appointment' element={<Appointment />} />
-                    <Route path='/contact' element={<Contact />} />
-                    <Route path='/departments' element={<Departments />} />
-                    <Route path='/doctors' element={<Doctors />} />
+            <Header cartcount1={cartcount} />
+            <Routes>
+                <Route path='/' element={<Home />} />
+                <Route path='/about' element={<About />} />
+                <Route path='/appointment' element={<Appointment />} />
+                <Route path='/contact' element={<Contact />} />
+                <Route path='/departments' element={<Departments />} />
+                <Route path='/doctors' element={<Doctors />} />
+                <Route path='/doctor/:id' element={<Doctor />} />
+                <Route path='/doctor/vistingdoctor' element={<VistingDoctor />} />
+                <Route path='*' element={<NotFound />} />
+
+                <Route path='/formvalidation' element={<FromValidation />} />
+
+                <Route path='/doctor'>
                     <Route path='/doctor/:id' element={<Doctor />} />
                     <Route path='/doctor/vistingdoctor' element={<VistingDoctor />} />
-                    <Route path='*' element={<NotFound />} />
+                </Route>
 
-                    <Route path='/formvalidation' element={<FromValidation />} />
-
-                    <Route path='/doctor'>
-                        <Route path='/doctor/:id' element={<Doctor />} />
-                        <Route path='/doctor/vistingdoctor' element={<VistingDoctor />} />
-                    </Route>
-
-                    <Route element={<PrivateRoute />}>
-                        <Route path='/medicine' element={<Medicine />} />
-                        <Route path='/medicine1' element={<Medicine1 setcartcount={setcartcount} />} />
-                    </Route>
-                    <Route path='/auth' element={<Auth />} />
-                    <Route path='/counter' element={<Counter />} />
-                    <Route path='/cart' element={<Cart />} />
-                    <Route path='/cart1' element={<Cart1 />} />
-                    <Route path='/myfav' element={<Myfav />} />
-                </Routes>
-                <Footer />
-            </div>
+                <Route element={<PrivateRoute />}>
+                    <Route path='/medicine' element={<Medicine />} />
+                    <Route path='/medicine1' element={<Medicine1 setcartcount={setcartcount} />} />
+                </Route>
+                <Route path='/auth' element={<Auth />} />
+                <Route path='/counter' element={<Counter />} />
+                <Route path='/cart' element={<Cart />} />
+                <Route path='/cart1' element={<Cart1 />} />
+                <Route path='/myfav' element={<Myfav />} />
+            </Routes>
+            <Footer />
         </>
     );
 }

@@ -28,6 +28,7 @@
     "redux-persist": "^6.0.0",
     "redux-saga": "^1.2.3",
     "redux-thunk": "^2.4.2",
+    "rsuite": "^5.37.4",
     "styled-components": "^5.3.11",
     "web-vitals": "^2.1.4",
     "yup": "^1.2.0"

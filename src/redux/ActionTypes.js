@@ -20,7 +20,7 @@ export const DEC_CART = "DEC_CART";
 export const REMOVE_CART = "REMOVE_CART";
 
 export const ADD_FAV = "ADD_FAV";
-export const DELETE_FAV = "DELETE_FAV";
+export const REMOVE_TO_FAV = "REMOVE_TO_FAV";
 
 
 export const GET_DEPARTMENTS = "GET_DEPARTMENTS";

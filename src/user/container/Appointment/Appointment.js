@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Heading from '../Ul/Heading/Heading';
+import { ThemeContext } from '../../../context/ThemeContext';
 
 function Appointment(props) {
+    const theme = useContext(ThemeContext)
+
     return (
-        <section id="appointment" className="appointment">
+        <section id="appointment" className={`appointment ${theme.theme}`}>
             <div className="container">
                 <div className="section-title">
-                <Heading type='h2'>Make an Appointment</Heading>
+                <h2 className={`${theme.theme}`}>Make an Appointment</h2>
                     <p>Aenean enim orci, suscipit vitae sodales ac, semper in ex. Nunc aliquam eget nibh eu euismod. Donec dapibus
                         blandit quam volutpat sollicitudin. Fusce tincidunt sit amet ex in volutpat. Donec lacinia finibus tortor.
                         Curabitur luctus eleifend odio. Phasellus placerat mi et suscipit pulvinar.</p>

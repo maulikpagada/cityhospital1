@@ -8,6 +8,7 @@ import { ThemeProvider } from './context/ThemeContext';
 import { persistor, store } from './redux/store';
 import Alert from './user/component/Alert/Alert';
 import { SnackbarProvider } from 'notistack';
+import './rsuite.css';
 
 
 function App() {

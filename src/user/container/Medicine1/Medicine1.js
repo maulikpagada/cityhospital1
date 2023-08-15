@@ -77,7 +77,7 @@ function Medicine1({ setcartcount }) {
                                         onclick1={handleCart1}
                                         btnval={'Add to Cart'}
                                         favItem={handlecart2}
-                                    // onclick2={handlecart2}
+                                        onclick2={handlecart2}
                                     />
                                 </div>
                             )
