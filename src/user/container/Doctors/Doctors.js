@@ -35,13 +35,13 @@ const doctorData = [
 ]
 
 function Doctors(props) {
-    const theme =useContext(ThemeContext) 
+    const theme = useContext(ThemeContext)
 
     return (
         <section id="doctors" className={`doctors ${theme.theme}`}>
             <div className="container">
                 <div className="section-title">
-                <h2 className={`${theme.theme}`}>Doctors</h2>
+                    <h2 className={`${theme.theme}`}>Doctors</h2>
                     <p>Duis sagittis rutrum neque, quis tincidunt arcu pretium ac. Suspendisse sem risus, molestie vitae arcu et,
                         tincidunt viverra erat. Quisque in lectus id nulla viverra sodales in a risus. Aliquam ut sem ex. Duis viverra
                         ipsum lacus, ut pharetra arcu sagittis nec. Phasellus a eleifend elit.</p>
@@ -63,7 +63,7 @@ function Doctors(props) {
                                                 <h4>{value.name}</h4>
                                                 <span>{value.besingations}</span>
                                                 <p>{value.description}</p>
-                                                 <div className="social">
+                                                <div className="social">
                                                     <a href><i className="ri-twitter-fill" /></a>
                                                     <a href><i className="ri-facebook-fill" /></a>
                                                     <a href><i className="ri-instagram-fill" /></a>

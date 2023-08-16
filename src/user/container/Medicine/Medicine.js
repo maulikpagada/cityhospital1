@@ -7,7 +7,7 @@ import { ThemeContext } from '../../../context/ThemeContext';
 // import { addToCart } from '../../../redux/action/cart.action';
 
 function Medicine(props) {
-    const theme =useContext(ThemeContext) 
+    const theme = useContext(ThemeContext)
     const [fdata, setFdata] = useState()
     const dispatch = useDispatch();
     const medicine = useSelector(state => state.medicine)
@@ -65,6 +65,7 @@ function Medicine(props) {
                     <ListingMed
                         mdata={fdata ? fdata : medicine.medicine}
                         handleCart1={handleCart}
+
                     />
                 </div>
             </div>

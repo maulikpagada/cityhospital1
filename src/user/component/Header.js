@@ -56,7 +56,8 @@ function Header({ cartcount1 }) {
                         <i className="bi bi-phone" /> +91 9988776655
                     </div>
 
-                    <div>
+                    <div className="d-none d-lg-flex social-links align-items-center">
+
                         <DarkModeIcon onClick={() => theme.toogletheme(theme.theme)}>toogle Them</DarkModeIcon>
                         <Link to='/cart'>
                             <IconButton aria-label="cart" className={`${theme.theme}`}>
@@ -81,9 +82,6 @@ function Header({ cartcount1 }) {
                         </Link>
 
 
-                    </div>
-
-                    <div className="d-none d-lg-flex social-links align-items-center">
                         <a href="#" className="twitter"><i className="bi bi-twitter" /></a>
                         <a href="#" className="facebook"><i className="bi bi-facebook" /></a>
                         <a href="#" className="instagram"><i className="bi bi-instagram" /></a>
@@ -112,7 +110,7 @@ function Header({ cartcount1 }) {
                             {/* <li><Link to="/counter" className="nav-link scrollto">Counter</Link></li> */}
                             <Outlet />
                         </ul>
-                        <i onClick={() => setOpen(true)} class="bi bi-list mobile-nav-toggle"></i> 
+                        <i onClick={() => setOpen(true)} class="bi bi-list mobile-nav-toggle"></i>
                     </nav>
                     {/* <a href="./pages/appointment.html" className="appointment-btn scrollto"><span className="d-none d-md-inline">Make an</span>
                         Appointment</a> */}
