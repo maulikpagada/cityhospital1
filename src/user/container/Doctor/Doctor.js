@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Card from '../Ul/Card/Card';
+import { getDoctorData } from '../../../redux/action/doctors.action';
+import { useDispatch, useSelector } from 'react-redux';
 
 const doctorData = [
     {
@@ -34,26 +36,48 @@ const doctorData = [
 ]
 
 function Doctor(props) {
+    const dispatch = useDispatch();
+    const dData = useSelector(state => state.doctors);
+    console.log(dData.doctors);
+
+    useEffect(() => {
+        dispatch(getDoctorData())
+    }, [])
+
     const { id } = useParams()
-    let filterData = doctorData.filter((value) => value.id === parseInt(id));
+    let filterData = dData.doctors.filter((value) => value.id === parseInt(id));
 
     return (
-        <div className="col-lg-6">
-            <Card className="member d-flex align-items-start">
-                <div className="pic"><img src={filterData[0].url} className="img-doctor" alt /></div>
-                <div className="member-info">
-                    <h4>{filterData[0].name}</h4>
-                    <span>{filterData[0].besingations}</span>
-                    <p>{filterData[0].description}</p>
-                    <div className="social">
-                        <a href><i className="ri-twitter-fill" /></a>
-                        <a href><i className="ri-facebook-fill" /></a>
-                        <a href><i className="ri-instagram-fill" /></a>
-                        <a href> <i className="ri-linkedin-box-fill" /> </a>
-                    </div>
+        <section id="doctors" className="doctors">
+            <div className="container">
+                <div className="row">
+                    {
+                        filterData.map((v, i) => {
+                            return (
+                                <div className="col-lg-10 m-auto">
+                                    <div className="member d-flex align-items-start">
+                                        <div className="pic des"><img src={v.url} className="img-doctordes" alt /></div>
+                                        <div className="member-info">
+                                            <h4>{v.name}</h4>
+                                            <span>{v.besingations}</span>
+                                            <p>{v.description}</p>
+                                            <p>{v.about}</p>
+                                            <div className="social">
+                                                <a href><i className="ri-twitter-fill" /></a>
+                                                <a href><i className="ri-facebook-fill" /></a>
+                                                <a href><i className="ri-instagram-fill" /></a>
+                                                <a href> <i className="ri-linkedin-box-fill" /> </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
+
                 </div>
-            </Card>
-        </div>
+            </div>
+        </section>
     );
 }
 

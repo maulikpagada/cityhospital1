@@ -3,12 +3,29 @@
     {
       "name": "uiiiiiiiiieeeeeeee",
       "price": "787844444444",
-      "id": 25
+      "id": 25,
+      "url": "../assets/img/doctors/doctors-1.jpg"
     },
     {
       "name": "eeee",
       "price": "111155",
-      "id": 26
+      "id": 26,
+      "url": "../assets/img/doctors/doctors-2.jpg"
+
+    },
+    {
+      "name": "qqqqq",
+      "price": "4545",
+      "id": 27,
+      "url": "../assets/img/doctors/doctors-3.jpg"
+
+    },
+    {
+      "name": "jbkijnli",
+      "price": "646463",
+      "id": 28,
+      "url": "../assets/img/doctors/doctors-4.jpg"
+
     }
   ],
   "comments": [

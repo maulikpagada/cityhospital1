@@ -1209,6 +1209,7 @@ section {
 
 .doctors .member .pic img {
   transition: ease-in-out 0.3s;
+  object-fit: cover;
 }
 
 .doctors .member:hover img {

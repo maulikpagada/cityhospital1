@@ -34,7 +34,6 @@ function Userroutes(props) {
             <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/about' element={<About />} />
-                <Route path='/appointment' element={<Appointment />} />
                 <Route path='/contact' element={<Contact />} />
                 <Route path='/departments' element={<Departments />} />
                 <Route path='/doctors' element={<Doctors />} />
@@ -52,6 +51,8 @@ function Userroutes(props) {
                 <Route element={<PrivateRoute />}>
                     <Route path='/medicine' element={<Medicine />} />
                     <Route path='/medicine1' element={<Medicine1 setcartcount={setcartcount} />} />
+                    <Route path='/appointment' element={<Appointment />} />
+
                 </Route>
                 <Route path='/auth' element={<Auth />} />
                 <Route path='/counter' element={<Counter />} />

@@ -2,9 +2,9 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { fetchadddepartmentData, fetchdeletedepartmentData, fetcheditdepartmentData, fetchgetdepartmentData } from "../../common/apis/departments.apis"
 
 const initState = {
-    isLoading: false,
-    departments: [],
-    error: null
+        isLoading: false,
+        departments: [],
+        error: null
 }
 
 export const fetchdepartments = createAsyncThunk(
