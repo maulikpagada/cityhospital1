@@ -66,7 +66,7 @@ export const updateApt = createAsyncThunk(
     'appoinment/update',
     async (data) => {
         try {
-            const aptRef = doc(db, "appointment", data);
+            const aptRef = doc(db, "appointment", data.id);
 
             await updateDoc(aptRef, data);
 
@@ -114,16 +114,15 @@ export const appointmentSlice = createSlice({
             })
             .addCase(updateApt.pending, onloading)
             .addCase(updateApt.fulfilled, (state, action) => {
-                let Udata = state.apt = state.departments.map((a, i) => {
-                    if (a.id === action.payload.id) {
-                        return action.payload
+                state.isLoading = false
+                let uData = state.apt.map((value) => {
+                    if (value.id === action.payload.id) {
+                        return action.payload;
                     } else {
-                        return a;
+                        return value;
                     }
                 })
-                state.isLoading = false
-                state.error = null
-                state.apt = Udata
+                state.apt = uData
             })
 
 

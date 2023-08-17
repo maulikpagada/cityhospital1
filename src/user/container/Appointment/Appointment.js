@@ -35,8 +35,9 @@ function Appointment(props) {
 
     const handleupdate = (data) => {
         console.log(data);
+        setupdate(true);
         setValue(0);
-        setupdate(true)
+        setValues(data);
     }
 
     const handleChangeTab = (event, newValue) => {
@@ -80,18 +81,18 @@ function Appointment(props) {
         },
         onSubmit: (values, action) => {
             console.log(values);
+            setValue(1);
             if (update) {
                 dispatch(updateApt(values))
             } else {
                 dispatch(addApt(values))
             }
             action.resetForm();
-            setValue(1);
             setupdate(false)
         },
     });
 
-    const { values, errors, touched, handleBlur, handleChange, handleSubmit } = formik;
+    const { values, errors, touched, handleBlur, handleChange, handleSubmit,setValues } = formik;
 
 
 
