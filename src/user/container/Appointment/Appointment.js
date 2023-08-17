@@ -1,24 +1,53 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ThemeContext } from '../../../context/ThemeContext';
 import * as Yup from 'yup'
 import { useFormik } from 'formik';
-import { useDispatch } from 'react-redux';
-import { addApt } from '../../../redux/slice/appointmentSlice';
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import { useDispatch, useSelector } from 'react-redux';
+import { addApt, aptgetData, deleteApt, getApt, updateApt } from '../../../redux/slice/appointmentSlice';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import BookOnlineIcon from '@mui/icons-material/BookOnline';
+import ListIcon from '@mui/icons-material/List';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+
+
 
 function Appointment(props) {
     const [value, setValue] = React.useState(0);
+    const [update, setupdate] = useState(false)
 
-    const handleChangee = (event, newValue) => {
-        setValue(newValue);
-    };
     const dispatch = useDispatch()
+    const apt = useSelector(state => state.apt);
+    console.log(apt);
+
     const theme = useContext(ThemeContext)
+
+    useEffect(() => {
+        dispatch(getApt())
+    }, [])
+
+    const handleDelete = (id) => {
+        console.log(id);
+        dispatch(deleteApt(id));
+    }
+
+    const handleupdate = (data) => {
+        console.log(data);
+        setValue(0);
+        setupdate(true)
+    }
+
+    const handleChangeTab = (event, newValue) => {
+        setValue(newValue); 
+        console.log(value);
+    };
+
 
     var d = new Date();
     let nd = new Date(d.setDate(d.getDate() - 1));
+
 
     let appointmentSchema = Yup.object({
         name: Yup.string().required('Enter your name'),
@@ -51,8 +80,14 @@ function Appointment(props) {
         },
         onSubmit: (values, action) => {
             console.log(values);
-            dispatch(addApt(values))
+            if (update) {
+                dispatch(updateApt(values))
+            } else {
+                dispatch(addApt(values))
+            }
             action.resetForm();
+            setValue(1);
+            setupdate(false)
         },
     });
 
@@ -64,128 +99,160 @@ function Appointment(props) {
         <section id="appointment" className={`appointment ${theme.theme}`}>
             <div className="container">
                 <div className="section-title">
-                    <h2 className={`${theme.theme}`}>Make an Appointment
-                    <Tabs value={value} onChange={handleChangee} aria-label="icon label tabs example">
-                        <Tab 
-                            icon={<FavoriteIcon />} 
-                            label="FAVORITES"
-                            />
-                    </Tabs>
-                    </h2>
-                    
+                    <h2 className={`${theme.theme}`}>Make an Appointment</h2>
                     <p>Aenean enim orci, suscipit vitae sodales ac, semper in ex. Nunc aliquam eget nibh eu euismod. Donec dapibus
                         blandit quam volutpat sollicitudin. Fusce tincidunt sit amet ex in volutpat. Donec lacinia finibus tortor.
                         Curabitur luctus eleifend odio. Phasellus placerat mi et suscipit pulvinar.</p>
                 </div>
-                <form action method="post" role="form" className="php-email-form" onSubmit={handleSubmit}>
-                    <div className="row">
-                        <div className="col-md-4 form-group">
-                            <input
-                                type="text"
-                                name="name"
+                <div className='section-title d-flex justify-content-center'>
+                    <Tabs value={value} onChange={handleChangeTab} aria-label="icon label tabs example">
+                        <Tab icon={<BookOnlineIcon />} label="Book Appiontment" />
+                        <Tab icon={<ListIcon />} label="List Appiontment" />
+                    </Tabs>
+                </div>
+
+                {
+                    value === 0 &&
+                    <form action method="post" role="form" className="php-email-form" onSubmit={handleSubmit}>
+                        <div className="row">
+                            <div className="col-md-4 form-group">
+                                <input
+                                    type="text"
+                                    name="name"
+                                    className="form-control"
+                                    id="name"
+                                    placeholder="Your Name"
+                                    value={values.name}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    error={errors.name && touched.name ? errors.name : ''}
+                                />
+                                <div className="validate" />
+                                <span className='error'>{errors.name && touched.name ? errors.name : ''}</span>
+                            </div>
+                            <div className="col-md-4 form-group mt-3 mt-md-0">
+                                <input
+                                    type="email"
+                                    className="form-control"
+                                    name="email"
+                                    id="email"
+                                    placeholder="Your Email"
+                                    value={values.email}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    error={errors.email && touched.email ? errors.email : ''}
+                                />
+                                <div className="validate" />
+                                <span className='error'>{errors.email && touched.email ? errors.email : ''}</span>
+                            </div>
+                            <div className="col-md-4 form-group mt-3 mt-md-0">
+                                <input
+                                    type="tel"
+                                    className="form-control"
+                                    name="phone"
+                                    id="phone"
+                                    placeholder="Your Phone"
+                                    value={values.phone}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    error={errors.phone && touched.phone ? errors.phone : ''}
+                                />
+                                <div className="validate" />
+                                <span className='error'>{errors.phone && touched.phone ? errors.phone : ''}</span>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-4 form-group mt-3">
+                                <input
+                                    type="date"
+                                    name="date"
+                                    className="form-control datepicker"
+                                    id="date"
+                                    placeholder="Appointment Date"
+                                    value={values.date}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    error={errors.date && touched.date ? errors.date : ''}
+                                />
+                                <div className="validate" />
+                                <span className='error'>{errors.date && touched.date ? errors.date : ''}</span>
+                            </div>
+                            <div className="col-md-4 form-group mt-3">
+                                <select
+                                    name="department"
+                                    id="department"
+                                    className="form-select"
+                                    value={values.department}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    error={errors.department && touched.department ? errors.department : ''}
+                                >
+                                    <option value="">Select Department</option>
+                                    <option value="Dep1">Department 1</option>
+                                    <option value="Dep2">Department 2</option>
+                                    <option value="Dep3">Department 3</option>
+                                </select>
+                                <div className="validate" />
+                                <span className='error'>{errors.department && touched.department ? errors.department : ''}</span>
+                            </div>
+                        </div>
+                        <div className="form-group mt-3">
+                            <textarea
                                 className="form-control"
-                                id="name"
-                                placeholder="Your Name"
-                                value={values.name}
+                                name="msg"
+                                rows={5}
+                                placeholder="Message (Optional)"
+                                defaultValue={""}
+                                value={values.msg}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                error={errors.name && touched.name ? errors.name : ''}
+                                error={errors.msg && touched.msg ? errors.msg : ''}
                             />
                             <div className="validate" />
-                            <span className='error'>{errors.name && touched.name ? errors.name : ''}</span>
+                            <span className='error'>{errors.msg && touched.msg ? errors.msg : ''}</span>
                         </div>
-                        <div className="col-md-4 form-group mt-3 mt-md-0">
-                            <input
-                                type="email"
-                                className="form-control"
-                                name="email"
-                                id="email"
-                                placeholder="Your Email"
-                                value={values.email}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                error={errors.email && touched.email ? errors.email : ''}
-                            />
-                            <div className="validate" />
-                            <span className='error'>{errors.email && touched.email ? errors.email : ''}</span>
+                        <div className="mb-3">
+                            <div className="loading">Loading</div>
+                            <div className="error-message" />
+                            <div className="sent-message">Your appointment request has been sent successfully. Thank you!</div>
                         </div>
-                        <div className="col-md-4 form-group mt-3 mt-md-0">
-                            <input
-                                type="tel"
-                                className="form-control"
-                                name="phone"
-                                id="phone"
-                                placeholder="Your Phone"
-                                value={values.phone}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                error={errors.phone && touched.phone ? errors.phone : ''}
-                            />
-                            <div className="validate" />
-                            <span className='error'>{errors.phone && touched.phone ? errors.phone : ''}</span>
+                        {/* <div className="text-center"><CustomButton val={'Make an Appointment'} /></div> */}
+                        <div className="text-center"><button type="submit">Make an Appointment</button></div>
+                    </form>
+                }
+
+                {
+                    value === 1 &&
+
+                    <>
+                        <h2>List Appiontment</h2>
+                        <div className='row'>
+                            {
+                                apt.apt.map((a, i) => {
+                                    return (
+                                        <div className='col-md-3'>
+                                            <p>{a.id} - {a.name}</p>
+                                            {/* Email:-<p>{a.email}</p>
+                                            Phone:-<p>{a.phone}</p>
+                                            Date:-<p>{a.date}</p>
+                                            Department:-<p>{a.department}</p>
+                                            Msg:-<p>{a.msg}</p> */}
+                                            <IconButton aria-label="delete" onClick={() => handleDelete(a.id)}>
+                                                <DeleteIcon />
+                                            </IconButton>
+
+                                            <IconButton aria-label="edit" onClick={() => handleupdate(a)}>
+                                                <EditIcon />
+                                            </IconButton>
+                                        </div>
+                                    )
+                                })
+                            }
                         </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-md-4 form-group mt-3">
-                            <input
-                                type="date"
-                                name="date"
-                                className="form-control datepicker"
-                                id="date"
-                                placeholder="Appointment Date"
-                                value={values.date}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                error={errors.date && touched.date ? errors.date : ''}
-                            />
-                            <div className="validate" />
-                            <span className='error'>{errors.date && touched.date ? errors.date : ''}</span>
-                        </div>
-                        <div className="col-md-4 form-group mt-3">
-                            <select
-                                name="department"
-                                id="department"
-                                className="form-select"
-                                value={values.department}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                error={errors.department && touched.department ? errors.department : ''}
-                            >
-                                <option value="">Select Department</option>
-                                <option value="Dep1">Department 1</option>
-                                <option value="Dep2">Department 2</option>
-                                <option value="Dep3">Department 3</option>
-                            </select>
-                            <div className="validate" />
-                            <span className='error'>{errors.department && touched.department ? errors.department : ''}</span>
-                        </div>
-                    </div>
-                    <div className="form-group mt-3">
-                        <textarea
-                            className="form-control"
-                            name="msg"
-                            rows={5}
-                            placeholder="Message (Optional)"
-                            defaultValue={""}
-                            value={values.msg}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            error={errors.msg && touched.msg ? errors.msg : ''}
-                        />
-                        <div className="validate" />
-                        <span className='error'>{errors.msg && touched.msg ? errors.msg : ''}</span>
-                    </div>
-                    <div className="mb-3">
-                        <div className="loading">Loading</div>
-                        <div className="error-message" />
-                        <div className="sent-message">Your appointment request has been sent successfully. Thank you!</div>
-                    </div>
-                    {/* <div className="text-center"><CustomButton val={'Make an Appointment'} /></div> */}
-                    <div className="text-center"><button type="submit">Make an Appointment</button></div>
-                </form>
+                    </>
+                }
             </div>
         </section>
-
     );
 }
 
