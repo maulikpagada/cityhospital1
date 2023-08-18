@@ -11,6 +11,15 @@ import ListIcon from '@mui/icons-material/List';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import { styled } from '@mui/material/styles';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+
 
 
 
@@ -41,7 +50,7 @@ function Appointment(props) {
     }
 
     const handleChangeTab = (event, newValue) => {
-        setValue(newValue); 
+        setValue(newValue);
         console.log(value);
     };
 
@@ -92,9 +101,27 @@ function Appointment(props) {
         },
     });
 
-    const { values, errors, touched, handleBlur, handleChange, handleSubmit,setValues } = formik;
+    const { values, errors, touched, handleBlur, handleChange, handleSubmit, setValues } = formik;
 
+    const StyledTableCell = styled(TableCell)(({ theme }) => ({
+        [`&.${tableCellClasses.head}`]: {
+            backgroundColor: theme.palette.common.black,
+            color: theme.palette.common.white,
+        },
+        [`&.${tableCellClasses.body}`]: {
+            fontSize: 14,
+        },
+    }));
 
+    const StyledTableRow = styled(TableRow)(({ theme }) => ({
+        '&:nth-of-type(odd)': {
+            backgroundColor: theme.palette.action.hover,
+        },
+        // hide last border
+        '&:last-child td, &:last-child th': {
+            border: 0,
+        },
+    }));
 
     return (
         <section id="appointment" className={`appointment ${theme.theme}`}>
@@ -225,32 +252,44 @@ function Appointment(props) {
                 {
                     value === 1 &&
 
-                    <>
-                        <h2>List Appiontment</h2>
-                        <div className='row'>
-                            {
-                                apt.apt.map((a, i) => {
-                                    return (
-                                        <div className='col-md-3'>
-                                            <p>{a.id} - {a.name}</p>
-                                            {/* Email:-<p>{a.email}</p>
-                                            Phone:-<p>{a.phone}</p>
-                                            Date:-<p>{a.date}</p>
-                                            Department:-<p>{a.department}</p>
-                                            Msg:-<p>{a.msg}</p> */}
-                                            <IconButton aria-label="delete" onClick={() => handleDelete(a.id)}>
-                                                <DeleteIcon />
-                                            </IconButton>
+                    <TableContainer component={Paper}>
+                        <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                            <>
+                                <TableHead>
+                                    <TableRow>
+                                        <StyledTableCell>Book Apoointment (Name)</StyledTableCell>
+                                        <StyledTableCell >email</StyledTableCell>
+                                        <StyledTableCell >Mobile no.</StyledTableCell>
+                                        <StyledTableCell >Apt Date</StyledTableCell>
+                                        <StyledTableCell >Apt Department</StyledTableCell>
+                                        <StyledTableCell >Message</StyledTableCell>
+                                        <StyledTableCell >Action</StyledTableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {
+                                        apt.apt.map((v) => (
+                                            <StyledTableRow >
+                                                <StyledTableCell >{v.name}</StyledTableCell>
+                                                <StyledTableCell >{v.email}</StyledTableCell>
+                                                <StyledTableCell >{v.phone}</StyledTableCell>
+                                                <StyledTableCell >{v.date}</StyledTableCell>
+                                                <StyledTableCell >{v.department}</StyledTableCell>
+                                                <StyledTableCell >{v.msg}</StyledTableCell>
+                                                <IconButton style={{ color: 'red' }} aria-label="delete" onClick={() => handleDelete(v.id)}>
+                                                    <DeleteIcon />
+                                                </IconButton>
 
-                                            <IconButton aria-label="edit" onClick={() => handleupdate(a)}>
-                                                <EditIcon />
-                                            </IconButton>
-                                        </div>
-                                    )
-                                })
-                            }
-                        </div>
-                    </>
+                                                <IconButton aria-label="edit" onClick={() => handleupdate(v)}>
+                                                    <EditIcon />
+                                                </IconButton>
+                                            </StyledTableRow>
+                                        ))
+                                    }
+                                </TableBody>
+                            </>
+                        </Table>
+                    </TableContainer>
                 }
             </div>
         </section>
