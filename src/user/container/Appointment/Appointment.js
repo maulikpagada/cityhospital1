@@ -76,6 +76,7 @@ function Appointment(props) {
                         return true
                     }
                 }),
+        prec: Yup.mixed().required('Please enter precipitation')
     });
 
     const formik = useFormik({
@@ -87,6 +88,7 @@ function Appointment(props) {
             date: '',
             department: '',
             msg: '',
+            prec: '',
         },
         onSubmit: (values, action) => {
             console.log(values);
@@ -101,7 +103,9 @@ function Appointment(props) {
         },
     });
 
-    const { values, errors, touched, handleBlur, handleChange, handleSubmit, setValues } = formik;
+    const { values, errors, touched, handleBlur, handleChange, handleSubmit, setValues, setFieldValue } = formik;
+
+    console.log(errors);
 
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
         [`&.${tableCellClasses.head}`]: {
@@ -122,6 +126,8 @@ function Appointment(props) {
             border: 0,
         },
     }));
+
+
 
     return (
         <section id="appointment" className={`appointment ${theme.theme}`}>
@@ -223,6 +229,17 @@ function Appointment(props) {
                                 <div className="validate" />
                                 <span className='error'>{errors.department && touched.department ? errors.department : ''}</span>
                             </div>
+
+                            <div className="col-md-4 form-group mt-3">
+                                <span>Precipitation</span>
+                                <input
+                                    type='file'
+                                    name='prec'
+                                    onChange={(event) => setFieldValue("prec", event.target.files[0])}
+                                />
+                                <div className="validate" />
+                                <span className='error'>{errors.prec && touched.prec ? errors.prec : ''}</span>
+                            </div>
                         </div>
                         <div className="form-group mt-3">
                             <textarea
@@ -263,6 +280,7 @@ function Appointment(props) {
                                         <StyledTableCell >Apt Date</StyledTableCell>
                                         <StyledTableCell >Apt Department</StyledTableCell>
                                         <StyledTableCell >Message</StyledTableCell>
+                                        <StyledTableCell >Image</StyledTableCell>
                                         <StyledTableCell >Action</StyledTableCell>
                                     </TableRow>
                                 </TableHead>
@@ -276,6 +294,7 @@ function Appointment(props) {
                                                 <StyledTableCell >{v.date}</StyledTableCell>
                                                 <StyledTableCell >{v.department}</StyledTableCell>
                                                 <StyledTableCell >{v.msg}</StyledTableCell>
+                                                <StyledTableCell ><img src={v.prec} height="70px" width="50px"></img></StyledTableCell>
                                                 <IconButton style={{ color: 'red' }} aria-label="delete" onClick={() => handleDelete(v.id)}>
                                                     <DeleteIcon />
                                                 </IconButton>

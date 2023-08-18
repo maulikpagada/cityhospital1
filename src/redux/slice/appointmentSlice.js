@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { collection, addDoc, getDocs, deleteDoc, doc, updateDoc } from "firebase/firestore";
-import { db } from "../../firebase";
+import { db, storage } from "../../firebase";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+
 
 const initState = {
     isLoading: false,
@@ -11,12 +13,34 @@ const initState = {
 export const addApt = createAsyncThunk(
     'appointment/add',
     async (data) => {
+        console.log(data.prec.name);
+
+        let iData = { data }
         try {
-            const docRef = await addDoc(collection(db, "appointment"), data);
-            return {
-                id: docRef.id,
-                ...data
-            }
+
+            const precRef = ref(storage, 'precipitation/' + data.prec.name);
+
+            await uploadBytes(precRef, data.prec).then(async (snapshot) => {
+                console.log('Uploaded a blob or file!');
+
+                await getDownloadURL(snapshot.ref)
+                    .then(async (url) => {
+                        console.log(url);
+
+                        iData = { ...data, prec: url }
+
+                        const docRef = await addDoc(collection(db, "appointment"), iData);
+                        console.log(docRef);
+
+                        iData = {
+                            id: docRef.id,
+                            ...data,
+                            prec: url
+                        }
+                    })
+            });
+
+            return iData;
         } catch (e) {
             console.error("Error adding document: ", e);
         }
