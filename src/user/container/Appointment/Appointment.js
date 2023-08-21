@@ -21,6 +21,26 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
 
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+        backgroundColor: theme.palette.common.black,
+        color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+        fontSize: 14,
+    },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': {
+        backgroundColor: theme.palette.action.hover,
+    },
+    // hide last border
+    '&:last-child td, &:last-child th': {
+        border: 0,
+    },
+}));
+
 
 
 function Appointment(props) {
@@ -37,9 +57,9 @@ function Appointment(props) {
         dispatch(getApt())
     }, [])
 
-    const handleDelete = (id) => {
-        console.log(id);
-        dispatch(deleteApt(id));
+    const handleDelete = (data) => {
+        console.log(data);
+        dispatch(deleteApt(data));
     }
 
     const handleupdate = (data) => {
@@ -106,26 +126,6 @@ function Appointment(props) {
     const { values, errors, touched, handleBlur, handleChange, handleSubmit, setValues, setFieldValue } = formik;
 
     console.log(errors);
-
-    const StyledTableCell = styled(TableCell)(({ theme }) => ({
-        [`&.${tableCellClasses.head}`]: {
-            backgroundColor: theme.palette.common.black,
-            color: theme.palette.common.white,
-        },
-        [`&.${tableCellClasses.body}`]: {
-            fontSize: 14,
-        },
-    }));
-
-    const StyledTableRow = styled(TableRow)(({ theme }) => ({
-        '&:nth-of-type(odd)': {
-            backgroundColor: theme.palette.action.hover,
-        },
-        // hide last border
-        '&:last-child td, &:last-child th': {
-            border: 0,
-        },
-    }));
 
 
 
@@ -231,12 +231,15 @@ function Appointment(props) {
                             </div>
 
                             <div className="col-md-4 form-group mt-3">
-                                <span>Precipitation</span>
+                                <span>precipitation</span>
                                 <input
                                     type='file'
                                     name='prec'
                                     onChange={(event) => setFieldValue("prec", event.target.files[0])}
                                 />
+                                {
+                                    values.prec === '' ? '' : <img src={typeof values.prec === "string" ? values.prec : URL.createObjectURL(values.prec)} width={"50px"} height={"50px"} />
+                                }
                                 <div className="validate" />
                                 <span className='error'>{errors.prec && touched.prec ? errors.prec : ''}</span>
                             </div>
@@ -295,7 +298,7 @@ function Appointment(props) {
                                                 <StyledTableCell >{v.department}</StyledTableCell>
                                                 <StyledTableCell >{v.msg}</StyledTableCell>
                                                 <StyledTableCell ><img src={v.prec} height="70px" width="50px"></img></StyledTableCell>
-                                                <IconButton style={{ color: 'red' }} aria-label="delete" onClick={() => handleDelete(v.id)}>
+                                                <IconButton aria-label="delete" onClick={() => handleDelete(v)}>
                                                     <DeleteIcon />
                                                 </IconButton>
 

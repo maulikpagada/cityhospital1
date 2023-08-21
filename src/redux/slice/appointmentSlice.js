@@ -1,7 +1,7 @@
+import { db, storage } from "../../firebase";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { collection, addDoc, getDocs, deleteDoc, doc, updateDoc } from "firebase/firestore";
-import { db, storage } from "../../firebase";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 
 const initState = {
@@ -11,14 +11,15 @@ const initState = {
 }
 
 export const addApt = createAsyncThunk(
-    'appointment/add',
+    'appoinment/add',
     async (data) => {
         console.log(data.prec.name);
 
         let iData = { data }
         try {
 
-            const precRef = ref(storage, 'precipitation/' + data.prec.name);
+            const rNo = Math.floor(Math.random() * 100);
+            const precRef = ref(storage, 'precipitation/' + rNo + "_" + data.prec.name);
 
             await uploadBytes(precRef, data.prec).then(async (snapshot) => {
                 console.log('Uploaded a blob or file!');
@@ -27,7 +28,7 @@ export const addApt = createAsyncThunk(
                     .then(async (url) => {
                         console.log(url);
 
-                        iData = { ...data, prec: url }
+                        iData = { ...data, prec: url, precName: rNo + "_" + data.prec.name }
 
                         const docRef = await addDoc(collection(db, "appointment"), iData);
                         console.log(docRef);
@@ -35,7 +36,8 @@ export const addApt = createAsyncThunk(
                         iData = {
                             id: docRef.id,
                             ...data,
-                            prec: url
+                            prec: url,
+                            precName: rNo + "_" + data.prec.name
                         }
                     })
             });
@@ -73,28 +75,86 @@ export const getApt = createAsyncThunk(
 
 export const deleteApt = createAsyncThunk(
     'appoinment/delete',
-    async (id) => {
+    async (data) => {
+        console.log(data);
         try {
+            const desertRef = ref(storage, 'precipitation/' + data.precName);
+            console.log(data);
+            await deleteObject(desertRef).then(async () => {
+                await deleteDoc(doc(db, "appointment", data.id));
+                console.log("file deleted success");
+            })
 
-            await deleteDoc(doc(db, "appointment", id));
-
-            return id;
 
         } catch (e) {
             console.error("Error adding document: ", e);
         }
+        return data.id;
     }
+
 )
 
 export const updateApt = createAsyncThunk(
     'appoinment/update',
     async (data) => {
         try {
-            const aptRef = doc(db, "appointment", data.id);
+            if (typeof data.prec === "string") {
+                console.log("Image No Change");
+                const aptRef = doc(db, "appointment", data.id);
 
-            await updateDoc(aptRef, data);
+                await updateDoc(aptRef, data);
 
-            return data;
+                return data;
+            } else {
+
+                console.log("Image  Change");
+                const desertRef = ref(storage, 'precipitation/' + data.precName);
+
+                let iData = { data }
+
+                await deleteObject(desertRef).then(async () => {
+                    const rNo = Math.floor(Math.random() * 100);
+
+                    const precRef = ref(storage, 'precipitation/' + rNo + "_" + data.prec.name);
+
+                    console.log("Delete Old File");
+
+                    // await deleteDoc(doc(db, "appointment", data.id));
+                    
+                    await uploadBytes(precRef, data.prec).then(async (snapshot) => {
+                        console.log('Uploaded a blob or file!');
+
+                        await getDownloadURL(snapshot.ref)
+                            .then(async (url) => {
+                                console.log("New url" + url);
+
+                                iData = { ...data, prec: url, precName: rNo + "_" + data.prec.name }
+
+                                // const docRef = await updateDoc(collection(db, "appointment"), iData);
+
+                                // // await updateDoc(aptRef, iData);
+
+                                const appointmentRef = doc(db, "appointment", data.id);
+                                
+                                await updateDoc(appointmentRef, iData);
+                                iData = {
+                                    // id: docRef.id,
+                                    ...data,
+                                    prec: url,
+                                    precName: rNo + "_" + data.prec.name
+                                }
+                            })
+                    });
+
+
+                })
+
+                return iData;
+
+
+
+            }
+
 
         } catch (e) {
             console.error("Error adding document: ", e);
@@ -123,20 +183,17 @@ export const appointmentSlice = createSlice({
                 console.log(action);
                 state.apt = state.apt.concat(action.payload)
             })
-            .addCase(getApt.pending, onloading)
             .addCase(getApt.fulfilled, (state, action) => {
                 state.isLoading = false
                 console.log(action);
                 state.apt = action.payload
             })
-            .addCase(deleteApt.pending, onloading)
             .addCase(deleteApt.fulfilled, (state, action) => {
                 state.isLoading = false
                 console.log(action);
                 let Fdata = state.apt = state.apt.filter((v) => v.id !== action.payload)
                 state.apt = Fdata;
             })
-            .addCase(updateApt.pending, onloading)
             .addCase(updateApt.fulfilled, (state, action) => {
                 state.isLoading = false
                 let uData = state.apt.map((value) => {
