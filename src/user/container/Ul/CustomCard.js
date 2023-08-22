@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle } from 'reactstrap';
 import FavoriteBorderIcon from '@mui/icons-material/Favorite';
+import { ThemeContext } from '../../../context/ThemeContext';
 
 function CustomCard({ value, btnval, onclick1, favItem }) {
+    
+    const theme = useContext(ThemeContext)
     return (
         <Card
             style={{
@@ -19,8 +22,8 @@ function CustomCard({ value, btnval, onclick1, favItem }) {
                     /> : null
             }
 
-            <CardBody>
-                <CardTitle tag="h5">
+            <CardBody className={`${theme.theme}`}>
+                <CardTitle tag="h5" className={`${theme.theme}`}>
                     {value.name}
                     <FavoriteBorderIcon onClick={() => favItem(value.id)} sx={{ color: "red", position: 'absolute', right: '30px' }} />
 
@@ -31,7 +34,7 @@ function CustomCard({ value, btnval, onclick1, favItem }) {
                 >
                     {value.date}
                 </CardSubtitle>
-                <CardText>
+                <CardText className={`${theme.theme}`}>
                     {value.price}
                 </CardText>
                 <CardText>

@@ -107,7 +107,7 @@ function Header({ cartcount1 }) {
                             <li><Link to="/about" className={`nav-link scrollto ${theme.theme}`} >About</Link></li>
                             <li><Link to="/contact" className={`nav-link scrollto ${theme.theme}`} >Contact</Link></li>
                             {/* <li><Link to="/formvalidation" className="nav-link scrollto">FormValidation</Link></li> */}
-                            {/* <li><Link to="/counter" className="nav-link scrollto">Counter</Link></li> */}
+                            <li><Link to="/counter" className="nav-link scrollto">Counter</Link></li>
                             <Outlet />
                         </ul>
                         <i onClick={() => setOpen(true)} class="bi bi-list mobile-nav-toggle"></i>
