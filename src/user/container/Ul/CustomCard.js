@@ -3,8 +3,8 @@ import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle } from 'react
 import FavoriteBorderIcon from '@mui/icons-material/Favorite';
 import { ThemeContext } from '../../../context/ThemeContext';
 
-function CustomCard({ value, btnval, onclick1, favItem }) {
-    
+function CustomCard({ value, btnval, onclick1, onclick2 }) {
+
     const theme = useContext(ThemeContext)
     return (
         <Card
@@ -25,7 +25,7 @@ function CustomCard({ value, btnval, onclick1, favItem }) {
             <CardBody className={`${theme.theme}`}>
                 <CardTitle tag="h5" className={`${theme.theme}`}>
                     {value.name}
-                    <FavoriteBorderIcon onClick={() => favItem(value.id)} sx={{ color: "red", position: 'absolute', right: '30px' }} />
+                    <FavoriteBorderIcon onClick={() => onclick2(value.id)} sx={{ color: "red", position: 'absolute', right: '30px' }} />
 
                 </CardTitle>
                 <CardSubtitle

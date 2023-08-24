@@ -108,7 +108,8 @@ function Header({ cartcount1 }) {
                             <li><Link to="/contact" className={`nav-link scrollto ${theme.theme}`} >Contact</Link></li>
                             {/* <li><Link to="/formvalidation" className="nav-link scrollto">FormValidation</Link></li> */}
                             {/* <li><Link to="/counter" className="nav-link scrollto">Counter</Link></li> */}
-                            <li><Link to="/CallBackExa" className="nav-link scrollto">CallBackExa</Link></li>
+                            {/* <li><Link to="/CallBackExa" className="nav-link scrollto">CallBackExa</Link></li> */}
+                            {/* <li><Link to="/UseRefEmaple" className="nav-link scrollto">UseRefEmaple</Link></li> */}
                             <Outlet />
                         </ul>
                         <i onClick={() => setOpen(true)} class="bi bi-list mobile-nav-toggle"></i>
@@ -139,12 +140,12 @@ function Header({ cartcount1 }) {
                         <Drawer.Body>
                             <nav>
                                 <ul>
-                                    <li><Link to="/">Home</Link></li>
-                                    <li><Link to="/department">Departments</Link></li>
-                                    <li><Link to="/doctors">Doctors</Link></li>
-                                    <li><Link to="/about">About</Link></li>
-                                    <li><Link to="/contact">Contact</Link></li>
-                                    <li><Link to="/medicine">Medicine</Link></li>
+                                    <li><Link to="/" onClick={() => setOpen(false)}>Home</Link></li>
+                                    <li><Link to="/departments" onClick={() => setOpen(false)}>Departments</Link></li>
+                                    <li><Link to="/doctors" onClick={() => setOpen(false)}>Doctors</Link></li>
+                                    <li><Link to="/about" onClick={() => setOpen(false)}>About</Link></li>
+                                    <li><Link to="/contact" onClick={() => setOpen(false)}>Contact</Link></li>
+                                    <li><Link to="/medicine" onClick={() => setOpen(false)}>Medicine</Link></li>
                                 </ul>
                             </nav>
                         </Drawer.Body>

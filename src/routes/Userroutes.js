@@ -23,6 +23,7 @@ import Medicine1 from '../user/container/Medicine1/Medicine1';
 import Myfav from '../user/container/myFav/Myfav';
 import { useState } from 'react';
 import CallBackExa from '../user/container/Examples/CallBackExa';
+import UseRefEmaple from '../user/container/Examples/UseRefEmaple';
 // import PrivateRoute from '../utils/PrivateRoute';
 
 function Userroutes(props) {
@@ -57,7 +58,8 @@ function Userroutes(props) {
                 </Route>
                 <Route path='/auth' element={<Auth />} />
                 {/* <Route path='/counter' element={<Counter />} /> */}
-                <Route path='/CallBackExa' element={<CallBackExa />} />
+                {/* <Route path='/CallBackExa' element={<CallBackExa />} /> */}
+                <Route path='/UseRefEmaple' element={<UseRefEmaple />} />
                 <Route path='/cart' element={<Cart />} />
                 <Route path='/cart1' element={<Cart1 />} />
                 <Route path='/myfav' element={<Myfav />} />

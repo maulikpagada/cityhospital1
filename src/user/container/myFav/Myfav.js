@@ -66,9 +66,7 @@ function Myfav(props) {
                                         <div className="d-flex flex-row align-items-center">
                                             <div style={{ width: 200 }}>
                                                 <h5 className="fw-normal mb-0">
-
                                                     <span style={{ margin: "5px" }}>{c.qty} </span>
-
                                                 </h5>
                                             </div>
                                             <div style={{ width: 80 }}>

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getMedicineData } from '../../../redux/action/medicine.action';
 import { addtocart } from '../../../redux/slice/cartSlice';
 import { ThemeContext } from '../../../context/ThemeContext';
+import { addfav } from '../../../redux/action/myfav.action';
 // import { addToCart } from '../../../redux/action/cart.action';
 
 function Medicine(props) {
@@ -48,6 +49,10 @@ function Medicine(props) {
         // console.log("handleCart", id);
     }
 
+    const handlefav = (id) => {
+        dispatch(addfav(id))
+    }
+
     return (
         <section id="medicines" className={`medicines ${theme.theme}`}>
             <div className={`container ${theme.theme}`}>
@@ -65,7 +70,7 @@ function Medicine(props) {
                     <ListingMed
                         mdata={fdata ? fdata : medicine.medicine}
                         handleCart1={handleCart}
-
+                        handlefav={handlefav}
                     />
                 </div>
             </div>

@@ -20,7 +20,7 @@ function CallBackExa(props) {
         <>
             <div style={themestyle}>
                 <h2>CallBack Examples</h2>
-                <button onClick={() => settheme(!theme)}>Change</button>
+                <button onClick={() => settheme(!theme)}>Change</button>    
 
             </div>
 

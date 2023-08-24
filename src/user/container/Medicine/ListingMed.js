@@ -2,7 +2,7 @@ import React from 'react';
 import CustomCard from '../Ul/CustomCard'
 import { useSelector } from 'react-redux';
 
-function ListingMed({ mdata, handleCart1,handlecart2 }) {
+function ListingMed({ mdata, handleCart1,handlecart2,handlefav }) {
 
     return (
         <>
@@ -15,6 +15,7 @@ function ListingMed({ mdata, handleCart1,handlecart2 }) {
                                 onclick1={handleCart1}
                                 btnval={'Add to Cart'}
                                 favItem={handlecart2}
+                                onclick2={handlefav}
                             />
                         </div>
                     )
