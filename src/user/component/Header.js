@@ -56,7 +56,7 @@ function Header({ cartcount1 }) {
                         <i className="bi bi-phone" /> +91 9988776655
                     </div>
 
-                    <div className="d-none d-lg-flex social-links align-items-center">
+                    <div className="d-lg-flex social-links align-items-center">
 
                         <DarkModeIcon onClick={() => theme.toogletheme(theme.theme)}>toogle Them</DarkModeIcon>
                         <Link to='/cart'>
