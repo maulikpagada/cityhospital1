@@ -5,8 +5,8 @@ import { getdepartmentsData } from '../../../redux/action/departments.action';
 
 import { addToCart } from '../../../redux/action/cart.action';
 import Listingdep from './Listingdep';
-import { fetchdepartments } from '../../../redux/slice/departmentSlice';
 import { ThemeContext } from '../../../context/ThemeContext';
+import { getdep } from '../../../redux/slice/departmentSlice';
 
 function Departments(props) {
 
@@ -16,7 +16,7 @@ function Departments(props) {
     console.log(departmentsrData);
 
     useEffect(() => {
-        dispatch(fetchdepartments())
+        dispatch(getdep())
     }, [])
 
 

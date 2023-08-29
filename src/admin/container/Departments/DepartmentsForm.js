@@ -30,7 +30,8 @@ function DepartmentsForm({ onhandlesubmit, onupdate }) {
 
     let departmentsschema = yup.object({
         name: yup.string().required(),
-        desc: yup.string().required()
+        desc: yup.string().required(),
+        prec: yup.mixed().required("Please Upload to File")
     });
 
     const formik = useFormik({
@@ -38,10 +39,11 @@ function DepartmentsForm({ onhandlesubmit, onupdate }) {
 
         initialValues: {
             name: '',
-            desc: ''
+            desc: '',
+            prec: ''
         },
         onSubmit: (values, action) => {
-            // handlesubmitdata(values)
+            console.log(values);
             action.resetForm()
             handleClose()
             onhandlesubmit(values)
@@ -49,7 +51,8 @@ function DepartmentsForm({ onhandlesubmit, onupdate }) {
 
     });
 
-    const { values, errors, touched, handleBlur, handleChange, handleSubmit } = formik;
+
+    const { values, errors, touched, handleBlur, handleChange, handleSubmit, setValues, setFieldValue } = formik;
 
 
     return (
@@ -91,6 +94,24 @@ function DepartmentsForm({ onhandlesubmit, onupdate }) {
                             onBlur={handleBlur}
                         />
                         <span style={{ color: 'red' }}>{errors.desc && touched.desc ? errors.desc : null} </span>
+
+                        <TextField
+                            margin="dense"
+                            label="prec"
+                            name='prec'
+                            type="file"
+                            fullWidth
+                            variant="standard"
+                            onChange={(e) => setFieldValue('prec', e.target.files[0])}
+                        />
+                        {/* <img
+                            src={typeof values.prec === 'string' ? values.prec : URL.createObjectURL(values.prec)}
+                            className="img-fluid"
+                            alt=""
+                        /> */}
+                        <span style={{ color: 'red' }}>{errors.prec && touched.prec ? errors.prec : null} </span>
+
+
                         <DialogActions>
                             <Button onClick={handleClose}>Cancel</Button>
                             <Button type='submit' >submit</Button>

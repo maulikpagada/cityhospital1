@@ -11,21 +11,18 @@
       "price": "111155",
       "id": 26,
       "url": "../assets/img/doctors/doctors-2.jpg"
-
     },
     {
       "name": "qqqqq",
       "price": "4545",
       "id": 27,
       "url": "../assets/img/doctors/doctors-3.jpg"
-
     },
     {
       "name": "jbkijnli",
       "price": "646463",
       "id": 28,
       "url": "../assets/img/doctors/doctors-4.jpg"
-
     }
   ],
   "comments": [
@@ -138,6 +135,12 @@
       "name": "maulikmaulik",
       "desc": "wwwwwwwwwwwwww",
       "id": 7
+    },
+    {
+      "name": "maulikmaulik",
+      "desc": "aaaaaaaaaaaaaa",
+      "prec": {},
+      "id": 8
     }
   ]
 }

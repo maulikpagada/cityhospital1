@@ -10,14 +10,14 @@ const initState = {
     error: null
 }
 
+
 export const addApt = createAsyncThunk(
     'appoinment/add',
     async (data) => {
         console.log(data.prec.name);
-
         let iData = { data }
-        try {
 
+        try {
             const rNo = Math.floor(Math.random() * 100);
             const precRef = ref(storage, 'precipitation/' + rNo + "_" + data.prec.name);
 
@@ -80,12 +80,11 @@ export const deleteApt = createAsyncThunk(
         try {
             const desertRef = ref(storage, 'precipitation/' + data.precName);
             console.log(data);
+
             await deleteObject(desertRef).then(async () => {
                 await deleteDoc(doc(db, "appointment", data.id));
                 console.log("file deleted success");
             })
-
-
         } catch (e) {
             console.error("Error adding document: ", e);
         }
@@ -108,6 +107,7 @@ export const updateApt = createAsyncThunk(
             } else {
 
                 console.log("Image  Change");
+
                 const desertRef = ref(storage, 'precipitation/' + data.precName);
 
                 let iData = { data }
@@ -145,17 +145,9 @@ export const updateApt = createAsyncThunk(
                                 }
                             })
                     });
-
-
                 })
-
                 return iData;
-
-
-
             }
-
-
         } catch (e) {
             console.error("Error adding document: ", e);
         }
@@ -205,8 +197,6 @@ export const appointmentSlice = createSlice({
                 })
                 state.apt = uData
             })
-
-
     }
 })
 
