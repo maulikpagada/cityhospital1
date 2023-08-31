@@ -10,19 +10,19 @@ export const doctorReducer = (state = initialState, action) => {
     console.log(action);
     switch (action.type) {
 
-        case ActionTypes.LOADING_DOCTORS:
-            return {
-                doctors: [],
-                isloading: action.payload,
-                error: null
-            }
+        // case ActionTypes.LOADING_DOCTORS:
+        //     return {
+        //         doctors: [],
+        //         isloading: action.payload,
+        //         error: null
+        //     }
 
-        case ActionTypes.ERROR_DOCTORS:
-            return {
-                doctors: [],
-                isloading: false,
-                error: action.payload
-            }
+        // case ActionTypes.ERROR_DOCTORS:
+        //     return {
+        //         doctors: [],
+        //         isloading: false,
+        //         error: action.payload
+        //     }
 
         case ActionTypes.GET_DOCTORS:
             return {

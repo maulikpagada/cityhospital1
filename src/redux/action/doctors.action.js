@@ -4,8 +4,8 @@ import { setAlert } from '../slice/alertSlice'
 
 export const getDoctorData = () => (dispatch) => {
     try {
-        dispatch(loadingData(true))
-        setTimeout(function () {
+        // dispatch(loadingData(true))
+        // setTimeout(function () {
             fetchgetDoctorData()
                 .then((response) => dispatch({ type: ActionTypes.GET_DOCTORS, payload: response.data }))
                 .catch((error) => console.log(error))
@@ -19,10 +19,10 @@ export const getDoctorData = () => (dispatch) => {
             //     })
             //     .then((data) => dispatch({ type: ActionTypes.GET_DOCTORS, payload: data }))
             //     .catch((error) => dispatch(errorData(error.message)))
-        }, 3000)
+        // }, 1000)
 
     } catch (error) {
-        dispatch(errorData(error.message))
+        // dispatch(errorData(error.message))
     }
 }
 
@@ -92,12 +92,12 @@ export const updateDoctorData = (data) => (dispatch) => {
     }
 }
 
-export const loadingData = (status) => (dispatch) => {
-    console.log("loading");
-    dispatch({ type: ActionTypes.LOADING_DOCTORS, payload: status })
-}
+// export const loadingData = (status) => (dispatch) => {
+//     console.log("loading");
+//     dispatch({ type: ActionTypes.LOADING_DOCTORS, payload: status })
+// }
 
-export const errorData = (error) => (dispatch) => {
-    console.log("error");
-    dispatch({ type: ActionTypes.ERROR_DOCTORS, payload: error })
-}
+// export const errorData = (error) => (dispatch) => {
+//     console.log("error");
+//     dispatch({ type: ActionTypes.ERROR_DOCTORS, payload: error })
+// }

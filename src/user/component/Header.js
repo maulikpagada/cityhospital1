@@ -58,7 +58,7 @@ function Header({ cartcount1 }) {
 
                     <div className="d-lg-flex social-links align-items-center">
 
-                        <DarkModeIcon onClick={() => theme.toogletheme(theme.theme)}>toogle Them</DarkModeIcon>
+                        <DarkModeIcon style={{cursor: 'pointer'}} onClick={() => theme.toogletheme(theme.theme)}>toogle Them</DarkModeIcon>
                         <Link to='/cart'>
                             <IconButton aria-label="cart" className={`${theme.theme}`}>
                                 <StyledBadge badgeContent={countercart} color="secondary">
