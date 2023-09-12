@@ -1821,7 +1821,7 @@ section {
 /* /////////////////////////////////////////////////////// */
 .light {
   color: white !important;
-  background-color: rgb(95, 94, 94) !important;
+  background-color: #000 !important;
 
 }
 
