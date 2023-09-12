@@ -142,5 +142,123 @@
       "prec": {},
       "id": 8
     }
-  ]
+  ],
+    "results": [
+      {
+        "category": "Entertainment: Video Games",
+        "type": "multiple",
+        "difficulty": "hard",
+        "question": "The map featured in Arma 3 named &quot;Altis&quot; is based off of what Greek island?",
+        "correct_answer": "Lemnos",
+        "incorrect_answers": [
+          "Ithaca",
+          "Naxos",
+          "Anafi"
+        ]
+      },
+      {
+        "category": "Science & Nature",
+        "type": "multiple",
+        "difficulty": "easy",
+        "question": "The element involved in making human blood red is which of the following?",
+        "correct_answer": "Iron",
+        "incorrect_answers": [
+          "Copper",
+          "Iridium",
+          "Cobalt"
+        ]
+      },
+      {
+        "category": "Entertainment: Video Games",
+        "type": "multiple",
+        "difficulty": "medium",
+        "question": "In the game &quot;Persona 4&quot;, what is the canonical name of the protagonist?",
+        "correct_answer": "Yu Narukami",
+        "incorrect_answers": [
+          "Chino Mashido",
+          "Tunki Sunada",
+          "Masaki Narinaka"
+        ]
+      },
+      {
+        "category": "Entertainment: Video Games",
+        "type": "multiple",
+        "difficulty": "medium",
+        "question": "What character is NOT apart of the Grand Theft Auto series?",
+        "correct_answer": "Michael Cardenas",
+        "incorrect_answers": [
+          "Packie McReary",
+          "Tommy Vercetti",
+          "Lester Crest"
+        ]
+      },
+      {
+        "category": "General Knowledge",
+        "type": "boolean",
+        "difficulty": "medium",
+        "question": "&quot;Buffalo buffalo Buffalo buffalo buffalo buffalo Buffalo buffalo.&quot; is a grammatically correct sentence.",
+        "correct_answer": "True",
+        "incorrect_answers": [
+          "False"
+        ]
+      },
+      {
+        "category": "Entertainment: Video Games",
+        "type": "multiple",
+        "difficulty": "easy",
+        "question": "Which Final Fantasy game consisted of a female-only cast of party members?",
+        "correct_answer": "Final Fantasy X-2",
+        "incorrect_answers": [
+          "Final Fantasy IX",
+          "Final Fantasy V",
+          "Final Fantasy XIII-2"
+        ]
+      },
+      {
+        "category": "History",
+        "type": "multiple",
+        "difficulty": "hard",
+        "question": "Who assassinated President James A. Garfield?",
+        "correct_answer": "Charles Guiteau",
+        "incorrect_answers": [
+          "Sirhan Sirhan",
+          "Leon Czolgosz",
+          "John Wilkes Booth"
+        ]
+      },
+      {
+        "category": "Entertainment: Books",
+        "type": "multiple",
+        "difficulty": "medium",
+        "question": "Which of the following is not a work authored by Fyodor Dostoevsky?",
+        "correct_answer": "Anna Karenina",
+        "incorrect_answers": [
+          "Notes from the Underground",
+          "Crime and Punishment",
+          "The Brothers Karamazov"
+        ]
+      },
+      {
+        "category": "Entertainment: Video Games",
+        "type": "multiple",
+        "difficulty": "easy",
+        "question": "Which of these covert groups employs Sam Fisher to work as a Splinter Cell?",
+        "correct_answer": "Third Echelon",
+        "incorrect_answers": [
+          "Voron",
+          "Black Arrow",
+          "The Engineers"
+        ]
+      },
+      {
+        "category": "Entertainment: Musicals & Theatres",
+        "type": "boolean",
+        "difficulty": "hard",
+        "question": "The protagonist&#039;s names in &#039;Who&#039;s Afraid of Virginia Woolf&#039;, George and Martha, were derived from George Washington and his wife.",
+        "correct_answer": "True",
+        "incorrect_answers": [
+          "False"
+        ]
+      }
+    ]
 }

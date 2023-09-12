@@ -24,6 +24,7 @@ import Myfav from '../user/container/myFav/Myfav';
 import { useState } from 'react';
 import CallBackExa from '../user/container/Examples/CallBackExa';
 import UseRefEmaple from '../user/container/Examples/UseRefEmaple';
+import QuizApp from '../user/QuizApp';
 // import PrivateRoute from '../utils/PrivateRoute';
 
 function Userroutes(props) {
@@ -63,6 +64,7 @@ function Userroutes(props) {
                 <Route path='/cart' element={<Cart />} />
                 <Route path='/cart1' element={<Cart1 />} />
                 <Route path='/myfav' element={<Myfav />} />
+                <Route path='/QUZ' element={<QuizApp />} />
             </Routes>
             <Footer />
         </>
