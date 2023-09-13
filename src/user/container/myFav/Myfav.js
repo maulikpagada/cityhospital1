@@ -8,14 +8,14 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 function Myfav(props) {
 
     const dispatch = useDispatch();
-    let medData = useSelector(state => state.medicine);
+    let medData = useSelector(state => state.medicines);
     const myfavouritedata = useSelector(state => state.item)
     console.log(myfavouritedata, medData);
     console.log(myfavouritedata);
 
 
     let cartitems = myfavouritedata.item.map((v) => {
-        let medicinceData = medData.medicine.find((m) => m.id === v.fid);
+        let medicinceData = medData.medicines.find((m) => m.id === v.fid);
 
         let fData = { ...medicinceData, ...v };
 
@@ -34,19 +34,8 @@ function Myfav(props) {
                     <div className="section-title">
                         <h2>Favorites</h2>
                     </div>
-                    <div>
-                        <h5 className="mb-3">
-                            <a href="#!" className="text-body">
-                                <i className="fas fa-long-arrow-alt-left me-2" />
-                                Continue shopping
-                            </a>
-                        </h5>
-                        <hr />
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <div>
-                            <p class="mb-1">Shopping cart</p>
-                        </div>
+                    <div style={{display: "flex", justifyContent: "flex-end"}}>
+                        <button style={{background: "#FF6337", padding: "10px", marginBottom: "20px", borderRadius: "20px"}}><a style={{color: "#fff"}} href='/medicine'>Continue shopping</a></button>
                     </div>
 
                     {cartitems.map((c, i) => {

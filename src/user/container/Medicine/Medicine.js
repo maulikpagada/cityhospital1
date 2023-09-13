@@ -1,17 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react';
 import ListingMed from './ListingMed';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMedicineData } from '../../../redux/action/medicine.action';
+// import { getMedicineData } from '../../../redux/action/medicine.action';
 import { addtocart } from '../../../redux/slice/cartSlice';
 import { ThemeContext } from '../../../context/ThemeContext';
 import { addfav } from '../../../redux/action/myfav.action';
+import { getMedicineData } from '../../../redux/slice/medicineSlice';
 // import { addToCart } from '../../../redux/action/cart.action';
 
 function Medicine(props) {
     const theme = useContext(ThemeContext)
     const [fdata, setFdata] = useState()
     const dispatch = useDispatch();
-    const medicine = useSelector(state => state.medicine)
+    const medicine = useSelector(state => state.medicines)
 
 
     useEffect(() => {
@@ -68,7 +69,7 @@ function Medicine(props) {
                     <input className='search-med' type="text" placeholder='Search Medicine' onChange={(e) => handlesearch(e.target.value)} />
 
                     <ListingMed
-                        mdata={fdata ? fdata : medicine.medicine}
+                        mdata={fdata ? fdata : medicine.medicines}
                         handleCart1={handleCart}
                         handlefav={handlefav}
                     />

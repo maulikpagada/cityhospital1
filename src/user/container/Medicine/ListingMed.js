@@ -9,7 +9,7 @@ function ListingMed({ mdata, handleCart1,handlecart2,handlefav }) {
             {
                 mdata.map((a, i) => {
                     return (
-                        <div className='col-md-3 g-4'>
+                        <div className='col g-4'>
                             <CustomCard
                                 value={a}
                                 onclick1={handleCart1}

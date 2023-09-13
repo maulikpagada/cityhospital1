@@ -75,9 +75,9 @@ function Header({ cartcount1 }) {
                             </IconButton>
                         </Link> */}
 
-                        <Link to='/myfav'>
+                        <Link to='/myfav' >
                             <Badge color="primary">
-                                <MailIcon color="action" />
+                                <MailIcon color="action" className={`${theme.theme}`}/>
                             </Badge>
                         </Link>
 

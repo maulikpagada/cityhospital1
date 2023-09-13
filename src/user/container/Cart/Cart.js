@@ -6,13 +6,13 @@ import { decCartQty, deleteToCart, incCartQty } from '../../../redux/slice/cartS
 function Cart(props) {
 
     let dispatch = useDispatch()
-    let medData = useSelector(state => state.medicine);
+    let medData = useSelector(state => state.medicines);
     let cartData = useSelector(state => state.cart);
 
     console.log(medData, cartData);
 
     let cartitems = cartData.item.map((v) => {
-        let medicinceData = medData.medicine.find((m) => m.id === v.pid);
+        let medicinceData = medData.medicines.find((m) => m.id === v.pid);
 
         let fData = { ...medicinceData, ...v };
 
@@ -52,7 +52,7 @@ function Cart(props) {
                                     <div className="d-flex justify-content-between">
                                         <div className="d-flex flex-row align-items-center">
                                             <div className="ms-3">
-                                                <h5>I{c.name}</h5>
+                                                <h5>{c.name}</h5>
                                                 <p className="small mb-0">{c.desc}...</p>
                                             </div>
                                         </div>

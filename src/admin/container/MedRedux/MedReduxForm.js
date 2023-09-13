@@ -31,7 +31,8 @@ function MedReduxForm({ onhandlesubmit, onupdate }) {
         name: yup.string().required(),
         price: yup.number().required(),
         expiry: yup.number().required(),
-        desc: yup.string().required()
+        desc: yup.string().required(),
+        prec: yup.mixed().required("Please Upload to File")
 
     });
 
@@ -42,7 +43,8 @@ function MedReduxForm({ onhandlesubmit, onupdate }) {
             name: '',
             price: '',
             expiry: '',
-            desc: ''
+            desc: '',
+            prec: ''
         },
         onSubmit: (values, action) => {
             // handlesubmitdata(values)
@@ -53,7 +55,7 @@ function MedReduxForm({ onhandlesubmit, onupdate }) {
 
     });
 
-    const { values, errors, touched, handleBlur, handleChange, handleSubmit } = formik;
+    const { values, errors, touched, handleBlur, handleChange, handleSubmit,setFieldValue } = formik;
 
 
     return (
@@ -124,6 +126,16 @@ function MedReduxForm({ onhandlesubmit, onupdate }) {
                             onBlur={handleBlur}
                         />
                         <span style={{ color: 'red' }}>{errors.desc && touched.desc ? errors.desc : null} </span>
+
+                        <TextField
+                            margin="dense"
+                            label="prec"
+                            name='prec'
+                            type="file"
+                            fullWidth
+                            variant="standard"
+                            onChange={(e) => setFieldValue('prec', e.target.files[0])}
+                        />
                         <DialogActions>
                             <Button onClick={handleClose}>Cancel</Button>
                             <Button type='submit' >submit</Button>
