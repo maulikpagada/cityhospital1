@@ -2172,3 +2172,13 @@ nav ul {
 .search-med{
   color: black;
 }
+
+.google {
+  padding: 10px;
+  border-radius: 50px;
+  width: 250px;
+  background-color: #FF6337;
+  color: #fff;
+  text-align: center;
+  margin: 0 auto;
+}

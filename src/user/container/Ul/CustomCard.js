@@ -33,7 +33,7 @@ function CustomCard({ value, btnval, onclick1, onclick2 }) {
 
             <CardBody className={`${theme.theme}`}>
                 <CardTitle tag="h5" className={`${theme.theme}`}>
-                    {value.name}
+                    Name:- {value.name}
                     {
                         value.id === data[delete_index] ?
                             <FavoriteBorderIcon onClick={() => onclick2(value.id)} sx={{ color: "red", position: 'absolute', right: '30px' }} />
@@ -43,17 +43,21 @@ function CustomCard({ value, btnval, onclick1, onclick2 }) {
 
                     }
                 </CardTitle>
-                <CardSubtitle
+
+                {/* <CardSubtitle
                     className="mb-2 text-muted"
                     tag="h6"
                 >
-                    {value.date}
-                </CardSubtitle>
+                    Date:-{value.date}
+                </CardSubtitle> */}
                 <CardText className={`${theme.theme}`}>
-                    {value.price}
+                    Price:- {value.price}
+                </CardText>
+                <CardText className={`${theme.theme}`}>
+                    Expiry:- {value.expiry}
                 </CardText>
                 <CardText>
-                    {value.desc.substring(0, 100)}
+                    Desecration:- {value.desc.substring(0, 100)}
                     {value.desc.length > 50 ? '...' : ''}
                 </CardText>
 

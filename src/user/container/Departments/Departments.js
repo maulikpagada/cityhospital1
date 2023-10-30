@@ -61,7 +61,7 @@ function Departments(props) {
                                                         <p  className={`${theme.theme}`}>{v.desc}</p>
                                                     </div>
                                                     <div className="col-lg-4 text-center order-1 order-lg-2">
-                                                        <img src="../assets/img/departments-1.jpg" alt className="img-fluid" />
+                                                        <img src={v.prec} alt="img" className="img-fluid"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -72,9 +72,6 @@ function Departments(props) {
                             </div>
                         </div>
                     </div>
-
-
-
                 </div>
             </section>
 

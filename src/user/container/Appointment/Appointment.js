@@ -130,7 +130,9 @@ function Appointment(props) {
 
 
     return (
+    
         <section id="appointment" className={`appointment ${theme.theme}`}>
+
             <div className="container">
                 <div className="section-title">
                     <h2 className={`${theme.theme}`}>Make an Appointment</h2>

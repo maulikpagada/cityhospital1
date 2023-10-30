@@ -140,6 +140,7 @@ function MedicineForm({ onhandlesubmit, onupdate }) {
                         />
                         <span style={{ color: 'red' }}>{errors.desc && touched.desc ? errors.desc : null} </span>
 
+
                         <DialogActions>
                             <Button onClick={handleClose}>Cancel</Button>
                             <Button type='submit' >submit</Button>

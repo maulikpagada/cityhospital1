@@ -10,12 +10,15 @@ import { auth } from '../../../firebase';
 import { useDispatch, useSelector } from 'react-redux';
 import { forgetRequest, loginRequest, signupRequest } from '../../../redux/action/auth.action';
 import { CircularProgress } from '@mui/material';
+import GoogleIcon from '@mui/icons-material/Google'
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 
 function Auth(props) {
     const dispatch = useDispatch()
-
+    const provider = new GoogleAuthProvider();
     const [authtype, setauthtype] = useState('login');
+    const authGoogle = getAuth();
 
     const authData = useSelector(state => state.auth);
     console.log(authData);
@@ -85,7 +88,7 @@ function Auth(props) {
         // localStorage.setItem("loginstatus", "true");
         // naigate('/')
         dispatch(loginRequest({
-            data:values,
+            data: values,
             callback: (route) => {
                 naigate(route)
             }
@@ -94,9 +97,7 @@ function Auth(props) {
 
     const handlerigister = (values) => {
         console.log(values);
-
         dispatch(signupRequest(values));
-
     }
 
     const handleforget = (values) => {
@@ -123,6 +124,11 @@ function Auth(props) {
             action.resetForm()
         },
     });
+
+    const signupWithGoogle = () => {
+        console.log("aaaaaaaaaa");
+        signInWithPopup(authGoogle, provider)
+    }
 
     const { values, errors, touched, handleBlur, handleChange, handleSubmit } = formik;
 
@@ -218,6 +224,11 @@ function Auth(props) {
                         </>
                 }
             </div>
+
+            <div style={{ textAlign: 'center' }}> _____________________OR_____________________</div>
+
+            <br></br>
+            <div className="text-center google" onClick={signupWithGoogle} ><GoogleIcon /> continue With Google</div>
         </section>
 
     );

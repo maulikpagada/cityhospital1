@@ -67,7 +67,6 @@ function Medicine(props) {
             <div className='container'>
                 <div className='row'>
                     <input className='search-med' type="text" placeholder='Search Medicine' onChange={(e) => handlesearch(e.target.value)} />
-
                     <ListingMed
                         mdata={fdata ? fdata : medicine.medicines}
                         handleCart1={handleCart}

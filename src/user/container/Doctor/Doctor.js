@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 const doctorData = [
     {
         id: 1,
-        name: 'Atha Smith',
+        name: 'qqqqqqqqqqqqqqqqqqqqq Smith',
         besingations: 'Chief Medical Officer',
         description: 'Duis sagittis rutrum neque, quis tincidunt arcu pretium ac.',
         url: '../assets/img/doctors/doctors-1.jpg',
